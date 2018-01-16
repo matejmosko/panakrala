@@ -1,0 +1,16 @@
+{
+  "name": "Párty",
+  "author": "Erken & Havel",
+  "keywords": "",
+  "desc": {
+    "index": "",
+    "mudrosti": "",
+    "archiv": ""
+  },
+  "strings": {
+    "events_past": "Tieto kvízy máme už za sebou",
+    "events_next": "Čakajú nás tieto kvízy",
+    "register_to_event": "Chcem zaregistrovať svoj tím",
+    "loading": "Kontaktujem internet. Prosím, počkajte ešte chvíľu."
+  }
+}

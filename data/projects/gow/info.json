@@ -1,0 +1,16 @@
+{
+  "name": "Game of Worlds",
+  "author": "Matej Moško & Branislav Skrečko",
+  "keywords": "fdg",
+  "desc": {
+    "index": "dfs",
+    "mudrosti": "dsf",
+    "archiv": "dsf"
+  },
+  "strings": {
+    "events_past": "Tieto kvízy máme už za sebou",
+    "events_next": "Čakajú nás tieto kvízy",
+    "register_to_event": "Chcem zaregistrovať svoj tím",
+    "loading": "Kontaktujem internet. Prosím, počkajte ešte chvíľu."
+  }
+}

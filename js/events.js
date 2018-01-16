@@ -1,0 +1,2 @@
+define(["projects"], function(projects) {
+});

@@ -1,0 +1,16 @@
+{
+  "name": "Turban Quiz",
+  "author": "Jakub Lužina & Matej Moško",
+  "keywords": "Quiz, Turban Quiz, kvíz, teambuilding, zábava, vedomostná súťaž, pubquiz, krčmový kvíz, kvíz v kaviarni",
+  "desc": {
+    "index": "Vedomostnú súťaž Turban kvíz vedie dvojica moderátorov Jakub Lužina a Matej Moško. Okrem múdrosti a skúseností ocenia v troch kolách aj humor súťažiacich tímov.",
+    "mudrosti": "Ak chceš zabiť najbližších pár minút, kým Ti skončí šichta pri facebooku, pozri si archív turbánnych múdrostí.",
+    "archiv": "Páčia sa Ti plagáty Turban Quizu? Pozri si ich v archíve."
+  },
+  "strings": {
+    "events_past": "Tieto kvízy máme už za sebou",
+    "events_next": "Čakajú nás tieto kvízy",
+    "register_to_event": "Chcem zaregistrovať svoj tím",
+    "loading": "Kontaktujem internet. Prosím, počkajte ešte chvíľu."
+  }
+}
