@@ -1,0 +1,16 @@
+{% for key,event in project.events %}
+<div class="event">
+  <img src="data/projects/{{path}}/events/{{key}}/cover.jpg" />
+  <h3>{{event.opts.title}}</h3>
+  <div class="eventDesc">{{event.opts.desc}}</div>
+  <ul class="eventMeta">
+    <li class="date">{{event.opts.date}}</li>
+    <li class="time">{{event.opts.time}}</li>
+    <li class="venue">{{event.opts.venue}}</li>
+    <li class="price">{{event.opts.price}}</li>
+  </ul>
+  {% if today <= event.opts.timestamp %}
+  <a href="cta">{{project.opts.strings.buy}}</a>
+  {% endif %}
+</div>
+{% endfor %}

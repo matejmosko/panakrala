@@ -128,20 +128,12 @@ function recursiveJsonSearch(&$data, $path = "data")
         } elseif (pathinfo($value, PATHINFO_EXTENSION) == "json") {
             $json = parseJsonFile($value, $path);
             $n = explode("/", $path);
-            //print_r((object) $json);
-            $data['options'] = json_decode($json, true);
-            //print_r($data);
-/*
-            if (!empty($n[3])) {
-                $data[$n[1]][$n[2]][$n[3]]['info'] = $json;
-            } elseif (!empty($n[2])) {
-              //print_r($json);
-                $data[$n[1]][$n[2]]['info'] = $json;
-            } elseif (!empty($n[1])) {
-                $data[$n[1]]['info'] = $json;
-            } else {
-                $data['info'] = $json;
-            }*/
+
+            $data['opts'] = json_decode($json, true);
+            /* Convert date to timestamp for later comparison */
+            if (array_key_exists('date', $data['opts'])) {
+                $data['opts']['timestamp'] = strtotime($data['opts']['date']);
+            }
         }
     }
     return $data;
