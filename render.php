@@ -9,21 +9,54 @@ $data = getData();
 
     $loader = new Twig_Loader_Filesystem('templates/');
     $twig = new Twig_Environment($loader);
-renderEvents($data, 'turban', $twig);
+renderEvents($data, 'turban', $twig, 'all');
 
-function renderEvents($data, $project, $twig)
+function filterEvents($data, $project, $scope)
 {
-    echo $twig->render('eventlist.html', array(
-      'project' => $data['projects'][$project],
-      'path' => $project,
-      'today' => time()
-    ));
-
-  /* echo "<pre>";
-    print_r($data['projects']['turban']);
-    echo "</pre>";*/
+  $today = time();
+    switch ($scope) {
+  case 'all':
+    return $data;
+    break;
+  case 'next':
+    foreach ($data['projects'][$project]['events'] as $key => &$event) {
+      echo "wow";
+        if (array_key_exists('opts', $event) && $event['opts']['timestamp'] <= $today) {
+            unset($data['projects'][$project]['events'][$key]);
+        }
+    }
+    return $data;
+    break;
+  case 'past':
+    foreach ($data['projects'][$project]['events'] as $key => &$event) {
+        if (array_key_exists('opts', $event) && $event['opts']['timestamp'] >= $today) {
+            unset($data['projects'][$project]['events'][$key]);
+        }
+    }
+    return $data;
+    break;
+  default:
+    return $data;
+    break;
+}
 }
 
+function renderEvents($localData, $project, $twig, $scope)
+{
+    $today = time();
+    $localData = filterEvents($localData, $project, $scope);
+
+    echo $twig->render('eventlist.html', array(
+      'project' => $localData['projects'][$project],
+      'path' => $project,
+      'today' => $today,
+      'scope' => $scope /* all, next, past */
+    ));
+
+    /* echo "<pre>";
+      print_r($data['projects']['turban']);
+      echo "</pre>";*/
+}
 
 /*
 
