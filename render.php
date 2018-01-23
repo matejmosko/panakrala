@@ -6,10 +6,11 @@ require_once('lib/Twig/Autoloader.php');
  Twig_Autoloader::register();
 
 $data = getData();
+$baseUrl = 'http://localhost/~gnaag/panakrala/';
 
     $loader = new Twig_Loader_Filesystem('templates/');
     $twig = new Twig_Environment($loader);
-saveFiles($data, $twig);
+saveFiles($data);
 /*
     echo "<pre>";
     print_r($data);
@@ -20,25 +21,25 @@ print_r($data);
 echo "</pre>";
 function filterEvents($data, $project, $filter)
 {
-  $today = time();
-  if (array_key_exists('events', $data['projects'][$project])){
-    switch ($filter) {
+    $today = time();
+    if (array_key_exists('events', $data['projects'][$project])) {
+        switch ($filter) {
       case 'all':
         return $data;
         break;
       case 'next':
         foreach ($data['projects'][$project]['events'] as $key => &$event) {
-          if (array_key_exists('opts', $event) && $event['opts']['timestamp'] <= $today) {
-            unset($data['projects'][$project]['events'][$key]);
-          }
+            if (array_key_exists('opts', $event) && $event['opts']['timestamp'] <= $today) {
+                unset($data['projects'][$project]['events'][$key]);
+            }
         }
         return $data;
         break;
       case 'past':
         foreach ($data['projects'][$project]['events'] as $key => &$event) {
-          if (array_key_exists('opts', $event) && $event['opts']['timestamp'] >= $today) {
-            unset($data['projects'][$project]['events'][$key]);
-          }
+            if (array_key_exists('opts', $event) && $event['opts']['timestamp'] >= $today) {
+                unset($data['projects'][$project]['events'][$key]);
+            }
         }
         return $data;
         break;
@@ -46,15 +47,17 @@ function filterEvents($data, $project, $filter)
         return $data;
         break;
     }
-  } else {"K tomuto projektu momentálne nepripravujeme žiadne verejné udalosti.";}
+    } else {
+        "K tomuto projektu momentálne nepripravujeme žiadne verejné udalosti.";
+    }
 }
 
-function renderEvents($localData, $project, $twig, $filter)
+function renderEvents($localData, $project, $filter)
 {
     $today = time();
     $localData = filterEvents($localData, $project, $filter);
 
-    return $twig->render('eventlist.html', array(
+    return $GLOBALS['twig']->render('eventlist.html', array(
       'project' => $localData['projects'][$project],
       'path' => $project,
       'today' => $today,
@@ -62,107 +65,140 @@ function renderEvents($localData, $project, $twig, $filter)
     ));
 }
 
-function renderProjects($localData, $twig)
+function renderProjects($localData)
 {
-    return $twig->render('projectlist.html', array(
+    return $GLOBALS['twig']->render('projectlist.html', array(
     'projects' => $localData['projects']
   ));
 }
 
-function renderCover($localData, $twig)
+function renderCover($localData)
 {
-    return $twig->render('cover.html', array(
+    return $GLOBALS['twig']->render('cover.html', array(
     'data' => $localData
   ));
 }
-function renderFooter($localData, $twig)
+function renderFooter($localData)
 {
-    return $twig->render('footer.html', array(
-    'data' => $localData
-  ));
-}
-
-function renderHead($localData, $twig)
-{
-    return $twig->render('head.html', array(
+    return $GLOBALS['twig']->render('footer.html', array(
     'data' => $localData
   ));
 }
 
-function renderScripts($localData, $twig)
+function renderHead($localData)
 {
-    return $twig->render('scripts.html', array(
+    return $GLOBALS['twig']->render('head.html', array(
     'data' => $localData
   ));
 }
 
-function renderProject($localData, $project, $twig)
+function renderScripts($localData)
 {
-    return $twig->render('project.html', array(
+    return $GLOBALS['twig']->render('scripts.html', array(
+    'data' => $localData
+  ));
+}
+
+function renderProject($localData, $project)
+{
+    return $GLOBALS['twig']->render('project.html', array(
     'data' => $localData['projects'][$project],
     'project' => $project,
-    'nextEvents' => renderEvents($localData, $project, $twig, 'next')
-    //'pastEvents' => renderEvents($localData, $project, $twig, 'past')
+    'nextEvents' => renderEvents($localData, $project, 'next')
+    //'pastEvents' => renderEvents($localData, $project, 'past')
   ));
 }
 
-function renderMenu($localData, $twig)
+function renderMenu($localData)
 {
-    return $twig->render('menu.html', array(
+    return $GLOBALS['twig']->render('menu.html', array(
     'menu' => $localData['opts']['menu']
   ));
 }
 
-function renderHomePage($localData, $twig)
+function renderGallery($localData, $project, $gallery)
 {
-  return $twig->render('page.html', array(
-  'menu' => renderMenu($localData, $twig),
-  'head' => renderHead($localData, $twig),
-  'cover' => renderCover($localData, $twig),
-  'content' => renderProjects($localData, $twig),
-  'footer' => renderFooter($localData, $twig),
-  'scripts' => renderScripts($localData, $twig),
+    return $GLOBALS['twig']->render('gallery.html', array(
+    'data' => $localData['projects'][$project]['gallery'][$gallery],
+    'project' => $project,
+    'gallery' => $gallery,
+    'baseUrl' => $GLOBALS['baseUrl']
+  ));
+}
+
+function renderHomePage($localData)
+{
+    return $GLOBALS['twig']->render('page.html', array(
+  'menu' => renderMenu($localData),
+  'head' => renderHead($localData),
+  'cover' => renderCover($localData),
+  'content' => renderProjects($localData),
+  'footer' => renderFooter($localData),
+  'scripts' => renderScripts($localData),
   'masterClass' => 'home'
 ));
 }
 
-function renderProjectPage($localData, $project, $twig)
+function renderProjectPage($localData, $project)
 {
-  return $twig->render('page.html', array(
-  'menu' => renderMenu($localData, $twig),
-  'head' => renderHead($localData, $twig),
-  'cover' => renderCover($localData, $twig),
-  'content' => renderProject($localData, $project, $twig),
-  //'footer' => renderFooter($localData, $twig),
-  'scripts' => renderScripts($localData, $twig),
+    return $GLOBALS['twig']->render('page.html', array(
+  'menu' => renderMenu($localData),
+  'head' => renderHead($localData),
+  'cover' => renderCover($localData),
+  'content' => renderProject($localData, $project),
+  //'footer' => renderFooter($localData),
+  'scripts' => renderScripts($localData),
   'masterClass' => 'project'
 ));
 }
 
-function renderDocumentPage($localData, $document, $twig)
+function renderGalleryPage($localData, $project, $gallery)
 {
-    return $twig->render('page.html', array(
-      'menu' => renderMenu($localData, $twig),
-      'head' => renderHead($localData, $twig),
-      'cover' => renderCover($localData, $twig),
+    return $GLOBALS['twig']->render('page.html', array(
+  'menu' => renderMenu($localData),
+  'head' => renderHead($localData),
+  'cover' => renderCover($localData),
+  'content' => renderGallery($localData, $project, $gallery),
+  //'footer' => renderFooter($localData),
+  'scripts' => renderScripts($localData),
+  'masterClass' => 'project'
+));
+}
+
+function renderDocumentPage($localData, $document)
+{
+    return $GLOBALS['twig']->render('page.html', array(
+      'menu' => renderMenu($localData),
+      'head' => renderHead($localData),
+      'cover' => renderCover($localData),
       'content' => $document,
-      'footer' => renderFooter($localData, $twig),
-      'scripts' => renderScripts($localData, $twig),
+      'footer' => renderFooter($localData),
+      'scripts' => renderScripts($localData),
       'masterClass' => 'home'
   ));
 }
 
-function saveFiles($localData, $twig){
-  /* Save Index.html */
-  $content = renderHomePage($localData, $twig);
-  file_put_contents('index.html',$content);
-  /* Save Projects' html files */
-  foreach ($localData['projects'] as $key => $project){
-    file_put_contents($key.'.html',renderProjectPage($localData, $key, $twig));
-  }
-  foreach ($localData['documents'] as $key => $doc){
-    file_put_contents(pathinfo($doc, PATHINFO_FILENAME).'.html',renderDocumentPage($localData, file_get_contents("data/documents/".$doc), $twig));
-  }
+function saveFiles($localData)
+{
+    /* Save Index.html */
+    $content = renderHomePage($localData);
+    file_put_contents('index.html', $content);
+    /* Save Projects' html files */
+    foreach ($localData['projects'] as $key => $project) {
+        file_put_contents($key.'.html', renderProjectPage($localData, $key));
+        if (array_key_exists('gallery', $project)) {
+            foreach ($project['gallery'] as $key2 => $gallery) {
+                $dir = './'.$key.'/gallery/';
+                if (!file_exists($dir)) {
+                    mkdir($dir, 0777, true);
+                }
+                file_put_contents($dir.'/'.$key2.'.html', renderGalleryPage($localData, $key, $key2));
+            }
+        }
+    }
+    foreach ($localData['documents'] as $key => $doc) {
+        file_put_contents(pathinfo($doc, PATHINFO_FILENAME).'.html', renderDocumentPage($localData, file_get_contents("data/documents/".$doc)));
+    }
 }
 
 
