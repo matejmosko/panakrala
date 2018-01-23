@@ -1,0 +1,10 @@
+{% autoescape false %}
+<div class="project">
+  <h2>{{data.opts.name}}</h2>
+  <p class="desc">{{data.opts.desc.index}}</p>
+  {% if nextEvents !="" %}
+  <h3>{{data.opts.strings.events_next}}</h3>
+  {{nextEvents}}
+  {% endif %}
+</div>
+{% endautoescape %}

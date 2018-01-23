@@ -1,25 +1,126 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html class="no-js" lang="">
 <head>
-  <meta charset="UTF-8">
-  <title>Panakrala.sk</title>
-  <!-- data-main attribute tells require.js to load
-             scripts/main.js after require.js loads. -->
-  <script data-main="js/main" src="js/require.js"></script>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Panakrala.sk</title>
+<meta name="description" content="Projekty a hry pre vaše tímbuildingy">
+<meta name="keywords" content="teambuilding, tímbulding, kvíz, hra, game design">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="manifest" href="site.webmanifest">
+<link rel="apple-touch-icon" href="icon.png">
+<!-- Place favicon.ico in the root directory -->
+
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/custom.css">
 
 </head>
-
 <body>
-  <h1>Panakrala</h1>
-  <div id="wrapper">
-    <div id="menu">
-    </div>
-    <div id="content">
-    </div>
-    <div id="footer">
-    </div>
-  </div>
-</body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
 
+    <!-- Add your site or application content here -->
+    <div id="wrapper" class="home">
+        <div id="header">
+              <a href="index.html"><img src="data/cover.jpg" /></a>
+  <a href="index.html"><h3>Panakrala.sk</h3></a>
+  <div class="dataDesc">Projekty a hry pre vaše tímbuildingy</div>
+  
+        </div>
+        <div id="topmenu">
+            <ul id="menu" class="menu">
+      <li class="menuitem"><a href="index.html">Čo ponúkame</a></li>
+      <li class="menuitem"><a href="contact.html">Kontakt</a></li>
+      <li class="menuitem"><a href="index.html#partners">Referencie</a></li>
+      <li class="menuitem"><a href="about.html">O nás</a></li>
+  </ul>
+
+        </div>
+        <div id="content" class="flexRow">
+          <div class="projects flexRow">
+<div class="project tile tile40">
+  <div class="projectCover fitImg"><a href="gow.html"><img src="data/projects/gow/cover.jpg" /></a></div>
+  <a href="gow.html"><h3>Game of Worlds</h3></a>
+  <div class="eventDesc">dfs</div>
+  <ul class="eventMeta">
+    <li class="keywords">fdg</li>
+    <li class="author">Matej Moško & Branislav Skrečko</li>
+  </ul>
+</div>
+<div class="project tile tile40">
+  <div class="projectCover fitImg"><a href="mierotvorca.html"><img src="data/projects/mierotvorca/cover.jpg" /></a></div>
+  <a href="mierotvorca.html"><h3>Projekt Mierotvorca</h3></a>
+  <div class="eventDesc"></div>
+  <ul class="eventMeta">
+    <li class="keywords"></li>
+    <li class="author">Matej Moško & Michal Lošonský</li>
+  </ul>
+</div>
+<div class="project tile tile40">
+  <div class="projectCover fitImg"><a href="party.html"><img src="data/projects/party/cover.jpg" /></a></div>
+  <a href="party.html"><h3>Párty</h3></a>
+  <div class="eventDesc"></div>
+  <ul class="eventMeta">
+    <li class="keywords"></li>
+    <li class="author">Erken & Havel</li>
+  </ul>
+</div>
+<div class="project tile tile40">
+  <div class="projectCover fitImg"><a href="turban.html"><img src="data/projects/turban/cover.jpg" /></a></div>
+  <a href="turban.html"><h3>Turban Quiz</h3></a>
+  <div class="eventDesc">Vedomostnú súťaž Turban kvíz vedie dvojica moderátorov Jakub Lužina a Matej Moško. Okrem múdrosti a skúseností ocenia v troch kolách aj humor súťažiacich tímov.</div>
+  <ul class="eventMeta">
+    <li class="keywords">Quiz, Turban Quiz, kvíz, teambuilding, zábava, vedomostná súťaž, pubquiz, krčmový kvíz, kvíz v kaviarni</li>
+    <li class="author">Jakub Lužina & Matej Moško</li>
+  </ul>
+</div>
+</div>
+
+        </div>
+        <div id="footer"><h3>Naše produkty si už vyskúšali</h3>
+<div id="partners" class="partners flexRow">
+            <div class="partner fitImg tile tile100px">
+        <img class="parner" src="data/partners/EuroScola.png">
+    </div>
+                <div class="partner fitImg tile tile100px">
+        <img class="parner" src="data/partners/Gorila.sk-Urban-Space.jpg">
+    </div>
+                <div class="partner fitImg tile tile100px">
+        <img class="parner" src="data/partners/IBM.jpg">
+    </div>
+                <div class="partner fitImg tile tile100px">
+        <img class="parner" src="data/partners/Jandl.jpg">
+    </div>
+                        <div class="partner fitImg tile tile100px">
+        <img class="parner" src="data/partners/exponea.png">
+    </div>
+                <div class="partner fitImg tile tile100px">
+        <img class="parner" src="data/partners/mloki.png">
+    </div>
+        </div>
+</div>
+    </div>
+  <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script>
+    window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')
+</script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112547836-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-112547836-1');
+</script>
+
+</body>
 </html>

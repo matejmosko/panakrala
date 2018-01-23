@@ -1,0 +1,28 @@
+{% autoescape false %}
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    {{head}}
+</head>
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div id="wrapper" class="{{masterClass}}">
+        <div id="header">
+            {{cover}}
+        </div>
+        <div id="topmenu">
+            {{menu}}
+        </div>
+        <div id="content" class="flexRow">
+          {{content}}
+        </div>
+        <div id="footer">{{footer}}</div>
+    </div>
+  {{scripts}}
+</body>
+</html>
+{% endautoescape %}

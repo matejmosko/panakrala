@@ -1,2 +1,0 @@
-define(["projects"], function(projects) {
-});

@@ -134,7 +134,12 @@ function recursiveJsonSearch(&$data, $path = "data")
             if (array_key_exists('date', $data['opts'])) {
                 $data['opts']['timestamp'] = strtotime($data['opts']['date']);
             }
-        }
+        } /*elseif (pathinfo($value, PATHINFO_EXTENSION) == "md") {
+            //$json = parseJsonFile($value, $path);
+            $n = explode("/", $path);
+
+            $data[$value] = file_get_contents($path."/".$value);
+        }*/
     }
     return $data;
 }
