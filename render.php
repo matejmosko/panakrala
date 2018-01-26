@@ -52,17 +52,66 @@ function filterEvents($data, $project, $filter)
     }
 }
 
+function renderForm($project, $event){
+  return $GLOBALS['twig']->render('registration.html', array(
+    'project' => $project,
+    'event' => $event
+  ));
+}
+
+function renderEvent($project, $event, $today){
+  return $GLOBALS['twig']->render('event.html', array(
+    'project' => $project,
+    'event' => $event,
+    'today' => $today,
+    'form' => renderForm($project, $event),
+  ));
+}
+
 function renderEvents($localData, $project, $filter)
 {
-    $today = time();
+$today = time();
+$html = '<div class="events flexRow">';
+if (array_key_exists('events', $localData['projects'][$project])) {
+    switch ($filter) {
+  case 'all':
+  foreach ($localData['projects'][$project]['events'] as $key => &$event) {
+        $html .= renderEvent($project, $event, $today);
+  }
+    break;
+  case 'next':
+    foreach ($localData['projects'][$project]['events'] as $key => &$event) {
+        if (array_key_exists('opts', $event) && $event['opts']['timestamp'] >= $today) {
+          $html .= renderEvent($project, $event, $today);
+          echo "wox";
+        }
+    }
+    break;
+  case 'past':
+    foreach ($localData['projects'][$project]['events'] as $key => &$event) {
+        if (array_key_exists('opts', $event) && $event['opts']['timestamp'] <= $today) {
+            $html .= renderEvent($project, $event, $today);
+        }
+    }
+    break;
+  default:
+    break;
+}
+} else {
+    $html .= "K tomuto projektu momentálne nepripravujeme žiadne verejné udalosti.";
+}
+
+$html .= '</div>';
+  return $html;
+/*    $today = time();
     $localData = filterEvents($localData, $project, $filter);
 
     return $GLOBALS['twig']->render('eventlist.html', array(
       'project' => $localData['projects'][$project],
       'path' => $project,
       'today' => $today,
-      'filter' => $filter /* all, next, past */
-    ));
+      'filter' => $filter /* all, next, past
+    ));*/
 }
 
 function renderProjects($localData)
