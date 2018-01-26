@@ -1,0 +1,18 @@
+{% autoescape false %}
+<div class="event tile tile40 flexColumn">
+  <div class="fitImg">
+  <img src="data/projects/{{path}}/events/{{key}}/cover.jpg" />
+</div>
+  <h4>{{event.opts.title}}</h4>
+  <div class="eventDesc">{{event.opts.desc}}</div>
+  <ul class="eventMeta">
+    <li class="icon date"><img src="css/img/date.png" />{{event.opts.date}}</li>
+    <li class="icon time"><img src="css/img/time.png" />{{event.opts.time}}</li>
+    <li class="icon venue"><img src="css/img/venue.png" />{{event.opts.venue}}</li>
+    <li class="icon price"><img src="css/img/price.png" />{{event.opts.price}}</li>
+  </ul>
+  {% if today <= event.opts.timestamp %}
+  <a href="{{buyLink}}?ref={{key}}" class="cta">{{project.opts.strings.buy}}</a>
+  {% endif %}
+</div>
+{% endautoescape %}

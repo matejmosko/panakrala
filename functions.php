@@ -144,6 +144,16 @@ function recursiveJsonSearch(&$data, $path = "data")
     return $data;
 }
 
+/* REGISTRATION SYSTEM */
+
+function addGuest(){
+
+}
+
+function showGuests(){
+
+}
+
 /*
 function get_cover_image()
 {
