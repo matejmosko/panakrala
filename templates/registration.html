@@ -1,10 +1,11 @@
-    <form id="formReg-{{eventId}}" action="{{options.baseurl}}/registration.php" method="post">
+    <form id="formReg-{{eventId}}" action="{{options.baseurl}}/admin/registration.php" method="post">
         <input type="hidden" name="project" value="{{projectId}}">
         <input type="hidden" name="event" value="{{eventId}}">
         <input type="hidden" name="capacity" value="{{event.opts.capacity}}">
         Email: <input type="email" name="email">
         Názov tímu: <input type="text" name="name">
         Odkaz pre Turban Quiz: <textarea name="message"></textarea>
+        <div class="g-recaptcha" data-sitekey="6LfjIEQUAAAAANJWi2oR1icgz64rRaoiQlSh7ZxY"></div>
         <input type="submit" value="Submit Comment">
     </form>
     <div id="formResult-{{eventId}}" class="formResult">

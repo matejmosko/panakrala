@@ -1,7 +1,7 @@
 $('document').ready(function() {
     $('form').ajaxForm({
      target: ".formResult",
-     success: function(){alert("Great Work")},
+     success: function(){},
      error: function(){alert("Something's wrong")}
    });
 });

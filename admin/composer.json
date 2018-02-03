@@ -1,0 +1,15 @@
+{
+    "name": "kamosko/panakrala",
+    "description": "Panakrala.sk",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matej Moško",
+            "email": "matej.mosko@gmail.com"
+        }
+    ],
+    "require": {
+      "monolog/monolog": "1.0.*",
+      "twig/twig": "^2.0"
+    }
+}

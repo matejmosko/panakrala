@@ -63,13 +63,14 @@ $(function () {
   </ul>
       <a data-fancybox data-src="#form-2018-02-13_historicky" href="javascript:;" class="cta">Chcem zaregistrovať svoj tím</a>
         <div class="eventForm modal" id="form-2018-02-13_historicky" style="display: none;">
-        <form id="formReg-2018-02-13_historicky" action="http://localhost/~gnaag/panakrala/registration.php" method="post">
+        <form id="formReg-2018-02-13_historicky" action="http://localhost/~gnaag/panakrala/admin/registration.php" method="post">
         <input type="hidden" name="project" value="turban">
         <input type="hidden" name="event" value="2018-02-13_historicky">
         <input type="hidden" name="capacity" value="23">
         Email: <input type="email" name="email">
         Názov tímu: <input type="text" name="name">
         Odkaz pre Turban Quiz: <textarea name="message"></textarea>
+        <div class="g-recaptcha" data-sitekey="6LfjIEQUAAAAANJWi2oR1icgz64rRaoiQlSh7ZxY"></div>
         <input type="submit" value="Submit Comment">
     </form>
     <div id="formResult-2018-02-13_historicky" class="formResult">
@@ -77,7 +78,7 @@ $(function () {
 
   </div>
   <div class="guestList">
-    <table><thead><tr><th>#</th><th>Time</th><th>Name</th><th>email</th><th>Message</th><th>Tools</th></tr></thead><tbody><tr><td>1</td><td>2018-01-29 19:02:45</td><td><strong>sdf</strong></td><td>matej.mosko@gmail.com</td><td>sdgsdg</td><td><a href='' class='delete'>X</a></td></tr><tr><td>2</td><td>2018-01-29 19:05:30</td><td><strong>sdf</strong></td><td>matej.mosko@gmail.com</td><td>sdgsdg</td><td><a href='' class='delete'>X</a></td></tr><tr><td>3</td><td>2018-01-29 19:09:40</td><td><strong>sdf</strong></td><td>matej.mosko@gmail.com</td><td>sdgsdg</td><td><a href='' class='delete'>X</a></td></tr><tr><td>4</td><td>2018-01-29 19:10:02</td><td><strong>sdf;sa</strong></td><td>joto@ssdsd.sdf</td><td>sydgsag</td><td><a href='' class='delete'>X</a></td></tr><tr><td>5</td><td>2018-01-29 19:11:28</td><td><strong>sdf;sa</strong></td><td>joto@ssdsd.sdf</td><td>sydgsag</td><td><a href='' class='delete'>X</a></td></tr></tbody></table>
+    <table><thead><tr><th></th><th>Registrované tímy</th></tr></thead><tbody><tr><td>1</td><td>sdf</td></tr><tr><td>2</td><td>sdf</td></tr><tr><td>3</td><td>sdf</td></tr><tr><td>4</td><td>sdf;sa</td></tr><tr><td>5</td><td>sdf;sa</td></tr><tr><td>6</td><td>dfsdf</td></tr><tr><td>7</td><td>Fero</td></tr><tr><td>8</td><td>Fero</td></tr><tr><td>9</td><td>Fero</td></tr><tr><td>10</td><td>Fero2</td></tr><tr><td>11</td><td>Fero2</td></tr><tr><td>12</td><td>Fero3</td></tr></tbody></table>
   </div>
 </div>
 </div>
@@ -87,12 +88,13 @@ $(function () {
         <div id="footer"></div>
     </div>
   <script src="http://localhost/~gnaag/panakrala/js/vendor/modernizr-3.5.0.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
-    window.jQuery || document.write('<script src="http://localhost/~gnaag/panakrala/js/vendor/jquery-3.2.1.min.js"><\/script>')
+    window.jQuery || document.write('<script src="http://localhost/~gnaag/panakrala/js/vendor/jquery-3.3.1.min.js"><\/script>')
 </script>
 <script src="http://scripts.panakrala.sk/fancybox/dist/jquery.fancybox.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 
 <script src="http://localhost/~gnaag/panakrala/js/plugins.js"></script>
 <script src="http://localhost/~gnaag/panakrala/js/main.js"></script>
