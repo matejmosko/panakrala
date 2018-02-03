@@ -3,8 +3,8 @@
 <div class="projects flexRow">
 {% for key,project in projects %}
 <div class="project tile tile40">
-  <div class="projectCover fitImg"><a href="{{key}}.html"><img src="data/projects/{{key}}/cover.jpg" /></a></div>
-  <a href="{{key}}.html"><h3>{{project.opts.name}}</h3></a>
+  <div class="projectCover fitImg"><a href="{{options.baseurl}}/{{key}}/index.html"><img src="{{options.baseurl}}/data/projects/{{key}}/cover.jpg" /></a></div>
+  <a href="{{options.baseurl}}/{{key}}/index.html"><h3>{{project.opts.name}}</h3></a>
   <div class="eventDesc">{{project.opts.desc.index}}</div>
   <ul class="eventMeta">
     <li class="keywords">{{project.opts.keywords}}</li>

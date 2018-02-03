@@ -1,10 +1,11 @@
-<div class="modal">
-    <form id="registrationForm" action="comment.php" method="post">
-        <input type="hidden" name="show" value="{{project.opts.title}}">
-        <input type="hidden" name="event" value="{{event.opts.title}}">
+    <form id="formReg-{{eventId}}" action="{{options.baseurl}}/registration.php" method="post">
+        <input type="hidden" name="project" value="{{projectId}}">
+        <input type="hidden" name="event" value="{{eventId}}">
+        <input type="hidden" name="capacity" value="{{event.opts.capacity}}">
         Email: <input type="email" name="email">
         Názov tímu: <input type="text" name="name">
         Odkaz pre Turban Quiz: <textarea name="message"></textarea>
         <input type="submit" value="Submit Comment">
     </form>
-</div>
+    <div id="formResult-{{eventId}}" class="formResult">
+    </div>

@@ -125,7 +125,8 @@ function recursiveJsonSearch(&$data, $path = "data")
     foreach ($data as $key => &$value) {
         if (is_object($value) or is_array($value)) {
             recursiveJsonSearch($value, $path."/".$key);
-        } elseif (pathinfo($value, PATHINFO_EXTENSION) == "json") {
+        } elseif (pathinfo($value, PATHINFO_EXTENSION) == "json" && $value != "registration.json") {
+
             $json = parseJsonFile($value, $path);
             $n = explode("/", $path);
 
@@ -145,10 +146,6 @@ function recursiveJsonSearch(&$data, $path = "data")
 }
 
 /* REGISTRATION SYSTEM */
-
-function addGuest(){
-
-}
 
 function showGuests(){
 

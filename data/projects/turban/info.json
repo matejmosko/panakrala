@@ -10,7 +10,9 @@
   "strings": {
     "events_past": "Tieto kvízy máme už za sebou",
     "events_next": "Čakajú nás tieto kvízy",
-    "buy": "Chcem zaregistrovať svoj tím",
+    "eventBuy": "Chcem zaregistrovať svoj tím",
+    "eventFull": "Chcem byť v poradovníku",
+    "eventFullMessage": "Maximálny počet tímov pre tento kvíz sa naplnil.",
     "loading": "Kontaktujem internet. Prosím, počkajte ešte chvíľu."
   }
 }

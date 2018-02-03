@@ -1,0 +1,23 @@
+{
+    "name": "kamosko/panakrala",
+    "description": "Panakrala.sk",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matej Moško",
+            "email": "matej.mosko@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "../package"
+        }
+    ],
+    "require": {
+      "monolog/monolog": "1.0.*",
+      "twig/twig": "^2.0",
+      "kamosko/db": "*"
+    }
+}

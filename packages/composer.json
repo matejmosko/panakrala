@@ -1,0 +1,16 @@
+{
+    "name": "kamosko/db",
+    "description": "DB settings module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matej Moško",
+            "email": "matej.mosko@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Kamosko": "src"
+        }
+    }
+}

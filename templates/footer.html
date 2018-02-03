@@ -3,7 +3,7 @@
     {% for key,partner in data.partners %}
     {% if partner ends with '.jpg' or partner ends with '.png' %}
     <div class="partner fitImg tile tile100px">
-        <img class="parner" src="data/partners/{{partner}}">
+        <img class="parner" src="{{options.baseurl}}/data/partners/{{partner}}">
     </div>
     {% endif %}
     {% endfor %}

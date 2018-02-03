@@ -1,18 +1,30 @@
 {% autoescape false %}
 <div class="event tile tile40 flexColumn">
   <div class="fitImg">
-  <img src="data/projects/{{path}}/events/{{key}}/cover.jpg" />
+  <img src="{{options.baseurl}}/data/projects/{{projectId}}/events/{{eventId}}/cover.jpg" />
 </div>
   <h4>{{event.opts.title}}</h4>
   <div class="eventDesc">{{event.opts.desc}}</div>
   <ul class="eventMeta">
-    <li class="icon date"><img src="css/img/date.png" />{{event.opts.date}}</li>
-    <li class="icon time"><img src="css/img/time.png" />{{event.opts.time}}</li>
-    <li class="icon venue"><img src="css/img/venue.png" />{{event.opts.venue}}</li>
-    <li class="icon price"><img src="css/img/price.png" />{{event.opts.price}}</li>
+    <li class="icon date"><img src="{{options.baseurl}}/css/img/date.png" />{{event.opts.date}}</li>
+    <li class="icon time"><img src="{{options.baseurl}}/css/img/time.png" />{{event.opts.time}}</li>
+    <li class="icon venue"><img src="{{options.baseurl}}/css/img/venue.png" />{{event.opts.venue}}</li>
+    <li class="icon price"><img src="{{options.baseurl}}/css/img/price.png" />{{event.opts.price}}</li>
   </ul>
-  {% if today <= event.opts.timestamp %}
-  <a href="{{buyLink}}?ref={{key}}" class="cta">{{project.opts.strings.buy}}</a>
+  {% if options.today <= event.opts.timestamp %}
+  {% if guestCount < event.opts.capacity %}
+  <a data-fancybox data-src="#form-{{eventId}}" href="javascript:;" class="cta">{{project.opts.strings.eventBuy}}</a>
   {% endif %}
+  {% if guestCount >= event.opts.capacity %}
+  <p class="warning">{{project.opts.strings.eventFullMessage}}</p>
+  <a data-fancybox data-src="#form-{{eventId}}" href="javascript:;" class="cta">{{project.opts.strings.eventFull}}</a>
+  {% endif %}
+  {% endif %}
+  <div class="eventForm modal" id="form-{{eventId}}" style="display: none;">
+    {{form}}
+  </div>
+  <div class="guestList">
+    {{guestList}}
+  </div>
 </div>
 {% endautoescape %}
