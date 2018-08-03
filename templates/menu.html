@@ -1,5 +1,6 @@
-<ul id="menu" class="menu">
   {% for key,item in menu %}
-    <li class="menuitem"><a href="{{options.baseurl}}/{{item}}">{{key}}</a></li>
+    <a href="{{options.baseurl}}/{{item}}">{{key}}</a>
   {% endfor %}
-</ul>
+  <a href="javascript:void(0);" class="icon" id="topMenuHamburger">
+    <i class="fa fa-bars"></i>
+  </a>
