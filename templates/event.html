@@ -1,30 +1,40 @@
 {% autoescape false %}
-<div class="event tile tile40 flexColumn">
-  <div class="fitImg">
-  <img src="{{options.baseurl}}/data/projects/{{projectId}}/events/{{eventId}}/cover.jpg" />
-</div>
-  <h4>{{event.opts.title}}</h4>
-  <div class="eventDesc">{{event.opts.desc}}</div>
-  <ul class="eventMeta">
-    <li class="icon date"><img src="{{options.baseurl}}/css/img/date.png" />{{event.opts.date}}</li>
-    <li class="icon time"><img src="{{options.baseurl}}/css/img/time.png" />{{event.opts.time}}</li>
-    <li class="icon venue"><img src="{{options.baseurl}}/css/img/venue.png" />{{event.opts.venue}}</li>
-    <li class="icon price"><img src="{{options.baseurl}}/css/img/price.png" />{{event.opts.price}}</li>
-  </ul>
-  {% if options.today <= event.opts.timestamp %}
-  {% if guestCount < event.opts.capacity %}
-  <a data-fancybox data-src="#form-{{eventId}}" href="javascript:;" class="cta">{{project.opts.strings.eventBuy}}</a>
-  {% endif %}
-  {% if guestCount >= event.opts.capacity %}
-  <p class="warning">{{project.opts.strings.eventFullMessage}}</p>
-  <a data-fancybox data-src="#form-{{eventId}}" href="javascript:;" class="cta">{{project.opts.strings.eventFull}}</a>
-  {% endif %}
-  {% endif %}
-  <div class="eventForm modal" id="form-{{eventId}}" style="display: none;">
-    {{form}}
-  </div>
-  <div class="guestList">
-    {{guestList}}
-  </div>
+<div class="event tile tile40 flexColumn {{eventId}}">
+    <div class="fitImg">
+        <img src="{{options.baseurl}}/data/projects/{{projectId}}/events/{{eventId}}/cover.jpg" />
+    </div>
+    <h4>{{event.opts.title}}</h4>
+    <div class="eventDesc">{{event.opts.desc}}</div>
+    <ul class="eventMeta">
+        <li class="icon date"><img src="{{options.baseurl}}/css/img/date.png" />{{event.opts.date}}</li>
+        <li class="icon time"><img src="{{options.baseurl}}/css/img/time.png" />{{event.opts.time}}</li>
+        <li class="icon venue"><img src="{{options.baseurl}}/css/img/venue.png" />{{event.opts.venue}}</li>
+        <li class="icon price"><img src="{{options.baseurl}}/css/img/price.png" />{{event.opts.price}}</li>
+    </ul>
+    {% if options.today
+    <=event.opts.timestamp %} {% if guestCount < event.opts.capacity %} <a data-fancybox data-src="#form-{{eventId}}" href="javascript:;" class="cta">{{project.opts.strings.eventBuy}}</a>
+        {% endif %} {% if guestCount >= event.opts.capacity %}
+        <p class="warning">{{project.opts.strings.eventFullMessage}}</p>
+        <a data-fancybox data-src="#form-{{eventId}}" href="javascript:;" class="cta">{{project.opts.strings.eventFull}}</a> {% endif %} {% endif %}
+        <div class="eventForm modal" id="form-{{eventId}}" style="display: none;">
+            {% if event.opts.regLink %}
+            <!-- Ticket Tailor Widget. Paste this in to your website where you want the widget to appear. Do no change the code or the widget may not work properly. -->
+            <div class="tt-widget">
+                <div class="tt-widget-fallback">
+                    <p><a href="https://www.tickettailor.com/new-order/147011/fbc2/ref/website_widget/" target="_blank">Click here to buy tickets</a><br /><small><a href="http://www.tickettailor.com?rf=wdg" class="tt-widget-powered">Sell tickets online with Ticket Tailor</a></small></p>
+                </div>
+                <script src="https://dc161a0a89fedd6639c9-03787a0970cd749432e2a6d3b34c55df.ssl.cf3.rackcdn.com/tt-widget.js" data-url="https://www.tickettailor.com/new-order/147011/fbc2/ref/website_widget/" data-type="inline" data-inline-minimal="true"
+                  data-inline-show-logo="false" data-inline-bg-fill="true"></script>
+            </div>
+            <!-- End of Ticket Tailor Widget -->
+            {% else %} {{form}} {% endif %}
+        </div>
+        <div class="guestList">
+            <ol>
+                {% for key,guest in guestList %}
+                <li>{{guest.name}}</li>
+                {% endfor%}
+            </ol>
+        </div>
 </div>
 {% endautoescape %}

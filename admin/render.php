@@ -2,6 +2,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+$debug = false;
+
 require_once(__DIR__."/kamosko-config.php");
 require_once(__DIR__ . '/functions.php');
 require_once(__DIR__ . '/db.php');
@@ -10,15 +12,14 @@ require __DIR__ . '/vendor/autoload.php';
 $data = getData();
 $loader = new Twig_Loader_Filesystem($GLOBALS['options']['basepath'].'templates/');
 $twig = new Twig_Environment($loader);
+
 saveFiles();
-/*
+
+if ($debug) {
     echo "<pre>";
     print_r($data);
     echo "</pre>";
-*/
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+}
 /*
 function filterEvents($data, $project, $filter)
 {
@@ -55,7 +56,7 @@ function filterEvents($data, $project, $filter)
 
 function renderForm($projectId, $eventId)
 {
-    return $GLOBALS['twig']->render('registration.html', array(
+    return $GLOBALS['twig']->render('registration-'.$projectId.'.html', array(
     'projectId' => $projectId,
     'eventId' => $eventId,
     'project' => $GLOBALS['data']['projects'][$projectId],
@@ -76,7 +77,7 @@ function renderEvent($projectId, $eventId)
     'form' => renderForm($projectId, $eventId),
     'options' => $GLOBALS['options'],
     'guestCount' => eventGuestCount($eventId),
-    'guestList' => eventGetGuests($eventId)
+    'guestList' => eventGetGuests($projectId, $eventId)
   ));
 }
 
@@ -162,7 +163,7 @@ function renderProject($projectId)
 {
     return $GLOBALS['twig']->render('project.html', array(
     'data' => $GLOBALS['data']['projects'][$projectId],
-    'project' => $projectId,
+    'projectId' => $projectId,
     'nextEvents' => renderEvents($projectId, 'next'),
     'options' => $GLOBALS['options']
     //'pastEvents' => renderEvents($project, 'past')
@@ -243,31 +244,48 @@ function renderDocumentPage($document)
   ));
 }
 
-function saveFiles()
+function saveIndex()
 {
     /* Save Index.html */
     $content = renderHomePage();
     file_put_contents($GLOBALS['options']['basepath'].'index.html', $content);
-    /* Save Projects' html files */
-    foreach ($GLOBALS['data']['projects'] as $key => $project) {
-        $dir = $GLOBALS['options']['basepath'].'./'.$key.'/';
-        if (!file_exists($dir)) {
-            mkdir($dir, 0777, true);
-        }
-        file_put_contents($dir.'/index.html', renderProjectPage($key));
-        if (array_key_exists('gallery', $project)) {
-            foreach ($project['gallery'] as $key2 => $gallery) {
-                $subdir = $GLOBALS['options']['basepath'].'./'.$key.'/gallery/';
-                if (!file_exists($subdir)) {
-                    mkdir($subdir, 0777, true);
-                }
-                file_put_contents($subdir.'/'.$key2.'.html', renderGalleryPage($key, $key2));
+}
+
+function saveProject($key)
+{
+  /* Save Projects' html files */
+    $dir = $GLOBALS['options']['basepath'].'./'.$key.'/';
+    if (!file_exists($dir)) {
+        mkdir($dir, 0777, true);
+    }
+    file_put_contents($dir.'/index.html', renderProjectPage($key));
+    if (array_key_exists('gallery', $GLOBALS['data']['projects'][$key])) {
+        foreach ($GLOBALS['data']['projects'][$key]['gallery'] as $key2 => $gallery) {
+            $subdir = $GLOBALS['options']['basepath'].'./'.$key.'/gallery/';
+            if (!file_exists($subdir)) {
+                mkdir($subdir, 0777, true);
             }
+            file_put_contents($subdir.'/'.$key2.'.html', renderGalleryPage($key, $key2));
         }
     }
-    /* Save Documents' html files */
+}
+
+function saveDocument($doc)
+{
+  /* Save Documents' html files */
+    file_put_contents($GLOBALS['options']['basepath'].pathinfo($doc, PATHINFO_FILENAME).'.html', renderDocumentPage(file_get_contents($GLOBALS['options']['basepath']."data/documents/".$doc)));
+}
+
+function saveFiles()
+{
+    saveIndex();
+
+    foreach ($GLOBALS['data']['projects'] as $key => $project) {
+        saveProject($key);
+    }
+
     foreach ($GLOBALS['data']['documents'] as $key => $doc) {
-        file_put_contents($GLOBALS['options']['basepath'].pathinfo($doc, PATHINFO_FILENAME).'.html', renderDocumentPage(file_get_contents($GLOBALS['options']['basepath']."data/documents/".$doc)));
+        saveDocument($doc);
     }
 }
 

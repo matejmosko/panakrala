@@ -1,5 +1,8 @@
 {% autoescape false %}
 <div class="project">
+  <div class="fitImg">
+      <img src="{{options.baseurl}}/data/projects/{{projectId}}/cover.jpg" />
+  </div>
   <h2>{{data.opts.name}}</h2>
   <p class="desc">{{data.opts.desc.index}}</p>
   {% if nextEvents !="" %}
