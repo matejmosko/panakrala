@@ -1,5 +1,15 @@
 {% autoescape false %}
-  <a href="{{options.baseurl}}/index.html"><img src="{{options.baseurl}}/data/cover.jpg" /></a>
-  <a href="{{options.baseurl}}/index.html"><h3>{{data.opts.title}}</h3></a>
-  <div class="dataDesc">{{data.opts.desc}}</div>
-  {% endautoescape %}
+<div class="fitImg coverImg">
+    {% if masterClass == 'project' %} <a href="{{options.baseurl}}/{{projectId}}/index.html"><img src="{{options.baseurl}}/data/projects/{{projectId}}/cover.jpg" /></a> {% endif %}
+</div>
+
+<div class="homeTitle">
+    <a href="{{options.baseurl}}/index.html"><h1>{{data.opts.title}}</h1></a>
+    <div class="dataDesc">{{data.opts.desc}}</div>
+  </div>
+
+        <a href="{{options.baseurl}}/index.html">
+            <div class="king topking kingwalk-1"></div>
+        </a>
+
+        {% endautoescape %}

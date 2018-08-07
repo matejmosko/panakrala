@@ -1,17 +1,19 @@
-{% autoescape false %}
-{% if projects %}
+{% autoescape false %} {% if projects %}
 <div class="projects flexRow">
-{% for key,project in projects %}
-<div class="project tile tile40">
-  <div class="projectCover fitImg"><a href="{{options.baseurl}}/{{key}}/index.html"><img src="{{options.baseurl}}/data/projects/{{key}}/cover.jpg" /></a></div>
-  <a href="{{options.baseurl}}/{{key}}/index.html"><h3>{{project.opts.name}}</h3></a>
-  <div class="eventDesc">{{project.opts.desc.index}}</div>
-  <ul class="eventMeta">
-    <li class="keywords">{{project.opts.keywords}}</li>
-    <li class="author">{{project.opts.author}}</li>
-  </ul>
+    {% for key,project in projects %}
+    <div class="project tile tile40">
+      <a href="{{options.baseurl}}/{{key}}/index.html">
+        <div class="projectCover fitImg"><img src="{{options.baseurl}}/data/projects/{{key}}/cover.jpg" />
+          <h3 class="projectTitle">{{project.opts.name}}</h3>
+        </div>
+        </a>
+        <div class="projectDesc tileDesc">{{project.opts.desc.index}}</div>
+        <ul class="projectMeta tileMeta">
+            <!--<li class="keywords">{{project.opts.keywords}}</li>-->
+            <li><span class="emotpack-icon timespan"></span><span class="metaDetail">{{project.opts.desc.timespan}}</span></li>
+            <li><span class="emotpack-icon groupsize"></span><span class="metaDetail">{{project.opts.desc.groupsize}}</span></li>
+        </ul>
+    </div>
+    {% endfor %}
 </div>
-{% endfor %}
-</div>
-{% endif %}
-{% endautoescape %}
+{% endif %} {% endautoescape %}

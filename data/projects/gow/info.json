@@ -4,8 +4,11 @@
   "keywords": "fdg",
   "desc": {
     "index": "Ty a Tvoj tím sa postavíte do čela jednej z top krajín sveta. Dobyjete alebo zachranite ho? Na strategickej mape budete rozhodovať o využití zdrojov, rozmiestnení armád, vytváraní aliancií a zradách spojencov.<br />Prečo to nie je obyčajná stolovka?<br />Každú krajinu bude ovládať jeden tím hráčov. Medzi sebou nebudete len bojovať na strategickej mape, ale čaká vás aj ozajstné vyjednávanie a koordinácia spojeneckých aktivít.<br />Každého spojenca môžete kedykoľvek zradiť.",
-    "mudrosti": "dsf",
-    "archiv": "dsf"
+    "promo": "",
+    "archiv": "",
+    "timespan": "3-5 hodín",
+    "groupsize": "20-60",
+    "price": "500€ +"
   },
   "strings": {
     "events_past": "Tu ste už svet zachránili",

@@ -1,7 +1,7 @@
 {
-  "title": "Panakrala.sk",
-  "desc": "Projekty a hry pre vaše tímbuildingy",
-  "keywords": "teambuilding, tímbulding, kvíz, hra, game design",
+  "title": "Hry Pána Kráľa",
+  "desc": "Chcú vaši ľudia tímbuilding? Dovoľte im zabávať sa.",
+  "keywords": "teambuilding, tímbuilding, kvíz, hra, game design",
   "menu": {
     "Hry Pána Kráľa": "index.html",
     "Kontakt": "contact.html",

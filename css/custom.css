@@ -13,8 +13,13 @@
     src: url("fonts/PermianSerifTypeface-Italic.otf") format("opentype");
 }
 
+html {
+    font-size: 16px;
+}
+
 body {
     font-family: "Permian";
+    font-size: 100%;
 }
 
 .flexColumn {
@@ -25,62 +30,128 @@ body {
 .flexRow {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 }
 
-#wrapper {}
+#wrapper {
+    background: url("img/tileChess.png");
+    background-attachment: fixed;
+}
 
-#header {}
+#header {
+    background-repeat: repeat-x;
+    background-position: bottom;
+}
 
-#footer {}
+#footer {
+    background: url("img/tileDark.png");
+    color: white;
+    padding: 5px 30px;
+    border-top: transparent solid 10px;
+    border-image: url("img/tileBrown_bordertop.png") 20% round;
+}
 
 #content {
     min-height: 90vh;
     align-content: center;
     align-items: center;
     justify-content: center;
-    padding: 2vh 2vw;
+    background: url("img/castleWall.png");
+    margin: 0px;
+    border-top: transparent solid 10px;
+    border-image: url("img/wall-top.png") 20% round;
+    border-image-outset: 10px;
+    position: relative;
+    z-index: 1000;
 }
 
 #topMenu {
-  position: fixed;
+    position: fixed;
     top: 0;
     width: 100%;
+    color: white;
+}
+
+#cover {
+    position: relative;
+    z-index: 1;
+}
+
+.home #cover {
+    height: 95vh;
+}
+
+.home #cover {
+    background-image: url("../data/cover.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.homeTitle{
+  display:none;
+  position: absolute;
+  width: 90vw;
+  bottom: 30px;
+  right:0px;
+  text-align: right;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  margin: 0px;
+}
+
+.home .homeTitle{
+  display: block;
+
 }
 
 /** NAVIGATION (TOPMENU) **/
 
 /* Add a black background color to the top navigation */
+
 .topnav {
-   background-color: #333;
-   overflow: hidden;
+    background-color: #333;
+    overflow: hidden;
+    z-index: 1000;
 }
 
 /* Style the links inside the navigation bar */
+
 .topnav a {
-   float: left;
-   display: block;
-   color: #f2f2f2;
-   text-align: center;
-   padding: 14px 16px;
-   text-decoration: none;
-   font-size: 17px;
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
 }
 
 /* Change the color of links on hover */
+
 .topnav a:hover {
-   background-color: #ddd;
-   color: black;
+    background-color: #ddd;
+    color: black;
 }
 
 /* Add an active class to highlight the current page */
+
 .active {
-   background-color: #4CAF50;
-   color: white;
+    background-color: #4CAF50;
+    color: white;
 }
 
 /* Hide the link that should open and close the topnav on small screens */
+
 .topnav .icon {
-   display: none;
+    display: none;
+}
+
+.footerTile {
+    width: 100%;
+    color: white;
+    text-align: center;
 }
 
 .fitImg img {
@@ -112,7 +183,14 @@ body {
     justify-content: center;
 }
 
-.eventMeta {
+.tile {
+    max-width: 851px;
+    padding: 0px;
+    margin: 10px;
+}
+
+.tileMeta {
+    margin-top: 30px;
     display: flex;
     flex-flow: row wrap;
     width: 100%;
@@ -120,18 +198,16 @@ body {
     align-content: space-between;
     align-items: center;
     justify-content: center;
-    margin: 0px;
     padding: 0px;
 }
 
-.eventMeta li {
+.tileMeta li {
     list-style-type: none;
     padding: 0px 5px;
 }
 
-.eventMeta .icon img {
-    width: 24px;
-    height: 24px;
+.tileDesc {
+    padding: 5px 30px;
 }
 
 .cta {
@@ -160,33 +236,215 @@ body {
     outline-offset: 15px;
 }
 
+/*
+.emotpack-icon:before {
+    content: "";
+    float: left;
+    margin: 0 5px 0 0;
+    width: 32px;
+    height: 38px;
+    background: url("img/emotespack.png");
+}
+
+.date:before {
+    background-position: 0px 0px;
+}
+
+.venue:before {
+    background-position: -32px 0px;
+}
+
+.price:before {
+    background-position: -160px -38px;
+}
+
+.time:before {
+    background-position: -64px 0px;
+}
+
+.author:before{
+  background-position: -32px -152px;
+}
+
+.groupsize:before{
+  background-position: -96px 0px;
+}
+
+.timespan:before{
+  background-position: -128px 0px;
+}*/
+
+.metaDetail {
+    color: #333;
+    height: 32px;
+    width: auto;
+    background-color: white;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 6px;
+}
+
+.emotpack-icon {
+    float: left;
+    margin: 0 -5px 0 0;
+    width: 32px;
+    height: 38px;
+    background: url("img/emotespack.png");
+}
+
+.timespan {
+    background-position: -128px 0px;
+}
+
+.date {
+    background-position: 0px 0px;
+}
+
+.venue {
+    background-position: -32px 0px;
+}
+
+.price {
+    background-position: -160px -38px;
+}
+
+.time {
+    background-position: -64px 0px;
+}
+
+.author {
+    background-position: -32px -152px;
+}
+
+.groupsize {
+    background-position: -96px 0px;
+}
+
+.event {
+    background: url("img/tileblue.png");
+    color: white;
+}
+
+.projects {
+    padding: 60px 0;
+    margin: 0px;
+}
+
+.projects .project {
+    background: url("img/tileblue.png");
+    color: white;
+}
+
+.projectCover {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.projects .projectTitle {
+    background-color: black;
+    opacity: 0.3;
+    font-size: 2.5rem;
+    background-blend-mode: luminosity;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s, color 1s;
+}
+
+.projects .projectTitle:hover {
+    opacity: 0.9;
+    color: white;
+}
+
+.hamburger-bars {
+    display: block;
+    height: 38px;
+    width: 32px;
+    background: url("img/emotespack.png");
+    background-position: -96px -190px;
+}
+
+.king {
+    background: url("img/king.png");
+    height: 186px;
+    width: 150px;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+
+.kingwalk-1 {
+    background-position: 0px 0px;
+}
+
+.kingwalk-2 {
+    background-position: -150px 0px;
+}
+
+.kingwalk-3 {
+    background-position: -300px 0px;
+}
+
+
+a{
+  text-decoration: none;
+}
+
+a:visited{
+  color: inherit;
+}
+
 @media screen and (max-width: 500px) {
     .tile {
         min-width: 95vw;
         width: 95vw
     }
+    .partners .tile {
+        min-width: 30vw;
+        width: 30vw
+    }
 }
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+
 @media screen and (max-width: 600px) {
- .topnav a:not(:first-child) {display: none;}
- .topnav a.icon {
-   float: right;
-   display: block;
- }
+    .topnav a/*:not(:first-child)*/
+        {
+        display: none;
+    }
+    .topnav {
+        background: none;
+    }
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
 }
 
 /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+
 @media screen and (max-width: 600px) {
- .topnav.responsive {position: relative;}
- .topnav.responsive a.icon {
-   position: absolute;
-   right: 0;
-   top: 0;
- }
- .topnav.responsive a {
-   float: none;
-   display: block;
-   text-align: left;
- }
+    .topnav.responsive {
+        position: relative;
+        background-color: #333;
+    }
+    .topnav.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
 }

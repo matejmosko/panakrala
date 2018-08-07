@@ -5,7 +5,10 @@
   "desc": {
     "index": "Vedomostnú súťaž Turban kvíz vedie dvojica moderátorov Jakub Lužina a Matej Moško. Okrem múdrosti a skúseností ocenia v troch kolách aj humor súťažiacich tímov.",
     "mudrosti": "Ak chceš zabiť najbližších pár minút, kým Ti skončí šichta pri facebooku, pozri si archív turbánnych múdrostí.",
-    "archiv": "Páčia sa Ti plagáty Turban Quizu? Pozri si ich v archíve."
+    "archiv": "Páčia sa Ti plagáty Turban Quizu? Pozri si ich v archíve.",
+    "timespan": "1-2,5 hodiny",
+    "groupsize": "10 a viac ľudí",
+    "price": "400€ +"
   },
   "strings": {
     "events_past": "Tieto kvízy máme už za sebou",

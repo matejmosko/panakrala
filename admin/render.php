@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+Locale::setDefault('sk_SK');
 
 $debug = false;
 
@@ -12,6 +13,7 @@ require __DIR__ . '/vendor/autoload.php';
 $data = getData();
 $loader = new Twig_Loader_Filesystem($GLOBALS['options']['basepath'].'templates/');
 $twig = new Twig_Environment($loader);
+$twig->addExtension(new Twig_Extensions_Extension_Intl());
 
 saveFiles();
 
@@ -128,11 +130,14 @@ function renderProjects()
   ));
 }
 
-function renderCover()
+function renderCover($masterClass = null, $projectId = null, $eventId = null)
 {
     return $GLOBALS['twig']->render('cover.html', array(
     'data' => $GLOBALS['data'],
-    'options' => $GLOBALS['options']
+    'options' => $GLOBALS['options'],
+    'masterClass' => $masterClass,
+    'projectId' => $projectId,
+    'eventId' => $eventId
   ));
 }
 function renderFooter()
@@ -207,9 +212,9 @@ function renderProjectPage($projectId)
     return $GLOBALS['twig']->render('page.html', array(
   'menu' => renderMenu(),
   'head' => renderHead(),
-  'cover' => renderCover(),
+  'cover' => renderCover('project', $projectId, ""),
   'content' => renderProject($projectId),
-  //'footer' => renderFooter(),
+  'footer' => renderFooter(),
   'scripts' => renderScripts(),
   'masterClass' => 'project',
   'options' => $GLOBALS['options']

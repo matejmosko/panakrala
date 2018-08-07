@@ -1,4 +1,5 @@
-<h3>Naše produkty si už vyskúšali</h3>
+<div class="footerTile">
+  <h3>Naše produkty si už vyskúšali</h3>
 <div id="partners" class="partners flexRow">
     {% for key,partner in data.partners %}
     {% if partner ends with '.jpg' or partner ends with '.png' %}
@@ -7,4 +8,5 @@
     </div>
     {% endif %}
     {% endfor %}
+</div>
 </div>

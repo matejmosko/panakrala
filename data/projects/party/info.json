@@ -4,8 +4,11 @@
   "keywords": "",
   "desc": {
     "index": "",
-    "mudrosti": "",
-    "archiv": ""
+    "promo": "",
+    "archiv": "",
+    "timespan": "1-2 hodiny",
+    "groupsize": "8-12 ľudí",
+    "price": "300€ +"
   },
   "strings": {
     "events_past": "Tieto kvízy máme už za sebou",

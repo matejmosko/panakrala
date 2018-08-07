@@ -7,12 +7,12 @@
   <img src="{{options.baseurl}}/data/projects/{{path}}/events/{{key}}/cover.jpg" />
 </div>
   <h4>{{event.opts.title}}</h4>
-  <div class="eventDesc">{{event.opts.desc}}</div>
-  <ul class="eventMeta">
-    <li class="icon date"><img src="{{options.baseurl}}/css/img/date.png" />{{event.opts.date}}</li>
-    <li class="icon time"><img src="{{options.baseurl}}/css/img/time.png" />{{event.opts.time}}</li>
-    <li class="icon venue"><img src="{{options.baseurl}}/css/img/venue.png" />{{event.opts.venue}}</li>
-    <li class="icon price"><img src="{{options.baseurl}}/css/img/price.png" />{{event.opts.price}}</li>
+  <div class="eventDesc tileDesc">{{event.opts.desc}}</div>
+  <ul class="eventMeta tileMeta">
+    <li><span class="emotpack-icon date"></span><span class="metaDetail">{{event.opts.date|localizeddate('long', 'none')}}</span></li>
+    <li><span class="emotpack-icon time"></span><span class="metaDetail">{{event.opts.time}}</span></li>
+    <li><span class="emotpack-icon venue"></span><span class="metaDetail">{{event.opts.venue}}</span></li>
+    <li><span class="emotpack-icon price"></span><span class="metaDetail">{{event.opts.price}}</span></li>
   </ul>
   {% if today <= event.opts.timestamp %}
   <a href="{{options.baseurl}}/?ref={{key}}" class="cta">{{project.opts.strings.buy}}</a>

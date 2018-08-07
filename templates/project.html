@@ -1,13 +1,18 @@
 {% autoescape false %}
 <div class="project">
-  <div class="fitImg">
-      <img src="{{options.baseurl}}/data/projects/{{projectId}}/cover.jpg" />
-  </div>
   <h2>{{data.opts.name}}</h2>
   <p class="desc">{{data.opts.desc.index}}</p>
+  <ul class="projectMeta tileMeta">
+      <!--<li class="keywords">{{project.opts.keywords}}</li>-->
+      <li><span class="emotpack-icon timespan"></span><span class="metaDetail">{{data.opts.desc.timespan}}</span></li>
+      <li><span class="emotpack-icon groupsize"></span><span class="metaDetail">{{data.opts.desc.groupsize}}</span></li>
+      <li><span class="emotpack-icon price"></span><span class="metaDetail">{{data.opts.desc.price}}</span></li>
+  </ul>
   {% if nextEvents !="" %}
   <h3>{{data.opts.strings.events_next}}</h3>
+  <div class="events nextEvents flexRow">
   {{nextEvents}}
+</div>
   {% endif %}
 </div>
 {% endautoescape %}
