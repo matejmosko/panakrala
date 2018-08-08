@@ -75,35 +75,40 @@ body {
 #cover {
     position: relative;
     z-index: 1;
+    overflow-x: hidden;
 }
 
-.home #cover {
-    height: 95vh;
-}
-
-.home #cover {
+.home #cover, .document #cover {
     background-image: url("../data/cover.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
 }
 
-.homeTitle{
-  display:none;
-  position: absolute;
-  width: 90vw;
-  bottom: 30px;
-  right:0px;
-  text-align: right;
-  background-color: white;
-  color: black;
-  padding: 10px;
-  margin: 0px;
+
+.home #cover {
+    height: 95vh;
 }
 
-.home .homeTitle{
-  display: block;
+.document #cover {
+    height: 260px;
+}
 
+.homeTitle {
+    display: none;
+    position: absolute;
+    width: 90vw;
+    bottom: 30px;
+    right: 0px;
+    text-align: right;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    margin: 0px;
+}
+
+.home .homeTitle, .document .homeTitle {
+    display: block;
 }
 
 /** NAVIGATION (TOPMENU) **/
@@ -236,43 +241,15 @@ body {
     outline-offset: 15px;
 }
 
-/*
-.emotpack-icon:before {
-    content: "";
-    float: left;
-    margin: 0 5px 0 0;
-    width: 32px;
-    height: 38px;
-    background: url("img/emotespack.png");
+/** TITLES **/
+
+.title{
+  text-align: center;
 }
 
-.date:before {
-    background-position: 0px 0px;
+h1.title{
+  text-align: right;
 }
-
-.venue:before {
-    background-position: -32px 0px;
-}
-
-.price:before {
-    background-position: -160px -38px;
-}
-
-.time:before {
-    background-position: -64px 0px;
-}
-
-.author:before{
-  background-position: -32px -152px;
-}
-
-.groupsize:before{
-  background-position: -96px 0px;
-}
-
-.timespan:before{
-  background-position: -128px 0px;
-}*/
 
 .metaDetail {
     color: #333;
@@ -332,7 +309,7 @@ body {
     margin: 0px;
 }
 
-.projects .project {
+.projects .projectPreview {
     background: url("img/tileblue.png");
     color: white;
 }
@@ -365,6 +342,41 @@ body {
     color: white;
 }
 
+.projectDesc{
+  display: flex;
+  max-width: 90vw;
+}
+
+.projectPage .gallery{
+  display:flex;
+  flex-flow: row wrap;
+}
+
+.projectPage .gallery img{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  filter: none;
+  transform: none;
+  transition: filter 0.5s, transform 0.5s;
+}
+
+.projectPage .gallery img:hover{
+  filter: brightness(1.5) grayscale(1);
+  transform: scale(1.1);
+}
+
+.documentPage{
+  display: flex;
+  max-width: 90vw;
+}
+
+.text{
+  background-color: white;
+  color: black;
+  padding: 30px;
+}
+
 .hamburger-bars {
     display: block;
     height: 38px;
@@ -373,13 +385,16 @@ body {
     background-position: -96px -190px;
 }
 
+.kingDiv {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+
 .king {
     background: url("img/king.png");
     height: 186px;
     width: 150px;
-    position: absolute;
-    left: 0px;
-    bottom: 0px;
 }
 
 .kingwalk-1 {
@@ -394,13 +409,29 @@ body {
     background-position: -300px 0px;
 }
 
-
-a{
-  text-decoration: none;
+.kingTip {
+    display: none;
+    left: 50px;
+    position: relative;
+    background: white;
+    color: black;
+    padding: 10px;
+    border: dashed 1px black;
+    width: 150px;
 }
 
-a:visited{
-  color: inherit;
+a.title {
+    text-decoration: none;
+    color: inherit;
+}
+
+a{
+  color: indianred;
+}
+
+
+a:visited {
+    color: inherit;
 }
 
 @media screen and (max-width: 500px) {
@@ -447,4 +478,15 @@ a:visited{
         display: block;
         text-align: left;
     }
+}
+
+@media screen and (max-width: 600px) {
+  .king{
+    background-size: auto 93px;
+    height: 93px;
+    width: 75px;
+  }
+  .kingDiv{
+
+  }
 }

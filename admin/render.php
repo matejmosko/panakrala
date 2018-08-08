@@ -11,9 +11,13 @@ require_once(__DIR__ . '/db.php');
 require __DIR__ . '/vendor/autoload.php';
 
 $data = getData();
+
 $loader = new Twig_Loader_Filesystem($GLOBALS['options']['basepath'].'templates/');
 $twig = new Twig_Environment($loader);
 $twig->addExtension(new Twig_Extensions_Extension_Intl());
+
+$Parsedown = new Parsedown();
+
 
 saveFiles();
 
@@ -175,6 +179,20 @@ function renderProject($projectId)
   ));
 }
 
+function renderDocument($document)
+{
+  //$content = "";
+    $content = $GLOBALS['Parsedown']->text(file_get_contents($GLOBALS['options']['basepath']."data/documents/".$document));
+    $image = pathinfo($document, PATHINFO_FILENAME).".jpg";
+    return $GLOBALS['twig']->render('document.html', array(
+      'content' => $content,
+    'data' => $GLOBALS['data']['documents'],
+    'image' => $image,
+    'options' => $GLOBALS['options']
+    //'pastEvents' => renderEvents($project, 'past')
+  ));
+}
+
 function renderMenu()
 {
     return $GLOBALS['twig']->render('menu.html', array(
@@ -241,10 +259,10 @@ function renderDocumentPage($document)
       'menu' => renderMenu(),
       'head' => renderHead(),
       'cover' => renderCover(),
-      'content' => $document,
+      'content' => renderDocument($document),
       'footer' => renderFooter(),
       'scripts' => renderScripts(),
-      'masterClass' => 'home',
+      'masterClass' => 'document',
       'options' => $GLOBALS['options']
   ));
 }
@@ -258,7 +276,7 @@ function saveIndex()
 
 function saveProject($key)
 {
-  /* Save Projects' html files */
+    /* Save Projects' html files */
     $dir = $GLOBALS['options']['basepath'].'./'.$key.'/';
     if (!file_exists($dir)) {
         mkdir($dir, 0777, true);
@@ -277,8 +295,8 @@ function saveProject($key)
 
 function saveDocument($doc)
 {
-  /* Save Documents' html files */
-    file_put_contents($GLOBALS['options']['basepath'].pathinfo($doc, PATHINFO_FILENAME).'.html', renderDocumentPage(file_get_contents($GLOBALS['options']['basepath']."data/documents/".$doc)));
+    /* Save Documents' html files */
+    file_put_contents($GLOBALS['options']['basepath'].pathinfo($doc, PATHINFO_FILENAME).'.html', renderDocumentPage($doc));
 }
 
 function saveFiles()

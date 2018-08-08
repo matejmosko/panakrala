@@ -49,6 +49,13 @@ class ComposerStaticInitda9554f3f981b8c4c2e6d7dc7ed72092
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
             ),
         ),
+        'P' => 
+        array (
+            'Parsedown' => 
+            array (
+                0 => __DIR__ . '/..' . '/erusev/parsedown',
+            ),
+        ),
         'M' => 
         array (
             'Monolog' => 

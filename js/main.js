@@ -38,34 +38,59 @@ $('document').ready(function() { /*  BROKEN!!! */
         }
     });
 
-    function moveKing(king){
-      $(king).css("left", $(window).scrollTop())
-      let xs = $(window).scrollTop() / 10 | 0;
-      if (xs % 4 == 0) {
-          $(king).addClass("kingwalk-2");
-          $(king).removeClass("kingwalk-3");
-          $(king).removeClass("kingwalk-1");
-      } else if (xs % 3 == 0) {
-          $(king).addClass("kingwalk-3");
-          $(king).removeClass("kingwalk-1");
-          $(king).removeClass("kingwalk-2");
-      } else if (xs % 2 == 0) {
-          $(king).addClass("kingwalk-1");
-          $(king).removeClass("kingwalk-2");
-          $(king).removeClass("kingwalk-3");
-      } else {
-          $(king).addClass("kingwalk-2");
-          $(king).removeClass("kingwalk-1");
-          $(king).removeClass("kingwalk-3");
-      }
+    function kingMove(king) {
+        $(king).closest(".kingDiv").css("left", $(window).scrollTop())
+        let xs = $(window).scrollTop() / 10 | 0;
+        console.log($(king).closest(".kingDiv").position().left);
+        console.log($(window).width());
+        if (xs % 4 == 0) {
+            $(king).addClass("kingwalk-2");
+            $(king).removeClass("kingwalk-3");
+            $(king).removeClass("kingwalk-1");
+        } else if (xs % 3 == 0) {
+            $(king).addClass("kingwalk-3");
+            $(king).removeClass("kingwalk-1");
+            $(king).removeClass("kingwalk-2");
+        } else if (xs % 2 == 0) {
+            $(king).addClass("kingwalk-1");
+            $(king).removeClass("kingwalk-2");
+            $(king).removeClass("kingwalk-3");
+        } else {
+            $(king).addClass("kingwalk-2");
+            $(king).removeClass("kingwalk-1");
+            $(king).removeClass("kingwalk-3");
+        }
+    }
+
+    function kingTooltips(king) {
+        let kingPos = $(king).closest(".kingDiv").position().left;
+        if (kingPos > 50 && kingPos < 250) {
+            $(".kingTip-1").show();
+            $(".kingTip-2").hide();
+            $(".kingTip-3").hide();
+        } else if (kingPos > 350 && kingPos < 550) {
+            $(".kingTip-1").hide();
+            $(".kingTip-2").show();
+            $(".kingTip-3").hide();
+        } else if (kingPos > 750 && kingPos < 950) {
+            $(".kingTip-1").hide();
+            $(".kingTip-2").hide();
+            $(".kingTip-3").show();
+        } else {
+            $(".kingTip-1").hide();
+            $(".kingTip-2").hide();
+            $(".kingTip-3").hide();
+        }
     }
 
     $(function() {
         $(window).scroll(function() {
-          moveKing(".topking");
+            kingMove(".topking");
+            kingTooltips(".topking");
         });
         $(document).ready(function() {
-          moveKing(".topking");
+            kingMove(".topking");
+            kingTooltips(".topking");
         });
     });
 
