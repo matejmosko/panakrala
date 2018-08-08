@@ -16,7 +16,6 @@
 <link rel="stylesheet" href="http://localhost/~gnaag/panakrala/css/main.css">
 <link rel="stylesheet" href="http://localhost/~gnaag/panakrala/css/custom.css">
 <link  href="http://scripts.panakrala.sk/fancybox/dist/jquery.fancybox.min.css" rel="stylesheet">
-<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 <!--<script>
 $(function () {
 });
@@ -63,8 +62,8 @@ $(function () {
         <div id="content" class="flexRow">
           <div class="projectPage">
     <h2 class="title">Turban Quiz</h2>
-    <div class="text projectText">
-        <p class="desc">Vedomostnú súťaž Turban kvíz vedie dvojica moderátorov Jakub Lužina a Matej Moško. Okrem múdrosti a skúseností ocenia v troch kolách aj humor súťažiacich tímov.</p>
+    <div class="projectDesc">
+        <p class="text projectText">Vedomostnú súťaž Turban kvíz vedie dvojica moderátorov Jakub Lužina a Matej Moško. Okrem múdrosti a skúseností ocenia v troch kolách aj humor súťažiacich tímov.</p>
         <div class="gallery">
                         <a data-fancybox="gallery" data-src="http://localhost/~gnaag/panakrala/data/projects/turban/gallery/preview/klucenky.jpg" href="javascript:;">
               <img src="http://localhost/~gnaag/panakrala/data/projects/turban/gallery/preview/klucenky.jpg" />
@@ -108,15 +107,15 @@ $(function () {
     </ul>
       <a data-fancybox data-src="#form-2018-08-20_TEST" href="javascript:;" class="cta">Chcem zaregistrovať svoj tím</a>
                   <div class="eventForm modal" id="form-2018-08-20_TEST" style="display: none;">
-                 <form id="formReg-2018-08-20_TEST" action="http://localhost/~gnaag/panakrala/admin/registration.php" method="post">
+                 <form id="formReg-2018-08-20_TEST" class="regForm" action="http://localhost/~gnaag/panakrala/admin/registration.php" method="post">
         <input type="hidden" name="project" value="turban">
         <input type="hidden" name="event" value="2018-08-20_TEST">
         <input type="hidden" name="capacity" value="23">
-        Email: <input type="email" name="email">
-        Názov tímu: <input type="text" name="name">
-        Odkaz pre Turban Quiz: <textarea name="message"></textarea>
+        <label for="email">Váš email</label><input type="email" name="email" required>
+        <label for="name">Názov tímu: </label><input type="text" name="name" minlenght="2" required>
+        <label for="message">Odkaz pre Turban Quiz:</label> <textarea name="message"></textarea>
         <div class="g-recaptcha" data-sitekey="6LfjIEQUAAAAANJWi2oR1icgz64rRaoiQlSh7ZxY"></div>
-        <input type="submit" value="Submit Comment">
+        <input type="submit" value="Prihlasujem tento tím" class="cta">
     </form>
     <div id="formResult-2018-08-20_TEST" class="formResult">
     </div>
@@ -159,7 +158,7 @@ $(function () {
   <script src="http://localhost/~gnaag/panakrala/js/vendor/modernizr-3.5.0.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
-    window.jQuery || document.write('<script src="http://localhost/~gnaag/panakrala/js/vendor/jquery-3.3.1.min.js"><\/script>')
+    window.jQuery || document.write('<script src="http://localhost/~gnaag/panakrala/js/vendor/jquery-3.3.1.min.js"><\/script>');
 </script>
 <script src="http://scripts.panakrala.sk/fancybox/dist/jquery.fancybox.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>

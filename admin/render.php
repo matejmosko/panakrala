@@ -188,7 +188,8 @@ function renderDocument($document)
       'content' => $content,
     'data' => $GLOBALS['data']['documents'],
     'image' => $image,
-    'options' => $GLOBALS['options']
+    'options' => $GLOBALS['options'],
+    'contactForm' => renderContactForm('context', 'projectId')
     //'pastEvents' => renderEvents($project, 'past')
   ));
 }
@@ -209,6 +210,13 @@ function renderGallery($projectId, $gallery)
     'gallery' => $gallery,
     'options' => $GLOBALS['options']
   ));
+}
+
+function renderContactForm($context, $projectId){
+  return $GLOBALS['twig']->render('contactform.html', array(
+  'data' => $GLOBALS['data'],
+  'options' => $GLOBALS['options']
+));
 }
 
 function renderHomePage()

@@ -1,19 +1,22 @@
-    <form id="formReg-{{eventId}}" action="{{options.baseurl}}/admin/registration.php" method="post">
-        <input type="hidden" name="project" value="{{projectId}}">
-        <input type="hidden" name="event" value="{{eventId}}">
-        <input type="hidden" name="capacity" value="{{event.opts.capacity}}">
-        Email: <input type="email" name="email">
-        Názov tímu: <input type="text" name="name">
-        Krajina: <select name="faction">
+<form id="formReg-{{eventId}}" class="regForm" action="{{options.baseurl}}/admin/registration.php" method="post">
+    <input type="hidden" name="project" value="{{projectId}}">
+    <input type="hidden" name="event" value="{{eventId}}">
+    <input type="hidden" name="capacity" value="{{event.opts.capacity}}">
+    <label for="email">Email:</label> <input type="email" name="email" required>
+    <label for="name">Názov tímu:</label> <input type="text" name="name" required>
+    <label for="faction">Krajina:</label> <select name="faction">
           {% for key,faction in event.opts.factions %}
           {% if faction.playing == false %}
           <option>{{faction.country}}</option>
           {% endif %}
           {% endfor %}
         </select>
-        Poznámka: <textarea name="message"></textarea>
-        <div class="g-recaptcha" data-sitekey="6LfjIEQUAAAAANJWi2oR1icgz64rRaoiQlSh7ZxY"></div>
-        <input type="submit" value="Submit Comment">
-    </form>
-    <div id="formResult-{{eventId}}" class="formResult">
-    </div>
+        <label for="message">Poznámka:</label> <textarea name="message"></textarea>
+    <div class="g-recaptcha" data-sitekey="6LfjIEQUAAAAANJWi2oR1icgz64rRaoiQlSh7ZxY"></div>
+    <input type="submit" value="Prihlasujem tento tím" class="cta">
+</form>
+<script>
+
+</script>
+<div id="formResult-{{eventId}}" class="formResult">
+</div>

@@ -1,8 +1,8 @@
 {% autoescape false %}
 <div class="projectPage">
     <h2 class="title">{{data.opts.name}}</h2>
-    <div class="text projectText">
-        <p class="desc">{{data.opts.desc.index}}</p>
+    <div class="projectDesc">
+        <p class="text projectText">{{data.opts.desc.index}}</p>
         <div class="gallery">
             {% for key,photo in data.gallery.preview %}
             <a data-fancybox="gallery" data-src="{{options.baseurl}}/data/projects/{{projectId}}/gallery/preview/{{photo}}" href="javascript:;">

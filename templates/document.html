@@ -1,6 +1,12 @@
 {% autoescape false %}
 <div class="documentPage">
-  <div class="text documentText">{{content}}</div>
+  <div class="text documentText">{{content}}
+    {% if contactForm !="" %}
+    {{contactForm}}
+    {% endif %}
+  </div>
   <img src="{{options.baseurl}}/data/documents/{{image}}" />
 </div>
+
+
 {% endautoescape %}

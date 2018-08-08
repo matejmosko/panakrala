@@ -1,7 +1,18 @@
-$('document').ready(function() { /*  BROKEN!!! */
+$('document').ready(function() {
     baseUrl = "http://localhost/~gnaag/panakrala/";
 
-    $('form').ajaxForm({
+    $('.contactForm').ajaxForm({
+        target: ".contactFormResult",
+        success: function() {
+          $("#submitContactForm").prop('disabled', true);
+            $('#contactFormResult').text("Ďakujeme za správu, onedlho Vám odpíšeme.")
+        },
+        error: function() {
+            $('#contactFormResult').text("Vaša správa sa bohužiaľ stratila v hlbinách internetu. Skúste to ešte raz.");
+        }
+    });
+
+    $('.regForm').ajaxForm({
         target: ".formResult",
         success: function() {
             ajaxGetEvent("turban", "2018-02-13_historicky");
@@ -14,9 +25,7 @@ $('document').ready(function() { /*  BROKEN!!! */
     function ajaxGetEvent(projectId, eventId) {
         link = baseUrl + "admin/ajax.php?script=eventGetGuests&eventId=" + eventId + "&projectId=" + projectId;
         $.getJSON(link, function(data) {
-            console.log(data);
             if ($.isEmptyObject(data)) {
-                console.log('wow')
             } else {
                 var items = [];
                 $.each(data, function(key, val) {
@@ -41,8 +50,6 @@ $('document').ready(function() { /*  BROKEN!!! */
     function kingMove(king) {
         $(king).closest(".kingDiv").css("left", $(window).scrollTop())
         let xs = $(window).scrollTop() / 10 | 0;
-        console.log($(king).closest(".kingDiv").position().left);
-        console.log($(window).width());
         if (xs % 4 == 0) {
             $(king).addClass("kingwalk-2");
             $(king).removeClass("kingwalk-3");

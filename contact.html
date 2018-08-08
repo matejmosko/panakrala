@@ -16,7 +16,6 @@
 <link rel="stylesheet" href="http://localhost/~gnaag/panakrala/css/main.css">
 <link rel="stylesheet" href="http://localhost/~gnaag/panakrala/css/custom.css">
 <link  href="http://scripts.panakrala.sk/fancybox/dist/jquery.fancybox.min.css" rel="stylesheet">
-<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 <!--<script>
 $(function () {
 });
@@ -63,26 +62,33 @@ $(function () {
         <div id="content" class="flexRow">
           <div class="documentPage">
   <div class="text documentText"><h2>Kontaktujte nás</h2>
-<div class="contact">
+<p><strong>Matej Moško (pán vedúci)</strong></p>
+<p>kamosko@panakrala.sk<br />+421 908 303 617</p>
+<p><strong>Fakturačné údaje:</strong></p>
+<p>Opus delicti<br />Dunajská 23<br />931 01 Šamorín</p>
+<p>IČO: 50285254<br />DIČ: 2120671465</p>
+        <div id="contactFormDiv" class="">
+    <h3 class="title">Chcete vedieť viac?</h3>
+    <div class="container">
+          <form id="contactForm" class="contactForm" action="http://localhost/~gnaag/panakrala/admin/sendform.php" method="post">
+            <label for="email">Váš email</label>
+            <input type="email" id="email" name="email" placeholder="Váš email.." required>
 
-<div>
+            <textarea id="subject" name="subject" placeholder="Napíšte nám.." minlenght="5" required></textarea>
+            <br />
+            <input id="submitContactForm" type="submit" value="Odoslať" class="contactFormResult cta">
 
-**Kontakty**
-
-Matej Moško
-kamosko@panakrala.sk
-+421 908 303 617
-
-</div><div>
-
-**Fakturačné údaje:**
-
-Opus delicti
-
+        </form>
+        <div id="contactFormResult">
+        </div>
+    </div>
 </div>
-</div></div>
+
+      </div>
   <img src="http://localhost/~gnaag/panakrala/data/documents/contact.jpg" />
 </div>
+
+
 
         </div>
         <div id="footer"><div class="footerTile">
@@ -113,7 +119,7 @@ Opus delicti
   <script src="http://localhost/~gnaag/panakrala/js/vendor/modernizr-3.5.0.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
-    window.jQuery || document.write('<script src="http://localhost/~gnaag/panakrala/js/vendor/jquery-3.3.1.min.js"><\/script>')
+    window.jQuery || document.write('<script src="http://localhost/~gnaag/panakrala/js/vendor/jquery-3.3.1.min.js"><\/script>');
 </script>
 <script src="http://scripts.panakrala.sk/fancybox/dist/jquery.fancybox.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
