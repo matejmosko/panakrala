@@ -33,6 +33,35 @@ body {
     justify-content: center;
 }
 
+.contentBlock {
+    display: flex;
+    flex-flow: row wrap;
+    max-width: 93vw;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.blockLight {
+    background-color: white;
+    color: black;
+}
+
+.blockDark {
+    background-color: #303841;
+    color: white;
+}
+
+.textBlock {
+    padding: 30px;
+}
+
+.equalColumn {
+    flex: 1 1 45%;
+    min-width: 45%;
+    max-width: 95%;
+}
+
 #wrapper {
     background: url("img/tileChess.png");
     background-attachment: fixed;
@@ -53,8 +82,8 @@ body {
 
 #content {
     min-height: 90vh;
-    align-content: center;
-    align-items: center;
+    align-content: start;
+    align-items: flex-start;
     justify-content: center;
     background: url("img/castleWall.png");
     margin: 0px;
@@ -84,7 +113,6 @@ body {
     background-size: cover;
     background-attachment: fixed;
 }
-
 
 .home #cover {
     height: 95vh;
@@ -118,7 +146,7 @@ body {
 .topnav {
     background-color: #333;
     overflow: hidden;
-    z-index: 1000;
+    z-index: 10000;
 }
 
 /* Style the links inside the navigation bar */
@@ -225,7 +253,7 @@ body {
 }
 
 .cta {
-    border: 0 solid;
+    border: 1px solid indianred;
     box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
     outline: 1px solid;
     outline-color: rgba(205, 92, 92, .5);
@@ -243,12 +271,16 @@ body {
 
 /** TITLES **/
 
-.title{
-  text-align: center;
+.title {
+    text-align: center;
 }
 
-h1.title{
-  text-align: right;
+label{
+  color: black;
+}
+
+h1.title {
+    text-align: right;
 }
 
 .metaDetail {
@@ -299,19 +331,9 @@ h1.title{
     background-position: -96px 0px;
 }
 
-.event {
-    background: url("img/tileblue.png");
-    color: white;
-}
-
 .projects {
     padding: 60px 0;
     margin: 0px;
-}
-
-.projects .projectPreview {
-    background: url("img/tileblue.png");
-    color: white;
 }
 
 .projectCover {
@@ -342,44 +364,46 @@ h1.title{
     color: white;
 }
 
-.projectDesc{
-  display: flex;
-  max-width: 90vw;
+.projectPage {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    max-width: 95%;
 }
 
-.projectPage .gallery{
-  display:flex;
-  flex-flow: row wrap;
+.projectPage .gallery {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }
 
-.projectPage .gallery img{
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  filter: none;
-  transform: none;
-  transition: filter 0.5s, transform 0.5s;
+.projectPage .gallery a {}
+
+.projectPage .gallery img {
+    flex: 1 1 auto;
+    width: 15vw;
+    height: 15vw;
+    object-fit: cover;
+    filter: none;
+    transform: none;
+    transition: filter 0.5s, transform 0.5s;
 }
 
-.projectPage .gallery img:hover{
-  filter: brightness(1.5) grayscale(1);
-  transform: scale(1.1);
+.projectPage .gallery img:hover {
+    filter: brightness(1.5) grayscale(1);
+    transform: scale(1.1);
 }
 
-.documentPage{
-  display: flex;
-  max-width: 90vw;
+.documentPage {
+    display: flex;
+    max-width: 90vw;
 }
 
-.documentPage img{
-  object-fit: cover;
+.documentPage img {
+    object-fit: cover;
 }
 
-.text{
-  background-color: white;
-  color: black;
-  padding: 30px;
-}
+#contactFormDiv {}
 
 .hamburger-bars {
     display: block;
@@ -387,6 +411,11 @@ h1.title{
     width: 32px;
     background: url("img/emotespack.png");
     background-position: -96px -190px;
+}
+
+.foldable{
+  display: none;
+  overflow:hidden;
 }
 
 .kingDiv {
@@ -437,8 +466,8 @@ input[type=text], input[type=email], select, textarea {
     resize: vertical;
 }
 
-textarea{
-  height: 200px;
+textarea {
+    height: 200px;
 }
 
 input[type=submit] {
@@ -470,15 +499,13 @@ input[type=submit]:disabled, input[type=submit]:disabled:hover {
     padding: 20px;
 }
 
-.error{
-
-}
+.error {}
 
 /* Formulár na registráciu */
 
-.eventForm.modal{
-  max-width: 90vw;
-  width: 500px;
+.eventForm.modal {
+    max-width: 90vw;
+    width: 500px;
 }
 
 /* Odkazy, linky etc. */
@@ -488,16 +515,15 @@ a.title {
     color: inherit;
 }
 
-a{
-  color: indianred;
+a {
+    color: indianred;
 }
-
 
 a:visited {
     color: inherit;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 575) {
     .tile {
         min-width: 95vw;
         width: 95vw
@@ -510,7 +536,7 @@ a:visited {
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 575px) {
     .topnav a/*:not(:first-child)*/
         {
         display: none;
@@ -526,7 +552,7 @@ a:visited {
 
 /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 575px) {
     .topnav.responsive {
         position: relative;
         background-color: #333;
@@ -543,13 +569,26 @@ a:visited {
     }
 }
 
-@media screen and (max-width: 600px) {
-  .king{
-    background-size: auto 93px;
-    height: 93px;
-    width: 75px;
-  }
-  .kingDiv{
+@media screen and (max-width: 575px) {
+    .king {
+        background-size: auto 93px;
+        height: 93px;
+        width: 75px;
+    }
+    .equalColumn {
+        width: 95%;
+    }
+}
 
-  }
+@media screen and (max-height: 575px) {
+    #rc-imageselect, .g-recaptcha {
+        transform: scale(0.77);
+        -webkit-transform: scale(0.77);
+        transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+    }
+    .projectPage .gallery img {
+        flex: 1 1 20%;
+        width: 30vw;
+        height: 30vw;
 }

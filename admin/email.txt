@@ -1,3 +1,12 @@
-aas@ggg.sk
+To: matej.mosko@gmail.com
 
-sdfsdf
+ Subject: List pre Pána Kráľa
+
+ From: info@panakrala.sk
+
+ Txt: sdfsdfsdf
+
+ Headers: MIME-Version: 1.0
+Content-type:text/html;charset=UTF-8
+From: Hry Pána Kráľa <info@panakrala.sk>
+Cc: <info@panakrala.sk>

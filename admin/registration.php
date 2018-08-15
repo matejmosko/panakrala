@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require_once(__DIR__."/render.php");
+require_once(__DIR__."/functions.php");
 
 if (!empty($_POST['name']) && !empty($_POST['email'])) {
     print_r($_POST);
@@ -13,36 +14,6 @@ if (!empty($_POST['name']) && !empty($_POST['email'])) {
 }
 
 /* reCaptcha */
-function solveCaptcha()
-{
-    $response = $_POST["g-recaptcha-response"] || "";
-
-    $url = 'https://www.google.com/recaptcha/api/siteverify';
-    $data = array(
-        'secret' => '6LfjIEQUAAAAAFQLMapACvy5bHBoKUr4wkyJbuIQ',
-        'response' => $_POST["g-recaptcha-response"]
-    );
-    $query = http_build_query($data);
-    $options = array(
-        'http' => array(
-      'header' => "Content-Type: application/x-www-form-urlencoded\r\n".
-                    "Content-Length: ".strlen($query)."\r\n",
-            'method' => 'POST',
-            'content' => $query
-        )
-    );
-    $context  = stream_context_create($options);
-    $verify = file_get_contents($url, false, $context);
-    $captcha_success=json_decode($verify);
-
-    if ($captcha_success->success==false) {
-        echo "<p>You are a bot! Go away!</p>";
-    } elseif ($captcha_success->success==true) {
-        addGuest($_POST);
-    }
-}
-
-
 
 
 function addGuest($newGuest)

@@ -1,7 +1,7 @@
 {% autoescape false %} {% if projects %}
 <div class="projects flexRow">
     {% for key,project in projects %}
-    <div class="projectPreview tile tile40">
+    <div class="projectPreview tile tile40 blockDark">
       <a href="{{options.baseurl}}/{{key}}/index.html">
         <div class="projectCover fitImg"><img src="{{options.baseurl}}/data/projects/{{key}}/cover.jpg" />
           <h3 class="projectTitle title">{{project.opts.name}}</h3>

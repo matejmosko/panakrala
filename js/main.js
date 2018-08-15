@@ -4,7 +4,7 @@ $('document').ready(function() {
     $('.contactForm').ajaxForm({
         target: ".contactFormResult",
         success: function() {
-          $("#submitContactForm").prop('disabled', true);
+            $("#submitContactForm").prop('disabled', true);
             $('#contactFormResult').text("Ďakujeme za správu, onedlho Vám odpíšeme.")
         },
         error: function() {
@@ -22,11 +22,15 @@ $('document').ready(function() {
         }
     });
 
+    $('.hiddenInfo').children('.hideBtn').click(function() {
+        $('.hiddenInfo').children('.foldable').slideToggle('500', "swing");
+        })
+
+
     function ajaxGetEvent(projectId, eventId) {
         link = baseUrl + "admin/ajax.php?script=eventGetGuests&eventId=" + eventId + "&projectId=" + projectId;
         $.getJSON(link, function(data) {
-            if ($.isEmptyObject(data)) {
-            } else {
+            if ($.isEmptyObject(data)) {} else {
                 var items = [];
                 $.each(data, function(key, val) {
                     items.push("<li id='" + key + "'>" + val.name + "</li>");

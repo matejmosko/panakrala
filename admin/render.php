@@ -5,9 +5,7 @@ Locale::setDefault('sk_SK');
 
 $debug = false;
 
-require_once(__DIR__."/kamosko-config.php");
 require_once(__DIR__ . '/functions.php');
-require_once(__DIR__ . '/db.php');
 require __DIR__ . '/vendor/autoload.php';
 
 $data = getData();
@@ -174,7 +172,8 @@ function renderProject($projectId)
     'data' => $GLOBALS['data']['projects'][$projectId],
     'projectId' => $projectId,
     'nextEvents' => renderEvents($projectId, 'next'),
-    'options' => $GLOBALS['options']
+    'options' => $GLOBALS['options'],
+    'contactForm' => renderContactForm('Záujem o '.$projectId, 'Dobrý deň, máme záujem o váš produkt'.$projectId.'. Pošlite nám prosím detailnejšie informácie.')
     //'pastEvents' => renderEvents($project, 'past')
   ));
 }
@@ -189,7 +188,7 @@ function renderDocument($document)
     'data' => $GLOBALS['data']['documents'],
     'image' => $image,
     'options' => $GLOBALS['options'],
-    'contactForm' => renderContactForm('context', 'projectId')
+    'contactForm' => renderContactForm('List pre Pána Kráľa', '')
     //'pastEvents' => renderEvents($project, 'past')
   ));
 }
@@ -212,10 +211,12 @@ function renderGallery($projectId, $gallery)
   ));
 }
 
-function renderContactForm($context, $projectId){
+function renderContactForm($subject, $text){
   return $GLOBALS['twig']->render('contactform.html', array(
   'data' => $GLOBALS['data'],
-  'options' => $GLOBALS['options']
+  'options' => $GLOBALS['options'],
+  'subject' => $subject,
+  'text' => $text
 ));
 }
 
