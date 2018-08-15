@@ -3,19 +3,15 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 Locale::setDefault('sk_SK');
 
-$debug = false;
+$debug = true;
 
 require_once(__DIR__ . '/functions.php');
-require __DIR__ . '/vendor/autoload.php';
 
 $data = getData();
 
 $loader = new Twig_Loader_Filesystem($GLOBALS['options']['basepath'].'templates/');
 $twig = new Twig_Environment($loader);
 $twig->addExtension(new Twig_Extensions_Extension_Intl());
-
-$Parsedown = new Parsedown();
-
 
 saveFiles();
 
@@ -180,11 +176,9 @@ function renderProject($projectId)
 
 function renderDocument($document)
 {
-  //$content = "";
-    $content = $GLOBALS['Parsedown']->text(file_get_contents($GLOBALS['options']['basepath']."data/documents/".$document));
     $image = pathinfo($document, PATHINFO_FILENAME).".jpg";
     return $GLOBALS['twig']->render('document.html', array(
-      'content' => $content,
+    'content' => $GLOBALS['data']['documents'][pathinfo($document, PATHINFO_FILENAME)],
     'data' => $GLOBALS['data']['documents'],
     'image' => $image,
     'options' => $GLOBALS['options'],

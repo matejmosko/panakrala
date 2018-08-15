@@ -2,13 +2,13 @@
 <div class="projectPage">
     <h2 class="title">{{data.opts.name}}</h2>
     <div class="projectDesc contentBlock blockTrans">
-        <p class="textBlock projectText blockLight">{{data.opts.desc.index}}</p>
+        <div class="textBlock projectText blockLight">{{data.mainText}}</div>
         {% if data.opts.desc.business != "" %}
         <div class="hiddenInfo flexColumn">
             <button type="button" class="hideBtn cta">Viem si {{data.opts.name}} objednať do firmy / domov?</button>
             <div class="foldable">
                 <div class="contentBlock blockDark textBlock">
-                    <div class="equalColumn">
+                    <div class="tile40">
                         <p>{{data.opts.desc.business}}</p>
                         <ul class="projectMeta tileMeta">
                             <!--<li class="keywords">{{project.opts.keywords}}</li>-->

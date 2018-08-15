@@ -23,8 +23,11 @@ $('document').ready(function() {
     });
 
     $('.hiddenInfo').children('.hideBtn').click(function() {
+      $('html, body').animate({
+          scrollTop: ($('.hiddenInfo').children('.hideBtn').offset().top - 60)
+      }, 500);
         $('.hiddenInfo').children('.foldable').slideToggle('500', "swing");
-        })
+    })
 
 
     function ajaxGetEvent(projectId, eventId) {

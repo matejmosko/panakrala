@@ -5,6 +5,7 @@
  error_reporting(E_ALL);
 /** CALLS **/
 
+require __DIR__ . '/vendor/autoload.php';
 require_once(__DIR__."/kamosko-config.php");
 
   if (isset($_GET['script'])) {
@@ -120,6 +121,17 @@ function parseJsonFile($value, $path)
     return $infodata;
 }
 
+function parseMarkdownFile($value, $path){
+  $myfile = $path."/".$value;
+  if (file_exists($myfile)) {
+      $Parsedown = new Parsedown();
+      $markfile = $Parsedown->text(file_get_contents($myfile));
+  } else {
+      $markfile = "";
+  }
+  return $markfile;
+}
+
 function recursiveJsonSearch(&$data, $path)
 {
     foreach ($data as $key => &$value) {
@@ -135,12 +147,12 @@ function recursiveJsonSearch(&$data, $path)
             if (array_key_exists('date', $data['opts'])) {
                 $data['opts']['timestamp'] = strtotime($data['opts']['date']);
             }
-        } /*elseif (pathinfo($value, PATHINFO_EXTENSION) == "md") {
-            //$json = parseJsonFile($value, $path);
+        } elseif (pathinfo($value, PATHINFO_EXTENSION) == "md") {
+
             $n = explode("/", $path);
 
-            $data[$value] = file_get_contents($path."/".$value);
-        }*/
+            $data[pathinfo($value, PATHINFO_FILENAME)] = parseMarkdownFile($value, $path);
+        }
     }
     return $data;
 }

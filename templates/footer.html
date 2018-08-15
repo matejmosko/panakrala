@@ -1,11 +1,9 @@
 <div class="footerTile">
   <h3 class="title">Naše produkty si už vyskúšali</h3>
-<div id="partners" class="partners flexRow">
+<div id="partners" class="partners flexRow gallery">
     {% for key,partner in data.partners %}
     {% if partner ends with '.jpg' or partner ends with '.png' %}
-    <div class="partner fitImg tile tile100px">
         <img class="parner" src="{{options.baseurl}}/data/partners/{{partner}}">
-    </div>
     {% endif %}
     {% endfor %}
 </div>

@@ -38,8 +38,9 @@ body {
     flex-flow: row wrap;
     max-width: 93vw;
     justify-content: center;
-    align-items: center;
     align-content: center;
+    padding: 0px;
+    margin: 0px;
 }
 
 .blockLight {
@@ -56,10 +57,40 @@ body {
     padding: 30px;
 }
 
-.equalColumn {
-    flex: 1 1 45%;
-    min-width: 45%;
-    max-width: 95%;
+/* Flex Flexible Tiles */
+
+.tile40 {
+    /* as flex item */
+    flex: 1 1 40%;
+    /* as flex container */
+    align-content: space-between;
+    align-items: center;
+}
+
+.tile100px {
+    /* as flex item */
+    flex: 0 1 100px;
+}
+
+.tileBit {
+    flex: 1 1 40%;
+}
+
+.tileMeta {
+    margin-top: 30px;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    overflow-x: hidden;
+    align-content: space-between;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+}
+
+.tileMeta li {
+    list-style-type: none;
+    padding: 0px 5px;
 }
 
 #wrapper {
@@ -192,55 +223,14 @@ body {
     object-fit: contain;
 }
 
-.tile40 {
-    /* as flex item */
-    flex: 1 1 40%;
-    min-width: 400px;
-    padding: 5px;
-    /* as flex container */
-    align-content: space-between;
-    align-items: center;
-}
-
-.tile100px {
-    /* as flex item */
-    flex: 0 1 100px;
-    padding: 5px;
-}
-
-.tileBit {
-    flex: 1 1 40%;
+.partners img{
+  width: 10vw;
+  height: 10vw;
+  margin: 0 0.5vw;
 }
 
 #footer .partners {
     justify-content: center;
-}
-
-.tile {
-    max-width: 851px;
-    padding: 0px;
-    margin: 10px;
-}
-
-.tileMeta {
-    margin-top: 30px;
-    display: flex;
-    flex-flow: row wrap;
-    width: 100%;
-    overflow-x: hidden;
-    align-content: space-between;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
-}
-
-.tileMeta li {
-    list-style-type: none;
-    padding: 0px 5px;
-}
-
-.tileDesc {
-    padding: 5px 30px;
 }
 
 .cta {
@@ -275,8 +265,8 @@ body {
     text-align: center;
 }
 
-label{
-  color: black;
+label {
+    color: black;
 }
 
 h1.title {
@@ -368,7 +358,7 @@ h1.title {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
-    max-width: 95%;
+    max-width: 95vw;
 }
 
 .projectPage .gallery {
@@ -394,9 +384,12 @@ h1.title {
     transform: scale(1.1);
 }
 
-.documentPage {
-    display: flex;
-    max-width: 90vw;
+.projectPreview{
+  margin: 10px;
+}
+
+.event {
+    max-width: 851px;
 }
 
 .documentPage img {
@@ -413,9 +406,9 @@ h1.title {
     background-position: -96px -190px;
 }
 
-.foldable{
-  display: none;
-  overflow:hidden;
+.foldable {
+    display: none;
+    overflow: hidden;
 }
 
 .kingDiv {
@@ -528,10 +521,6 @@ a:visited {
         min-width: 95vw;
         width: 95vw
     }
-    .partners .tile {
-        min-width: 30vw;
-        width: 30vw
-    }
 }
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
@@ -591,4 +580,18 @@ a:visited {
         flex: 1 1 20%;
         width: 30vw;
         height: 30vw;
+    }
+
+    .partners img {
+        min-width: 10vw;
+        width: 10vw
+    }
+    .tile40 {
+        /* as flex item */
+        flex: 0 1 95%;
+        max-width: 100%;
+    }
+    .textBlock {
+        padding: 15px;
+    }
 }
