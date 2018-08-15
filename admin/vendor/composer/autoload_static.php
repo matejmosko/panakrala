@@ -51,6 +51,10 @@ class ComposerStaticInitda9554f3f981b8c4c2e6d7dc7ed72092
         ),
         'P' => 
         array (
+            'ParsedownExtra' => 
+            array (
+                0 => __DIR__ . '/..' . '/erusev/parsedown-extra',
+            ),
             'Parsedown' => 
             array (
                 0 => __DIR__ . '/..' . '/erusev/parsedown',

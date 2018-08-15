@@ -3,7 +3,7 @@
     <div class="fitImg">
         <img src="{{options.baseurl}}/data/projects/{{projectId}}/events/{{eventId}}/cover.jpg" />
     </div>
-    <h3 class="title">{{event.opts.title}}</h4>
+    <h4 class="title">{{event.opts.title}}</h4>
     <div class="eventDesc tileDesc textBlock">{{event.opts.desc}}</div>
     <ul class="eventMeta tileMeta">
       <li><span class="emotpack-icon date"></span><span class="metaDetail">{{event.opts.date|localizeddate('long', 'none')}}</span></li>
@@ -11,10 +11,10 @@
       <li><span class="emotpack-icon venue"></span><span class="metaDetail">{{event.opts.venue}}</span></li>
       <li><span class="emotpack-icon price"></span><span class="metaDetail">{{event.opts.price}}</span></li>
     </ul>
-    {% if options.today<=event.opts.timestamp %} {% if guestCount < event.opts.capacity %} <a data-fancybox data-src="#form-{{eventId}}" href="javascript:;" class="cta">{{project.opts.strings.eventBuy}}</a>
+    {% if options.today<=event.opts.timestamp %} {% if guestCount < event.opts.capacity %} <a data-fancybox data-src="#form-{{eventId}}" href="javascript:;" class="ctaBtn">{{project.opts.strings.eventBuy}}</a>
         {% endif %} {% if guestCount >= event.opts.capacity %}
         <p class="warning">{{project.opts.strings.eventFullMessage}}</p>
-        <a data-fancybox data-src="#form-{{eventId}}" href="javascript:;" class="cta">{{project.opts.strings.eventFull}}</a> {% endif %} {% endif %}
+        <a data-fancybox data-src="#form-{{eventId}}" href="javascript:;" class="ctaBtn">{{project.opts.strings.eventFull}}</a> {% endif %} {% endif %}
         <div class="eventForm modal" id="form-{{eventId}}" style="display: none;">
             {% if event.opts.regLink %}
             <!-- Ticket Tailor Widget. Paste this in to your website where you want the widget to appear. Do no change the code or the widget may not work properly. -->

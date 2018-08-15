@@ -71,8 +71,9 @@ $(function () {
 <p><strong>Ak si od vás objednám tímbuilding, budete ho testovať na mojom tíme?</strong></p>
 <p>Nie. Každú hru, ktorú ponúkame, máme otestovanú na ozajstných ľuďoch.</p>
         <div id="contactFormDiv">
-    <h3 class="title">Chcete vedieť viac?</h3>
+
     <div class="container">
+      <h3 class="title">Chcete vedieť viac?</h3>
           <form id="contactForm" class="contactForm" action="http://localhost/~gnaag/panakrala/admin/sendform.php" method="post">
             <label for="email">Váš email</label>
             <input type="email" id="email" name="email" placeholder="Váš email.." required>
@@ -81,7 +82,7 @@ $(function () {
             <textarea id="text" name="text" placeholder="Napíšte nám.." minlenght="5" value="" required></textarea>
             <div class="g-recaptcha" data-sitekey="6LfjIEQUAAAAANJWi2oR1icgz64rRaoiQlSh7ZxY"></div>
             <br />
-            <input id="submitContactForm" type="submit" value="Odoslať" class="contactFormResult cta">
+            <input id="submitContactForm" type="submit" value="Odoslať" class="contactFormSubmit ctaBtn">
 
         </form>
         <div id="contactFormResult">

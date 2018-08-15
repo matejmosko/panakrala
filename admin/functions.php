@@ -124,7 +124,7 @@ function parseJsonFile($value, $path)
 function parseMarkdownFile($value, $path){
   $myfile = $path."/".$value;
   if (file_exists($myfile)) {
-      $Parsedown = new Parsedown();
+      $Parsedown = new ParsedownExtra();
       $markfile = $Parsedown->text(file_get_contents($myfile));
   } else {
       $markfile = "";

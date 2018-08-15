@@ -1,8 +1,25 @@
 $('document').ready(function() {
     baseUrl = "http://localhost/~gnaag/panakrala/";
 
+/* TURN ALL LINKS TO TARGET="_BLANK" */
+    $.expr[':'].external = function(obj) {
+        return !obj.href.match(/^mailto\:/) &&
+            (obj.hostname != location.hostname);
+    };
+
+    $(function() {
+        // Add 'external' CSS class to all external links
+        $('a:external').addClass('external');
+
+        // turn target into target=_blank for elements w external class
+        $(".external").attr('target', '_blank');
+
+    })
+
+    /* PROCESS CONTACT FORM WITH AJAX */
+
     $('.contactForm').ajaxForm({
-        target: ".contactFormResult",
+        target: ".contactFormSubmit",
         success: function() {
             $("#submitContactForm").prop('disabled', true);
             $('#contactFormResult').text("Ďakujeme za správu, onedlho Vám odpíšeme.")
@@ -11,6 +28,8 @@ $('document').ready(function() {
             $('#contactFormResult').text("Vaša správa sa bohužiaľ stratila v hlbinách internetu. Skúste to ešte raz.");
         }
     });
+
+    /* PROCESS REGISTRATION FORM WITH AJAX */
 
     $('.regForm').ajaxForm({
         target: ".formResult",
@@ -21,14 +40,6 @@ $('document').ready(function() {
             alert("Something's wrong");
         }
     });
-
-    $('.hiddenInfo').children('.hideBtn').click(function() {
-      $('html, body').animate({
-          scrollTop: ($('.hiddenInfo').children('.hideBtn').offset().top - 60)
-      }, 500);
-        $('.hiddenInfo').children('.foldable').slideToggle('500', "swing");
-    })
-
 
     function ajaxGetEvent(projectId, eventId) {
         link = baseUrl + "admin/ajax.php?script=eventGetGuests&eventId=" + eventId + "&projectId=" + projectId;
@@ -44,6 +55,16 @@ $('document').ready(function() {
         });
     }
 
+
+        /* SHOW/HIDE hiddenInfo on button click */
+
+        $('.hiddenInfo').children('.hideBtn').click(function() {
+            $('html, body').animate({
+                scrollTop: ($('.hiddenInfo').children('.hideBtn').offset().top - 60)
+            }, 500);
+            $('.hiddenInfo').children('.foldable').slideToggle('500', "swing");
+        })
+
     /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
     $('#topMenuHamburger').click(function() {
         var x = document.getElementById("topMenu");
@@ -53,6 +74,8 @@ $('document').ready(function() {
             x.className = "topnav";
         }
     });
+
+    /* MOVE OBJECT (KING) WHEN SCROLLING PAGE */
 
     function kingMove(king) {
         $(king).closest(".kingDiv").css("left", $(window).scrollTop())
@@ -75,6 +98,8 @@ $('document').ready(function() {
             $(king).removeClass("kingwalk-3");
         }
     }
+
+    /* DISPLAY OBJECTS (TOOLTIPS) WHEN SCROLLING PAGE */
 
     function kingTooltips(king) {
         let kingPos = $(king).closest(".kingDiv").position().left;
