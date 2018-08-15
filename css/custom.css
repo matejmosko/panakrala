@@ -268,6 +268,7 @@ body {
 
 .hideBtn{
   align-self: center;
+  margin: 100px 0;
 }
 
 /** TITLES **/
@@ -351,6 +352,7 @@ h2.title, h3.title{
     position: relative;
     text-align: center;
     color: white;
+    width: 100%;
 }
 
 .projects .projectTitle {
@@ -409,8 +411,12 @@ h2.title, h3.title{
   margin: 10px;
 }
 
-.event {
+.event, .projectPreview {
     max-width: 851px;
+}
+
+.event img, .projectPreview img{
+
 }
 
 .documentPage img {
@@ -427,8 +433,12 @@ h2.title, h3.title{
     background-position: -96px -190px;
 }
 
-.foldable {
+.hiddenInfo{
   background-color: black;
+  margin: 30px 0;
+}
+
+.foldable {
     display: none;
     overflow: hidden;
     width: 100%;
