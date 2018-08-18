@@ -1,5 +1,6 @@
 {% autoescape false %}
 {% if project.events %}
+  <h3 class="title">{{data.opts.strings.events_next}}</h3>
 <div class="events flexRow">
 {% for key,event in project.events %}
 <div class="event tile tile40 flexColumn blockDark">

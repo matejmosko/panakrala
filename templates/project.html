@@ -3,7 +3,7 @@
     <h2 class="title">{{data.opts.name}}</h2>
     <div class="projectDesc contentBlock blockTrans">
         <div class="textBlock projectText blockLight">{{data.mainText}}</div>
-        {% if data.opts.desc.business != "" %}
+        {% if data.hiddenText != "" %}
     </div>
     <div class="hiddenInfo flexColumn">
         <button type="button" class="hideBtn ctaBtn">Viem si {{data.opts.name}} objednať do firmy / domov?</button>
@@ -30,8 +30,7 @@
             </a> {% endfor %}
     </div>
     {% if nextEvents !="" %}
-    <h3 class="title">{{data.opts.strings.events_next}}</h3>
-    <div class="events nextEvents flexRow">
+      <div class="events nextEvents flexRow">
         {{nextEvents}}
     </div>
     {% endif %}

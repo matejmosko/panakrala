@@ -268,7 +268,8 @@ body {
 
 .hideBtn{
   align-self: center;
-  margin: 100px 0;
+  margin-top: 100px;
+  margin-bottom: 50px;
 }
 
 /** TITLES **/

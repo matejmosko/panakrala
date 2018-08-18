@@ -1,6 +1,8 @@
 {% autoescape false %} {% if projects %}
 <div class="projects flexRow">
     {% for key,project in projects %}
+    {% if "[disabled]" in key %}
+    {% else %}
     <div class="projectPreview contentBlock tile40 blockDark">
         <div class="projectCover fitImg"><a href="{{options.baseurl}}/{{key}}/index.html"><img src="{{options.baseurl}}/data/projects/{{key}}/cover.jpg" />
           <h2 class="projectTitle title">{{project.opts.name}}</h2></a>
@@ -13,6 +15,7 @@
             <li><span class="emotpack-icon groupsize"></span><span class="metaDetail">{{project.opts.desc.groupsize}}</span></li>
         </ul>
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 {% endif %} {% endautoescape %}
