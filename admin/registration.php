@@ -6,9 +6,10 @@ require_once(__DIR__."/render.php");
 require_once(__DIR__."/functions.php");
 
 if (!empty($_POST['name']) && !empty($_POST['email'])) {
-    print_r($_POST);
     //addGuest($_POST);
-    solveCaptcha();
+    if (solveCaptcha() == true) {
+        addGuest($_POST);
+    }
 } else {
     echo "Zadajte údaje prihlasovaného tímu.";
 }
@@ -26,14 +27,16 @@ function addGuest($newGuest)
 function dbNewGuest($newGuest)
 {
     $conn = setupDB();
-    $project = $newGuest['project'];
-    $event = $newGuest['event'];
-    $name = $newGuest['name'];
-    $email = $newGuest['email'];
-    $message = $newGuest['message'];
-    $faction = $newGuest['faction'];
+    $project = $newGuest['project'] ?? "";
+    $event = $newGuest['event'] ?? "";
+    $name = $newGuest['name'] ?? "";
+    $email = $newGuest['email'] ?? "";
+    $message = $newGuest['message'] ?? "";
+    $faction = $newGuest['faction'] ?? "";
+    $personalcheck = $newGuest['personalCheck'] ?? "";
+    $emailcheck = $newGuest['emailCheck'] ?? "";
 
-    $sql = "INSERT INTO events_guests (project, event, name, email, message, faction) VALUES ('$project', '$event', '$name', '$email', '$message', '$faction')";
+    $sql = "INSERT INTO events_guests (project, event, name, email, message, faction, personalcheck, emailcheck) VALUES ('$project', '$event', '$name', '$email', '$message', '$faction', '$personalcheck', '$emailcheck')";
 
     if (mysqli_query($conn, $sql)) {
         saveProject($project); // Renders new html for project = adds new team.
@@ -49,12 +52,14 @@ function isDuplicate($newGuest)
 {
     $conn = setupDB();
 
-    $project = $newGuest['project'];
-    $event = $newGuest['event'];
-    $name = $newGuest['name'];
-    $email = $newGuest['email'];
-    $message = $newGuest['message'];
-    $faction = $newGuest['faction'];
+    $project = $newGuest['project'] ?? "";
+    $event = $newGuest['event'] ?? "";
+    $name = $newGuest['name'] ?? "";
+    $email = $newGuest['email'] ?? "";
+    $message = $newGuest['message'] ?? "";
+    $faction = $newGuest['faction'] ?? "";
+    $personalcheck = $newGuest['personalCheck'] ?? "";
+    $emailcheck = $newGuest['emailCheck'] ?? "";
 
     /*
     //TEST data
@@ -77,9 +82,10 @@ function isDuplicate($newGuest)
     mysqli_close($conn);
 }
 
+/*
 function saveGuest($newGuest)
 {
-    /*
+
       $guestList = [];
       $dir = 'data/projects/'.$_POST["project"].'/events/'.$_POST["event"];
       if (!file_exists($dir)) {
@@ -100,5 +106,6 @@ function saveGuest($newGuest)
 
       file_put_contents($dir.'/registration.json', json_encode($guestList));
       print_r($guestList);
-      */
+
 }
+      */

@@ -2,18 +2,24 @@
 
 require_once(__DIR__."/functions.php");
 
-$from = "info@panakrala.sk";
-$subject = $_POST['subject'];
-$to = $_POST['email'];
-$txt = $_POST['text'];
+if (solveCaptcha() == true) {
+    sendMessage();
+}
 
-$headers = "MIME-Version: 1.0" . "\r\n";
-$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+function sendMessage()
+{
+    $from = "info@panakrala.sk";
+    $subject = $_POST['subject'];
+    $to = $_POST['email'];
+    $txt = $_POST['text'];
 
-$headers .= 'From: Hry Pána Kráľa <info@panakrala.sk>' . "\r\n";
-$headers .= 'Cc: <'.$from.'>' . "\r\n";
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-mail($to,$subject,$txt,$headers);
+    $headers .= 'From: Hry Pána Kráľa <info@panakrala.sk>' . "\r\n";
+    $headers .= 'Cc: <'.$from.'>' . "\r\n";
 
-file_put_contents("email.txt","To: ".$to."\n\n Subject: ".$subject."\n\n From: ".$from."\n\n Txt: ".$txt."\n\n Headers: ".$headers);
-?>
+    mail($to, $subject, $txt, $headers);
+
+    file_put_contents("email.txt", "To: ".$to."\n\n Subject: ".$subject."\n\n From: ".$from."\n\n Txt: ".$txt."\n\n Headers: ".$headers);
+}

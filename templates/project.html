@@ -5,7 +5,7 @@
         <div class="textBlock projectText blockLight">{{data.mainText}}</div>
         {% if data.hiddenText != "" %}
     </div>
-    <div class="hiddenInfo flexColumn">
+    <div class="hiddenInfo flexColumn businessInfo">
         <button type="button" class="hideBtn ctaBtn">Viem si {{data.opts.name}} objednať do firmy / domov?</button>
         <div class="foldable">
             <div class="contentBlock">
@@ -30,7 +30,8 @@
             </a> {% endfor %}
     </div>
     {% if nextEvents !="" %}
-      <div class="events nextEvents flexRow">
+    <h3 class="title">{{data.opts.strings.events_next}}</h3>
+      <div id="rezervacie" class="events nextEvents flexRow">
         {{nextEvents}}
     </div>
     {% endif %}

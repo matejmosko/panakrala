@@ -1,3 +1,4 @@
+{% autoescape false %}
     <form id="formReg-{{eventId}}" class="regForm" action="{{options.baseurl}}/admin/registration.php" method="post">
         <input type="hidden" name="project" value="{{projectId}}">
         <input type="hidden" name="event" value="{{eventId}}">
@@ -5,8 +6,11 @@
         <label for="email">Váš email</label><input type="email" name="email" required>
         <label for="name">Názov tímu: </label><input type="text" name="name" minlenght="2" required>
         <label for="message">Odkaz pre Turban Quiz:</label> <textarea name="message"></textarea>
+        {{checkboxes}}
         <div class="g-recaptcha" data-sitekey="6LfjIEQUAAAAANJWi2oR1icgz64rRaoiQlSh7ZxY"></div>
         <input type="submit" value="Prihlasujem tento tím" class="cta">
     </form>
-    <div id="formResult-{{eventId}}" class="formResult">
+    <div id="formResult-{{eventId}}" class="formResult" panakrala-projectid="{{projectId}}" panakrala-eventid="{{eventId}}">
     </div>
+
+    {% endautoescape %}

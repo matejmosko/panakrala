@@ -50,7 +50,6 @@ function getData()
 {
     $data = recursiveScandir($GLOBALS['options']['basepath'].'/data');
     $data = recursiveJsonSearch($data, $GLOBALS['options']['basepath'].'/data');
-    //$data['projects'] = parseProjectFiles($data['projects']);
     return $data;
 }
 
@@ -93,20 +92,6 @@ function recursiveScandir($path)
     return $files;
 }
 
-function parseProjectFiles($projects)
-{
-    foreach ($projects as $key => $project) {
-        $myfile = "data/projects/".$key."/info.json";
-        if (file_exists($myfile)) {
-            $infodata = file_get_contents($myfile);
-        } else {
-            $infodata = [];
-        }
-        $projects[$key]['info'] = json_decode($infodata, true);
-    }
-    return $projects;
-}
-
 function parseJsonFile($value, $path)
 {
     $myfile = $path."/".$value;
@@ -137,10 +122,9 @@ function recursiveJsonSearch(&$data, $path)
     foreach ($data as $key => &$value) {
         if (is_object($value) or is_array($value)) {
             recursiveJsonSearch($value, $path."/".$key);
-        } elseif (pathinfo($value, PATHINFO_EXTENSION) == "json" && $value != "registration.json") {
+        } elseif (pathinfo($value, PATHINFO_EXTENSION) == "json" && $value == "opts.json") {
 
             $json = parseJsonFile($value, $path);
-            $n = explode("/", $path);
 
             $data['opts'] = json_decode($json, true);
             /* Convert date to timestamp for later comparison */
@@ -148,8 +132,6 @@ function recursiveJsonSearch(&$data, $path)
                 $data['opts']['timestamp'] = strtotime($data['opts']['date']);
             }
         } elseif (pathinfo($value, PATHINFO_EXTENSION) == "md") {
-
-            $n = explode("/", $path);
 
             $data[pathinfo($value, PATHINFO_FILENAME)] = parseMarkdownFile($value, $path);
         }
@@ -180,9 +162,10 @@ function solveCaptcha()
     $captcha_success=json_decode($verify);
 
     if ($captcha_success->success==false) {
-        echo "<p>You are a bot! Go away!</p>";
+        echo "<p class='error'>Máme podozrenie, že si robot. Ak nie si robot, Zaškrtni políčko pri texte <strong>I'm not a robot</strong>. Ak si robot, nechytaj sa našej stránky.</p>";
+        return false;
     } elseif ($captcha_success->success==true) {
-        addGuest($_POST);
+        return true;
     }
 }
 
@@ -209,6 +192,8 @@ function createDB()
     createTables();
 }
 
+//createTables();
+
 function createTables()
 {
     $conn = setupDB();
@@ -219,11 +204,14 @@ function createTables()
       email VARCHAR(50),
       name VARCHAR(50),
       message VARCHAR(255),
+      faction VARCHAR(255),
+      personalcheck TINYINT(1),
+      emailcheck TINYINT(1),
       regtime TIMESTAMP
     )";
 
     if ($conn->query($sql) === true) {
-        echo "Table MyGuests created successfully";
+        echo "Table event_guests created successfully";
     } else {
         echo "Error creating table: " . $conn->error;
     }

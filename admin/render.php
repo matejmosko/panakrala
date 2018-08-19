@@ -1,9 +1,14 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+$debug = false;
+
+if ($debug) {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+}
+
 Locale::setDefault('sk_SK');
 
-$debug = true;
+
 
 require_once(__DIR__ . '/functions.php');
 
@@ -62,6 +67,7 @@ function renderForm($projectId, $eventId)
     'project' => $GLOBALS['data']['projects'][$projectId],
     'event' => $GLOBALS['data']['projects'][$projectId]['events'][$eventId],
     'options' => $GLOBALS['options'],
+    'checkboxes' => renderFormCheckboxes(),
     'guestCount' => eventGuestCount($eventId),
     'recaptcha' => "recaptcha" // TODO Recaptcha
   ));
@@ -69,13 +75,13 @@ function renderForm($projectId, $eventId)
 
 function renderEvent($projectId, $eventId)
 {
-  $path = $GLOBALS['options']['baseurl']."/data/projects/".$projectId."/events/";
-  if (file_exists($path.$eventId."/cover.jpg")){
-  $eventPic = $path.$eventId."/cover.jpg";
-  } else {
-  $eventPic = $path."/default.jpg";
-  }
-  
+    $path = $GLOBALS['options']['baseurl']."/data/projects/".$projectId."/events/";
+    if (file_exists($path.$eventId."/cover.jpg")) {
+        $eventPic = $path.$eventId."/cover.jpg";
+    } else {
+        $eventPic = $path."/default.jpg";
+    }
+
     return $GLOBALS['twig']->render('event.html', array(
     'project' => $GLOBALS['data']['projects'][$projectId],
     'projectId' => $projectId,
@@ -92,39 +98,35 @@ function renderEvent($projectId, $eventId)
 function renderEvents($projectId, $filter)
 {
     $today = $GLOBALS['options']['today'];
-    $html = '<div class="events flexRow">';
-
-    // echo "<pre>"; print_r($GLOBALS['data']['projects']); echo "</pre>";
+    $html = '';
 
     if (array_key_exists('events', $GLOBALS['data']['projects'][$projectId])) {
-        switch ($filter) {
+        foreach ($GLOBALS['data']['projects'][$projectId]['events'] as $key => &$event) {
+            if (is_string($event)) { // Checks if $event is array (folder) or simple file.
+                break;
+            }
+            switch ($filter) {
   case 'all':
-  foreach ($GLOBALS['data']['projects'][$projectId]['events'] as $key => &$event) {
-      $html .= renderEvent($projectId, $key, $today);
-  }
+    $html .= renderEvent($projectId, $key, $today);
     break;
   case 'next':
-    foreach ($GLOBALS['data']['projects'][$projectId]['events'] as $key => &$event) {
-        if (array_key_exists('opts', $event) && $event['opts']['timestamp'] >= $today) {
-            $html .= renderEvent($projectId, $key, $today);
-        }
+    if (array_key_exists('opts', $event) && $event['opts']['timestamp'] >= $today) {
+        $html .= renderEvent($projectId, $key, $today);
     }
     break;
   case 'past':
-    foreach ($GLOBALS['data']['projects'][$projectId]['events'] as $key => &$event) {
-        if (array_key_exists('opts', $event) && $event['opts']['timestamp'] <= $today) {
-            $html .= renderEvent($projectId, $key, $today);
-        }
+    if (array_key_exists('opts', $event) && $event['opts']['timestamp'] <= $today) {
+        $html .= renderEvent($projectId, $key, $today);
     }
     break;
   default:
     break;
-}
+          }
+        }
     } else {
-        $html .= "K tomuto projektu momentálne nepripravujeme žiadne verejné udalosti.";
+        $html .= "Momentálne nepripravujeme žiadne verejné udalosti.";
     }
 
-    $html .= '</div>';
     return $html;
 }
 
@@ -153,6 +155,7 @@ function renderFooter()
     'options' => $GLOBALS['options']
   ));
 }
+
 
 function renderHead()
 {
@@ -213,13 +216,22 @@ function renderGallery($projectId, $gallery)
   ));
 }
 
-function renderContactForm($subject, $text){
-  return $GLOBALS['twig']->render('contactform.html', array(
+function renderContactForm($subject, $text)
+{
+    return $GLOBALS['twig']->render('contactform.html', array(
   'data' => $GLOBALS['data'],
   'options' => $GLOBALS['options'],
   'subject' => $subject,
   'text' => $text
 ));
+}
+
+function renderFormCheckboxes()
+{
+    return $GLOBALS['twig']->render('form-checkboxes.html', array(
+    'data' => $GLOBALS['data'],
+    'options' => $GLOBALS['options']
+  ));
 }
 
 function renderHomePage()
@@ -319,7 +331,9 @@ function saveFiles()
     }
 
     foreach ($GLOBALS['data']['documents'] as $key => $doc) {
-        saveDocument($doc);
+        if (pathinfo($doc, PATHINFO_EXTENSION) == "md") {
+            saveDocument($doc);
+        }
     }
 }
 

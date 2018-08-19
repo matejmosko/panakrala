@@ -12,11 +12,12 @@
           {% endfor %}
         </select>
         <label for="message">Poznámka:</label> <textarea name="message"></textarea>
+      {{checkboxes}}
     <div class="g-recaptcha" data-sitekey="6LfjIEQUAAAAANJWi2oR1icgz64rRaoiQlSh7ZxY"></div>
     <input type="submit" value="Prihlasujem tento tím" class="cta">
 </form>
 <script>
 
 </script>
-<div id="formResult-{{eventId}}" class="formResult">
+<div id="formResult-{{eventId}}" class="formResult" panakrala-projectid="{{projectId}}" panakrala-eventid="{{eventId}}">
 </div>

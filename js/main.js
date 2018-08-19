@@ -13,16 +13,13 @@ $('document').ready(function() {
 
         // turn target into target=_blank for elements w external class
         $(".external").attr('target', '_blank');
-
     })
 
     /* PROCESS CONTACT FORM WITH AJAX */
 
     $('.contactForm').ajaxForm({
-        target: ".contactFormSubmit",
+        target: ".contactFormResult",
         success: function() {
-            $("#submitContactForm").prop('disabled', true);
-            $('#contactFormResult').text("Ďakujeme za správu, onedlho Vám odpíšeme.")
         },
         error: function() {
             $('#contactFormResult').text("Vaša správa sa bohužiaľ stratila v hlbinách internetu. Skúste to ešte raz.");
@@ -34,10 +31,10 @@ $('document').ready(function() {
     $('.regForm').ajaxForm({
         target: ".formResult",
         success: function() {
-            ajaxGetEvent("turban", "2018-02-13_historicky");
+            ajaxGetEvent($(this).attr("panakrala-projectId"), $(this).attr("panakrala-eventId"));
         },
         error: function() {
-            alert("Something's wrong");
+            alert("Niekde vo vesmíre sa stalo niečo, čo sa nemalo. To, čo sa malo podariť sa nepodarilo. Skús to urobiť ešte raz.");
         }
     });
 
@@ -59,10 +56,11 @@ $('document').ready(function() {
         /* SHOW/HIDE hiddenInfo on button click */
 
         $('.hiddenInfo').children('.hideBtn').click(function() {
+          var hiddenBox = $(this).closest('.hiddenInfo');
             $('html, body').animate({
-                scrollTop: ($('.hiddenInfo').children('.hideBtn').offset().top - 60)
+                scrollTop: ($(this).offset().top - 60)
             }, 500);
-            $('.hiddenInfo').children('.foldable').slideToggle('500', "swing");
+            hiddenBox.children('.foldable').slideToggle('500', "swing");
         })
 
     /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
