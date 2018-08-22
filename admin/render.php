@@ -21,6 +21,8 @@ $twig->addExtension(new Twig_Extensions_Extension_Intl());
 saveFiles();
 
 if ($debug) {
+  echo "Base FS path: ".PATH_BASE_FS."<br />";
+  echo "Base WEB path: ".PATH_BASE_WEB."<br />";
     echo "<pre>";
     print_r($data);
     echo "</pre>";
