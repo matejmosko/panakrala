@@ -64,6 +64,7 @@ $('document').ready(function() {
         })
 
         $('scrollToProjects').click(function() {
+          console.log("warning");
           scrollTop: ($('#projects').offset().top);
         })
 
