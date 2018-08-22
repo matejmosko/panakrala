@@ -75,16 +75,18 @@ function renderForm($projectId, $eventId)
 
 function renderEvent($projectId, $eventId)
 {
-    $path = $GLOBALS['options']['baseurl']."/data/projects/".$projectId."/events/";
-    if (file_exists($path.$eventId."/cover.jpg")) {
-        $eventPic = $path.$eventId."/cover.jpg";
+    $path = "../data/projects/".$projectId."/events/";
+    $coverpath = $path.$eventId."/cover.jpg";
+
+    if (realpath($coverpath)) {
+        $eventPic = $coverpath;
     } else {
-        $eventPic = $path."/default.jpg";
+        $eventPic = $path."default.jpg";
     }
-$form = "";
-if ($GLOBALS['data']['projects'][$projectId]['events'][$eventId]['opts']['regLink'] == ""){
-$form = renderForm($projectId, $eventId);
-}
+    $form = "";
+    if ($GLOBALS['data']['projects'][$projectId]['events'][$eventId]['opts']['regLink'] == "") {
+        $form = renderForm($projectId, $eventId);
+    }
 
     return $GLOBALS['twig']->render('event.twig', array(
     'project' => $GLOBALS['data']['projects'][$projectId],

@@ -6,7 +6,7 @@
 /** CALLS **/
 
 require __DIR__ . '/vendor/autoload.php';
-require_once(__DIR__."/kamosko-config.php");
+require_once(__DIR__."/../kamosko-config.php");
 
   if (isset($_GET['script'])) {
       $script = $_GET['script'];
