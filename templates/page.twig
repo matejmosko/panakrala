@@ -1,6 +1,8 @@
 {% autoescape false %}
 <!doctype html>
 <html class="no-js" lang="sk">
+Content-Security-Policy-Report-Only: default-src https: 'unsafe-inline' 'unsafe-eval'; report-uri {{options.baseurl}}/admin/https://panakrala.report-uri.com/r/d/csp/wizard
+
 <head>
     {{head}}
 </head>
