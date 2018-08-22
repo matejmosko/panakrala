@@ -298,7 +298,7 @@ function saveIndex()
 {
     /* Save Index.twig */
     $content = renderHomePage();
-    file_put_contents($GLOBALS['options']['basepath'].'index.twig', $content);
+    file_put_contents($GLOBALS['options']['basepath'].'index.html', $content);
 }
 
 function saveProject($key)
@@ -308,14 +308,14 @@ function saveProject($key)
     if (!file_exists($dir)) {
         mkdir($dir, 0777, true);
     }
-    file_put_contents($dir.'/index.twig', renderProjectPage($key));
+    file_put_contents($dir.'/index.html', renderProjectPage($key));
     if (array_key_exists('gallery', $GLOBALS['data']['projects'][$key])) {
         foreach ($GLOBALS['data']['projects'][$key]['gallery'] as $key2 => $gallery) {
             $subdir = $GLOBALS['options']['basepath'].'./'.$key.'/gallery/';
             if (!file_exists($subdir)) {
                 mkdir($subdir, 0777, true);
             }
-            file_put_contents($subdir.'/'.$key2.'.twig', renderGalleryPage($key, $key2));
+            file_put_contents($subdir.'/'.$key2.'.html', renderGalleryPage($key, $key2));
         }
     }
 }
@@ -323,7 +323,7 @@ function saveProject($key)
 function saveDocument($doc)
 {
     /* Save Documents' html files */
-    file_put_contents($GLOBALS['options']['basepath'].pathinfo($doc, PATHINFO_FILENAME).'.twig', renderDocumentPage($doc));
+    file_put_contents($GLOBALS['options']['basepath'].pathinfo($doc, PATHINFO_FILENAME).'.html', renderDocumentPage($doc));
 }
 
 function saveFiles()
