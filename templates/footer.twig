@@ -3,7 +3,7 @@
 <div id="partners" class="partners flexRow gallery">
     {% for key,partner in data.partners %}
     {% if partner ends with '.jpg' or partner ends with '.png' %}
-        <img class="partner" src="{{options.baseurl}}/data/partners/{{partner}}" alt="{{partner}}">
+        <img class="partner" src="{{options.baseurl}}data/partners/{{partner}}" alt="{{partner}}">
     {% endif %}
     {% endfor %}
 </div>

@@ -1,17 +1,17 @@
 {% autoescape false %}
 <div class="fitImg coverImg">
-    {% if masterClass == 'project' %} <a href="{{options.baseurl}}/{{projectId}}/index.html"><img src="{{options.baseurl}}/data/projects/{{projectId}}/cover.jpg" /></a> {% endif %}
+    {% if masterClass == 'project' %} <a href="{{options.baseurl}}{{projectId}}/index.html"><img src="{{options.baseurl}}data/projects/{{projectId}}/cover.jpg" /></a> {% endif %}
 </div>
 
 <div class="homeTitle">
-    <a href="{{options.baseurl}}/index.html" class="title"><h1 class="title">{{data.opts.title}}</h1></a>
+    <a href="{{options.baseurl}}index.html" class="title"><h1 class="title">{{data.opts.title}}</h1></a>
     <div class="dataDesc">{{data.opts.desc}}</div>
 </div>
 <div class="kingDiv">
   <div class="kingTip kingTip-1">{{data.opts.kingTips.tip1}}</div>
   <div class="kingTip kingTip-2">{{data.opts.kingTips.tip2}}</div>
   <div class="kingTip kingTip-3">{{data.opts.kingTips.tip3}}</div>
-    <a href="{{options.baseurl}}/index.html">
+    <a href="{{options.baseurl}}index.html">
         <div class="king topking kingwalk-1"></div>
     </a>
 </div>

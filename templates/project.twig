@@ -30,8 +30,8 @@
         {% endif %}
         <div class="gallery">
             {% for key, photo in data.gallery.preview %}
-                <a data-fancybox="gallery" data-src="{{options.baseurl}}/data/projects/{{projectId}}/gallery/preview/{{photo}}" href="javascript:;">
-                    <img src="{{options.baseurl}}/data/projects/{{projectId}}/gallery/preview/{{photo}}" alt="{{projectId}}"/>
+                <a data-fancybox="gallery" data-src="{{options.baseurl}}data/projects/{{projectId}}/gallery/preview/{{photo}}" href="javascript:;">
+                    <img src="{{options.baseurl}}data/projects/{{projectId}}/gallery/preview/{{photo}}" alt="{{projectId}}"/>
                 </a>
             {% endfor %}
         </div>
