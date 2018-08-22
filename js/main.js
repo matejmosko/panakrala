@@ -61,12 +61,13 @@ $('document').ready(function() {
                 scrollTop: ($(this).offset().top - 60)
             }, 500);
             hiddenBox.children('.foldable').slideToggle('500', "swing");
-        })
+        });
 
         $('.scrollToProjects').click(function() {
-          console.log("warning");
-          scrollTop: ($('#projects').offset().top);
-        })
+          $('html, body').animate({
+              scrollTop: ($('#projects').offset().top - 60)
+          }, 500);
+        });
 
     /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
     $('#topMenuHamburger').click(function() {
