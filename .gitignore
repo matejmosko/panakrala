@@ -8,3 +8,10 @@ kamosko-config.php
 admin/vendor/
 doc
 .htaccess
+
+# Project folders
+gow*
+mierotvorca*
+party*
+bratislavskykaviar*
+turban*
