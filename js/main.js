@@ -63,6 +63,10 @@ $('document').ready(function() {
             hiddenBox.children('.foldable').slideToggle('500', "swing");
         })
 
+        $('scrollToProjects').click(function() {
+          scrollTop: ($('#projects').offset().top);
+        })
+
     /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
     $('#topMenuHamburger').click(function() {
         var x = document.getElementById("topMenu");
