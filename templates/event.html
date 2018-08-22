@@ -11,25 +11,24 @@
         <li><span class="emotpack-icon venue"></span><span class="metaDetail">{{event.opts.venue}}</span></li>
         <li><span class="emotpack-icon price"></span><span class="metaDetail">{{event.opts.price}}</span></li>
     </ul>
-    {% if options.today <=event.opts.timestamp %} {% if guestCount < event.opts.capacity %}
-    <a data-fancybox data-src="#form-{{eventId}}" href="javascript:;" class="ctaBtn">{{project.opts.strings.eventBuy}}</a>
-        {% endif %} {% if guestCount >= event.opts.capacity %}
-        <p class="warning">{{project.opts.strings.eventFullMessage}}</p>
-        <a data-fancybox data-src="#form-{{eventId}}" href="javascript:;" class="ctaBtn">{{project.opts.strings.eventFull}}</a> {% endif %} {% endif %}
-        <div class="eventForm modal" id="form-{{eventId}}" style="display: none;">
-            {% if event.opts.regLink %}
-            <!-- Ticket Tailor Widget. Paste this in to your website where you want the widget to appear. Do no change the code or the widget may not work properly. -->
-            <div class="tt-widget">
-                <div class="tt-widget-fallback">
-                    <p><a href="https://www.tickettailor.com/new-order/147011/fbc2/ref/website_widget/" target="_blank">Click here to buy tickets</a><br /><small><a href="http://www.tickettailor.com?rf=wdg" class="tt-widget-powered">Sell tickets online with Ticket Tailor</a></small></p>
-                </div>
-                <script src="https://dc161a0a89fedd6639c9-03787a0970cd749432e2a6d3b34c55df.ssl.cf3.rackcdn.com/tt-widget.js" data-url="https://www.tickettailor.com/new-order/147011/fbc2/ref/website_widget/" data-type="inline" data-inline-minimal="true" data-inline-show-logo="false"
-                  data-inline-bg-fill="true"></script>
-            </div>
-            <!-- End of Ticket Tailor Widget -->
-            {% else %} {{form}} {% endif %}
-        </div>
-        <div class="hiddenInfo">
+	{% if options.today <=event.opts.timestamp %} 
+		{% if guestCount < event.opts.capacity %}
+			{% if event.opts.regLink %}
+				<a href="{{event.opts.regLink}}" class="ctaBtn">{{project.opts.strings.eventBuy}}</a>
+			{% else %} 
+				<a data-fancybox data-src="#form-{{eventId}}" href="#" class="ctaBtn">{{project.opts.strings.eventBuy}}</a>
+	       			<div class="eventForm modal" id="form-{{eventId}}" style="display: none;">
+					{{form}} 
+	        		</div>
+			{% endif %}
+	        {% endif %}
+
+		{% if guestCount >= event.opts.capacity %}
+	        	<p class="warning">{{project.opts.strings.eventFullMessage}}</p>
+	        	<a data-fancybox data-src="#form-{{eventId}}" href="#" class="ctaBtn">{{project.opts.strings.eventFull}}</a> 
+		{% endif %}
+
+{% if not event.opts.regLink %}        <div class="hiddenInfo">
           <a href="#" class="hideBtn">Kto sa už zaregistroval?</a>
         <div class="guestList foldable">
             <ol>
@@ -39,5 +38,7 @@
             </ol>
         </div>
       </div>
+{% endif %}
+		{% endif %}
 </div>
 {% endautoescape %}

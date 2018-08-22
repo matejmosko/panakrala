@@ -1,5 +1,5 @@
 <?php
-$debug = false;
+$debug = $_GET['debug'];
 
 if ($debug) {
     error_reporting(E_ALL);
@@ -81,6 +81,10 @@ function renderEvent($projectId, $eventId)
     } else {
         $eventPic = $path."/default.jpg";
     }
+$form = "";
+if ($GLOBALS['data']['projects'][$projectId]['events'][$eventId]['opts']['regLink'] == ""){
+$form = renderForm($projectId, $eventId);
+}
 
     return $GLOBALS['twig']->render('event.html', array(
     'project' => $GLOBALS['data']['projects'][$projectId],
@@ -88,7 +92,7 @@ function renderEvent($projectId, $eventId)
     'eventId' => $eventId,
     'eventPic' => $eventPic,
     'event' => $GLOBALS['data']['projects'][$projectId]['events'][$eventId],
-    'form' => renderForm($projectId, $eventId),
+    'form' => $form,
     'options' => $GLOBALS['options'],
     'guestCount' => eventGuestCount($eventId),
     'guestList' => eventGetGuests($projectId, $eventId)
