@@ -61,7 +61,7 @@ function filterEvents($data, $project, $filter)
 
 function renderForm($projectId, $eventId)
 {
-    return $GLOBALS['twig']->render('registration-'.$projectId.'.html', array(
+    return $GLOBALS['twig']->render('registration-'.$projectId.'.twig', array(
     'projectId' => $projectId,
     'eventId' => $eventId,
     'project' => $GLOBALS['data']['projects'][$projectId],
@@ -86,7 +86,7 @@ if ($GLOBALS['data']['projects'][$projectId]['events'][$eventId]['opts']['regLin
 $form = renderForm($projectId, $eventId);
 }
 
-    return $GLOBALS['twig']->render('event.html', array(
+    return $GLOBALS['twig']->render('event.twig', array(
     'project' => $GLOBALS['data']['projects'][$projectId],
     'projectId' => $projectId,
     'eventId' => $eventId,
@@ -136,7 +136,7 @@ function renderEvents($projectId, $filter)
 
 function renderProjects()
 {
-    return $GLOBALS['twig']->render('projectlist.html', array(
+    return $GLOBALS['twig']->render('projectlist.twig', array(
     'projects' => $GLOBALS['data']['projects'],
     'options' => $GLOBALS['options']
   ));
@@ -144,7 +144,7 @@ function renderProjects()
 
 function renderCover($masterClass = null, $projectId = null, $eventId = null)
 {
-    return $GLOBALS['twig']->render('cover.html', array(
+    return $GLOBALS['twig']->render('cover.twig', array(
     'data' => $GLOBALS['data'],
     'options' => $GLOBALS['options'],
     'masterClass' => $masterClass,
@@ -154,7 +154,7 @@ function renderCover($masterClass = null, $projectId = null, $eventId = null)
 }
 function renderFooter()
 {
-    return $GLOBALS['twig']->render('footer.html', array(
+    return $GLOBALS['twig']->render('footer.twig', array(
     'data' => $GLOBALS['data'],
     'options' => $GLOBALS['options']
   ));
@@ -163,7 +163,7 @@ function renderFooter()
 
 function renderHead()
 {
-    return $GLOBALS['twig']->render('head.html', array(
+    return $GLOBALS['twig']->render('head.twig', array(
     'data' => $GLOBALS['data'],
     'options' => $GLOBALS['options']
   ));
@@ -171,7 +171,7 @@ function renderHead()
 
 function renderScripts()
 {
-    return $GLOBALS['twig']->render('scripts.html', array(
+    return $GLOBALS['twig']->render('scripts.twig', array(
     'data' => $GLOBALS['data'],
     'options' => $GLOBALS['options']
   ));
@@ -179,7 +179,7 @@ function renderScripts()
 
 function renderProject($projectId)
 {
-    return $GLOBALS['twig']->render('project.html', array(
+    return $GLOBALS['twig']->render('project.twig', array(
     'data' => $GLOBALS['data']['projects'][$projectId],
     'projectId' => $projectId,
     'nextEvents' => renderEvents($projectId, 'next'),
@@ -192,7 +192,7 @@ function renderProject($projectId)
 function renderDocument($document)
 {
     $image = pathinfo($document, PATHINFO_FILENAME).".jpg";
-    return $GLOBALS['twig']->render('document.html', array(
+    return $GLOBALS['twig']->render('document.twig', array(
     'content' => $GLOBALS['data']['documents'][pathinfo($document, PATHINFO_FILENAME)],
     'data' => $GLOBALS['data']['documents'],
     'image' => $image,
@@ -204,7 +204,7 @@ function renderDocument($document)
 
 function renderMenu()
 {
-    return $GLOBALS['twig']->render('menu.html', array(
+    return $GLOBALS['twig']->render('menu.twig', array(
     'menu' => $GLOBALS['data']['opts']['menu'],
     'options' => $GLOBALS['options']
   ));
@@ -212,7 +212,7 @@ function renderMenu()
 
 function renderGallery($projectId, $gallery)
 {
-    return $GLOBALS['twig']->render('gallery.html', array(
+    return $GLOBALS['twig']->render('gallery.twig', array(
     'data' => $GLOBALS['data']['projects'][$projectId]['gallery'][$gallery],
     'project' => $projectId,
     'gallery' => $gallery,
@@ -222,7 +222,7 @@ function renderGallery($projectId, $gallery)
 
 function renderContactForm($subject, $text)
 {
-    return $GLOBALS['twig']->render('contactform.html', array(
+    return $GLOBALS['twig']->render('contactform.twig', array(
   'data' => $GLOBALS['data'],
   'options' => $GLOBALS['options'],
   'subject' => $subject,
@@ -232,7 +232,7 @@ function renderContactForm($subject, $text)
 
 function renderFormCheckboxes()
 {
-    return $GLOBALS['twig']->render('form-checkboxes.html', array(
+    return $GLOBALS['twig']->render('form-checkboxes.twig', array(
     'data' => $GLOBALS['data'],
     'options' => $GLOBALS['options']
   ));
@@ -240,7 +240,7 @@ function renderFormCheckboxes()
 
 function renderHomePage()
 {
-    return $GLOBALS['twig']->render('page.html', array(
+    return $GLOBALS['twig']->render('page.twig', array(
   'menu' => renderMenu(),
   'head' => renderHead(),
   'cover' => renderCover(),
@@ -254,7 +254,7 @@ function renderHomePage()
 
 function renderProjectPage($projectId)
 {
-    return $GLOBALS['twig']->render('page.html', array(
+    return $GLOBALS['twig']->render('page.twig', array(
   'menu' => renderMenu(),
   'head' => renderHead(),
   'cover' => renderCover('project', $projectId, ""),
@@ -268,7 +268,7 @@ function renderProjectPage($projectId)
 
 function renderGalleryPage($projectId, $gallery)
 {
-    return $GLOBALS['twig']->render('page.html', array(
+    return $GLOBALS['twig']->render('page.twig', array(
   'menu' => renderMenu(),
   'head' => renderHead(),
   'cover' => renderCover(),
@@ -282,7 +282,7 @@ function renderGalleryPage($projectId, $gallery)
 
 function renderDocumentPage($document)
 {
-    return $GLOBALS['twig']->render('page.html', array(
+    return $GLOBALS['twig']->render('page.twig', array(
       'menu' => renderMenu(),
       'head' => renderHead(),
       'cover' => renderCover(),
@@ -296,9 +296,9 @@ function renderDocumentPage($document)
 
 function saveIndex()
 {
-    /* Save Index.html */
+    /* Save Index.twig */
     $content = renderHomePage();
-    file_put_contents($GLOBALS['options']['basepath'].'index.html', $content);
+    file_put_contents($GLOBALS['options']['basepath'].'index.twig', $content);
 }
 
 function saveProject($key)
@@ -308,14 +308,14 @@ function saveProject($key)
     if (!file_exists($dir)) {
         mkdir($dir, 0777, true);
     }
-    file_put_contents($dir.'/index.html', renderProjectPage($key));
+    file_put_contents($dir.'/index.twig', renderProjectPage($key));
     if (array_key_exists('gallery', $GLOBALS['data']['projects'][$key])) {
         foreach ($GLOBALS['data']['projects'][$key]['gallery'] as $key2 => $gallery) {
             $subdir = $GLOBALS['options']['basepath'].'./'.$key.'/gallery/';
             if (!file_exists($subdir)) {
                 mkdir($subdir, 0777, true);
             }
-            file_put_contents($subdir.'/'.$key2.'.html', renderGalleryPage($key, $key2));
+            file_put_contents($subdir.'/'.$key2.'.twig', renderGalleryPage($key, $key2));
         }
     }
 }
@@ -323,7 +323,7 @@ function saveProject($key)
 function saveDocument($doc)
 {
     /* Save Documents' html files */
-    file_put_contents($GLOBALS['options']['basepath'].pathinfo($doc, PATHINFO_FILENAME).'.html', renderDocumentPage($doc));
+    file_put_contents($GLOBALS['options']['basepath'].pathinfo($doc, PATHINFO_FILENAME).'.twig', renderDocumentPage($doc));
 }
 
 function saveFiles()
