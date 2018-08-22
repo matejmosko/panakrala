@@ -4,7 +4,6 @@
 
 *.html
 data/*
-lib/*
 kamosko-config.php
 admin/vendor
 doc
