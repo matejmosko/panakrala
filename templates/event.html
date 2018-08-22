@@ -11,34 +11,33 @@
         <li><span class="emotpack-icon venue"></span><span class="metaDetail">{{event.opts.venue}}</span></li>
         <li><span class="emotpack-icon price"></span><span class="metaDetail">{{event.opts.price}}</span></li>
     </ul>
-	{% if options.today <=event.opts.timestamp %} 
-		{% if guestCount < event.opts.capacity %}
-			{% if event.opts.regLink %}
-				<a href="{{event.opts.regLink}}" class="ctaBtn">{{project.opts.strings.eventBuy}}</a>
-			{% else %} 
-				<a data-fancybox data-src="#form-{{eventId}}" href="#" class="ctaBtn">{{project.opts.strings.eventBuy}}</a>
-	       			<div class="eventForm modal" id="form-{{eventId}}" style="display: none;">
-					{{form}} 
-	        		</div>
-			{% endif %}
-	        {% endif %}
-
-		{% if guestCount >= event.opts.capacity %}
-	        	<p class="warning">{{project.opts.strings.eventFullMessage}}</p>
-	        	<a data-fancybox data-src="#form-{{eventId}}" href="#" class="ctaBtn">{{project.opts.strings.eventFull}}</a> 
-		{% endif %}
-
-{% if not event.opts.regLink %}        <div class="hiddenInfo">
+    {% if options.today<=event.opts.timestamp %}
+      {% if guestCount < event.opts.capacity %}
+        {% if event.opts.regLink %}
+          <a href="{{event.opts.regLink}}" class="ctaBtn">{{project.opts.strings.eventBuy}}</a>
+        {% else %}
+          <a data-fancybox data-src="#form-{{eventId}}" href="#" class="ctaBtn">{{project.opts.strings.eventBuy}}</a>
+          <div class="eventForm modal" id="form-{{eventId}}" style="display: none;">
+            {{form}}
+          </div>
+        {% endif %}
+      {% endif %}
+    {% if guestCount >= event.opts.capacity %}
+      <p class="warning">{{project.opts.strings.eventFullMessage}}</p>
+      <a data-fancybox data-src="#form-{{eventId}}" href="#" class="ctaBtn">{{project.opts.strings.eventFull}}</a>
+    {% endif %}
+    {% if not event.opts.regLink %}
+        <div class="hiddenInfo">
           <a href="#" class="hideBtn">Kto sa už zaregistroval?</a>
-        <div class="guestList foldable">
-            <ol>
-                {% for key,guest in guestList %}
-                <li>{{guest.name}}</li>
-                {% endfor%}
-            </ol>
+            <div class="guestList foldable">
+                <ol>
+                    {% for key,guest in guestList %}
+                    <li>{{guest.name}}</li>
+                    {% endfor%}
+                </ol>
+            </div>
         </div>
-      </div>
-{% endif %}
-		{% endif %}
+    {% endif %}
+  {% endif %}
 </div>
 {% endautoescape %}
