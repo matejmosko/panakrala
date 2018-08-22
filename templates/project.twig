@@ -1,39 +1,45 @@
 {% autoescape false %}
-<div class="projectPage">
-    <h2 class="title">{{data.opts.name}}</h2>
-    <div class="projectDesc contentBlock blockTrans">
-        <div class="textBlock projectText blockLight">{{data.mainText}}</div>
-        {% if data.hiddenText != "" %}
-    </div>
-    <div class="hiddenInfo flexColumn businessInfo">
-        <button type="button" class="hideBtn ctaBtn">Viem si {{data.opts.name}} objednať do firmy / domov?</button>
-        <div class="foldable">
-            <div class="contentBlock">
-                <div class="tile40 blockLight textBlock">
-                    {{data.hiddenText}}
-                    <ul class="projectMeta tileMeta">
-                        <!--<li class="keywords">{{project.opts.keywords}}</li>-->
-                        <li><span class="emotpack-icon timespan"></span><span class="metaDetail">{{data.opts.desc.timespan}}</span></li>
-                        <li><span class="emotpack-icon groupsize"></span><span class="metaDetail">{{data.opts.desc.groupsize}}</span></li>
-                        <li><span class="emotpack-icon price"></span><span class="metaDetail">{{data.opts.desc.price}}</span></li>
-                    </ul>
-                </div>
-                {{contactForm}}
+    <div class="projectPage">
+        <h2 class="title">{{data.opts.name}}</h2>
+        <div class="projectDesc contentBlock blockTrans">
+            <div class="textBlock projectText blockLight">{{data.mainText}}</div>
             </div>
+            {% if data.hiddenText != "" %}
+            <div class="hiddenInfo flexColumn businessInfo">
+                <button type="button" class="hideBtn ctaBtn">Viem si
+                    {{data.opts.name}}
+                    objednať do firmy / domov?</button>
+                <div class="foldable">
+                    <div class="contentBlock">
+                        <div class="tile40 blockLight textBlock">
+                            {{data.hiddenText}}
+                            <ul class="projectMeta tileMeta">
+                                <!--<li class="keywords">{{project.opts.keywords}}</li>-->
+                                <li>
+                                    <span class="emotpack-icon timespan"></span><span class="metaDetail">{{data.opts.desc.timespan}}</span></li>
+                                <li>
+                                    <span class="emotpack-icon groupsize"></span><span class="metaDetail">{{data.opts.desc.groupsize}}</span></li>
+                                <li>
+                                    <span class="emotpack-icon price"></span><span class="metaDetail">{{data.opts.desc.price}}</span></li>
+                            </ul>
+                        </div>
+                        {{contactForm}}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="gallery">
+            {% for key, photo in data.gallery.preview %}
+                <a data-fancybox="gallery" data-src="{{options.baseurl}}/data/projects/{{projectId}}/gallery/preview/{{photo}}" href="javascript:;">
+                    <img src="{{options.baseurl}}/data/projects/{{projectId}}/gallery/preview/{{photo}}" alt="{{projectId}}"/>
+                </a>
+            {% endfor %}
         </div>
+        {% if nextEvents != "" %}
+            <h3 class="title">{{data.opts.strings.events_next}}</h3>
+            <div id="rezervacie" class="events nextEvents flexRow">
+                {{nextEvents}}
+            </div>
+        {% endif %}
     </div>
-    {% endif %}
-    <div class="gallery">
-        {% for key,photo in data.gallery.preview %}
-        <a data-fancybox="gallery" data-src="{{options.baseurl}}/data/projects/{{projectId}}/gallery/preview/{{photo}}" href="javascript:;">
-              <img src="{{options.baseurl}}/data/projects/{{projectId}}/gallery/preview/{{photo}}" alt="{{projectId}}" />
-            </a> {% endfor %}
-    </div>
-    {% if nextEvents !="" %}
-    <h3 class="title">{{data.opts.strings.events_next}}</h3>
-      <div id="rezervacie" class="events nextEvents flexRow">
-        {{nextEvents}}
-    </div>
-    {% endif %}
-</div>
 {% endautoescape %}

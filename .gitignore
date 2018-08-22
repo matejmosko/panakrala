@@ -2,14 +2,9 @@
 # Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
 # Useful .gitignore templates: https://github.com/github/gitignore
 
+*.html
 data/*
 lib/*
 kamosko-config.php
 admin/vendor
 doc
-gow
-turban
-bratislavskykaviar
-mierotvorca [disabled]
-party [disabled]
-*.html
