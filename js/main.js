@@ -63,7 +63,7 @@ $('document').ready(function() {
             hiddenBox.children('.foldable').slideToggle('500', "swing");
         })
 
-        $('scrollToProjects').click(function() {
+        $('.scrollToProjects').click(function() {
           console.log("warning");
           scrollTop: ($('#projects').offset().top);
         })
