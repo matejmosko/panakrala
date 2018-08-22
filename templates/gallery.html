@@ -6,7 +6,7 @@
       {% if picture ends with '.jpg' or picture ends with '.png' %}
       <p class="galleryPic" style="max-width:none">
         <a data-fancybox="picfolder" title="{{picture}}" href="{{options.baseurl}}/data/projects/{{project}}/gallery/{{gallery}}/{{picture}}">
-          <img src="{{options.baseurl}}/data/projects/{{project}}/gallery/{{gallery}}/{{picture}}" />
+          <img src="{{options.baseurl}}/data/projects/{{project}}/gallery/{{gallery}}/{{picture}}" alt="{{picture}}"/>
         </a>
       </p>
       {% endif %}
