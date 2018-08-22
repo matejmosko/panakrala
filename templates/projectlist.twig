@@ -1,5 +1,5 @@
 {% autoescape false %} {% if projects %}
-<div class="projects flexRow">
+<div id="projects" class="projects flexRow">
     {% for key,project in projects %}
     {% if "[disabled]" in key %}
     {% else %}
