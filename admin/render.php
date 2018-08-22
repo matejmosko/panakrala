@@ -175,9 +175,11 @@ function renderHead()
 
 function renderScripts()
 {
+  $today = $GLOBALS['options']['today'];
     return $GLOBALS['twig']->render('scripts.twig', array(
     'data' => $GLOBALS['data'],
-    'options' => $GLOBALS['options']
+    'options' => $GLOBALS['options'],
+    'today' => $today
   ));
 }
 
