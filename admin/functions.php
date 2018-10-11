@@ -171,7 +171,7 @@ function solveCaptcha()
 
 /* REGISTRATION SYSTEM */
 
-function createDB()
+function createDB() // ERROR IN SQL SYNTAX, USE createTables() INSTEAD
 {
     $conn = new mysqli($GLOBALS['db']['servername'], $GLOBALS['db']['username'], $GLOBALS['db']['password']);
     // Check connection
