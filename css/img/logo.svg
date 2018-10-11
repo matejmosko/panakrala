@@ -16,7 +16,7 @@
    id="svg2017"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="logo.svg"
-   inkscape:export-filename="/home/gnaag/public_html/panakrala/css/img/logo.png"
+   inkscape:export-filename="/home/gnaag/public_html/panakrala/css/img/logo-trans.png"
    inkscape:export-xdpi="130"
    inkscape:export-ydpi="130">
   <defs
@@ -231,7 +231,7 @@
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="1"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
      inkscape:cx="106.67321"
