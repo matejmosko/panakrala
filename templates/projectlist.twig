@@ -1,21 +1,30 @@
-{% autoescape false %} {% if projects %}
-<div id="projects" class="projects flexRow">
-    {% for key,project in projects %}
-    {% if "[disabled]" in key %}
-    {% else %}
-    <div class="projectPreview contentBlock tile40 blockDark">
-        <div class="projectCover fitImg"><a href="{{options.baseurl}}{{key}}/index.html"><img src="{{options.baseurl}}data/projects/{{key}}/cover.jpg" alt="{{key}}" />
-          <h2 class="projectTitle title">{{project.opts.name}}</h2></a>
-        </div>
-        </a>
-        <div class="projectDesc tileDesc textBlock">{{project.opts.desc.index}}</div>
-        <ul class="projectMeta tileMeta">
+{% autoescape false %}
+  {% if projects %}
+    <div id="projects" class="projects flexRow">
+      {% for key, project in projects %}
+        {% if "[disabled]" in key %}
+        {% else %}
+          <div class="projectPreview contentBlock tile40 blockLight">
+            <div class="projectCover fitImg">
+              <a href="{{options.baseurl}}{{key}}/index.html">
+                <img class="frontImg" src="{{options.baseurl}}data/projects/{{key}}/cover.jpg" alt="{{key}}"/>
+                <img class="backImg" src="{{options.baseurl}}data/projects/{{key}}/back.jpg" alt="{{key}}"/>
+
+                <h2 class="projectTitle title">{{project.opts.name}}</h2>
+              </a>
+            </div>
+          </a>
+          <div class="projectDesc tileDesc textBlock">{{project.opts.desc.index}}</div>
+          <ul class="projectMeta tileMeta">
             <!--<li class="keywords">{{project.opts.keywords}}</li>-->
-            <li><span class="emotpack-icon timespan"></span><span class="metaDetail">{{project.opts.desc.timespan}}</span></li>
-            <li><span class="emotpack-icon groupsize"></span><span class="metaDetail">{{project.opts.desc.groupsize}}</span></li>
-        </ul>
-    </div>
-    {% endif %}
+            <li>
+              <span class="emotpack-icon timespan"></span><span class="metaDetail">{{project.opts.desc.timespan}}</span></li>
+            <li>
+              <span class="emotpack-icon groupsize"></span><span class="metaDetail">{{project.opts.desc.groupsize}}</span></li>
+          </ul>
+        </div>
+      {% endif %}
     {% endfor %}
-</div>
-{% endif %} {% endautoescape %}
+  </div>
+{% endif %}
+{% endautoescape %}

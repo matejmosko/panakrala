@@ -27,39 +27,6 @@ if ($debug) {
     print_r($data);
     echo "</pre>";
 }
-/*
-function filterEvents($data, $project, $filter)
-{
-    $today = time();
-    if (array_key_exists('events', $data['projects'][$project])) {
-        switch ($filter) {
-      case 'all':
-        return $data;
-        break;
-      case 'next':
-        foreach ($data['projects'][$project]['events'] as $key => &$event) {
-            if (array_key_exists('opts', $event) && $event['opts']['timestamp'] <= $today) {
-                unset($data['projects'][$project]['events'][$key]);
-            }
-        }
-        return $data;
-        break;
-      case 'past':
-        foreach ($data['projects'][$project]['events'] as $key => &$event) {
-            if (array_key_exists('opts', $event) && $event['opts']['timestamp'] >= $today) {
-                unset($data['projects'][$project]['events'][$key]);
-            }
-        }
-        return $data;
-        break;
-      default:
-        return $data;
-        break;
-    }
-    } else {
-        "K tomuto projektu momentálne nepripravujeme žiadne verejné udalosti.";
-    }
-}*/
 
 function renderForm($projectId, $eventId)
 {
@@ -75,7 +42,7 @@ function renderForm($projectId, $eventId)
   ));
 }
 
-function renderEvent($projectId, $eventId)
+function renderEvent($projectId, $eventId, $today, $format)
 {
     $path = "../data/projects/".$projectId."/events/";
     $coverpath = $path.$eventId."/cover.jpg";
@@ -86,8 +53,10 @@ function renderEvent($projectId, $eventId)
         $eventPic = $path."default.jpg";
     }
     $form = "";
-    if ($GLOBALS['data']['projects'][$projectId]['events'][$eventId]['opts']['regLink'] == "") {
+    if (array_key_exists ('regLink', $GLOBALS['data']['projects'][$projectId]['events'][$eventId]['opts'])) {
+      if ($GLOBALS['data']['projects'][$projectId]['events'][$eventId]['opts']['regLink'] == "") {
         $form = renderForm($projectId, $eventId);
+      }
     }
 
     return $GLOBALS['twig']->render('event.twig', array(
@@ -99,7 +68,8 @@ function renderEvent($projectId, $eventId)
     'form' => $form,
     'options' => $GLOBALS['options'],
     'guestCount' => eventGuestCount($eventId),
-    'guestList' => eventGetGuests($projectId, $eventId)
+    'guestList' => eventGetGuests($projectId, $eventId),
+    'format' => $format
   ));
 }
 
@@ -115,16 +85,16 @@ function renderEvents($projectId, $filter)
             }
             switch ($filter) {
   case 'all':
-    $html .= renderEvent($projectId, $key, $today);
+    $html .= renderEvent($projectId, $key, $today, 'archive');
     break;
   case 'next':
     if (array_key_exists('opts', $event) && $event['opts']['timestamp'] >= $today) {
-        $html .= renderEvent($projectId, $key, $today);
+        $html .= renderEvent($projectId, $key, $today, 'full');
     }
     break;
   case 'past':
     if (array_key_exists('opts', $event) && $event['opts']['timestamp'] <= $today) {
-        $html .= renderEvent($projectId, $key, $today);
+        $html .= renderEvent($projectId, $key, $today, 'gallery');
     }
     break;
   default:
@@ -148,11 +118,16 @@ function renderProjects()
 
 function renderCover($masterClass = null, $projectId = null, $eventId = null)
 {
+  $projectData = "";
+  if ($projectId){
+    $projectData = $GLOBALS['data']['projects'][$projectId];
+  }
     return $GLOBALS['twig']->render('cover.twig', array(
     'data' => $GLOBALS['data'],
     'options' => $GLOBALS['options'],
     'masterClass' => $masterClass,
     'projectId' => $projectId,
+    'projectData' => $projectData,
     'eventId' => $eventId
   ));
 }
@@ -183,14 +158,15 @@ function renderScripts()
   ));
 }
 
-function renderProject($projectId)
+function renderProject($projectId, $filterEvents)
 {
     return $GLOBALS['twig']->render('project.twig', array(
     'data' => $GLOBALS['data']['projects'][$projectId],
     'projectId' => $projectId,
-    'nextEvents' => renderEvents($projectId, 'next'),
+    'events' => renderEvents($projectId, $filterEvents),
     'options' => $GLOBALS['options'],
-    'contactForm' => renderContactForm('Záujem o '.$projectId, 'Dobrý deň, máme záujem o váš produkt'.$projectId.'. Pošlite nám prosím detailnejšie informácie.')
+    'filterEvents' => $filterEvents,
+    'contactForm' => renderContactForm('Záujem o '.$projectId, 'Dobrý deň, máme záujem o váš produkt '.$GLOBALS['data']['projects'][$projectId]['opts']['name'].'. Pošlite nám prosím detailnejšie informácie.')
     //'pastEvents' => renderEvents($project, 'past')
   ));
 }
@@ -264,7 +240,21 @@ function renderProjectPage($projectId)
   'menu' => renderMenu(),
   'head' => renderHead(),
   'cover' => renderCover('project', $projectId, ""),
-  'content' => renderProject($projectId),
+  'content' => renderProject($projectId, 'next'),
+  'footer' => renderFooter(),
+  'scripts' => renderScripts(),
+  'masterClass' => 'project',
+  'options' => $GLOBALS['options']
+));
+}
+
+function renderProjectArchivePage($projectId)
+{
+    return $GLOBALS['twig']->render('page.twig', array(
+  'menu' => renderMenu(),
+  'head' => renderHead(),
+  'cover' => renderCover('project', $projectId, ""),
+  'content' => renderProject($projectId, 'all'),
   'footer' => renderFooter(),
   'scripts' => renderScripts(),
   'masterClass' => 'project',
@@ -315,6 +305,7 @@ function saveProject($key)
         mkdir($dir, 0777, true);
     }
     file_put_contents($dir.'/index.html', renderProjectPage($key));
+    file_put_contents($dir.'/archive.html', renderProjectArchivePage($key));
     if (array_key_exists('gallery', $GLOBALS['data']['projects'][$key])) {
         foreach ($GLOBALS['data']['projects'][$key]['gallery'] as $key2 => $gallery) {
             $subdir = $GLOBALS['options']['basepath'].'./'.$key.'/gallery/';
@@ -345,6 +336,7 @@ function saveFiles()
             saveDocument($doc);
         }
     }
+    echo "<p>Done.</p>";
 }
 
 
