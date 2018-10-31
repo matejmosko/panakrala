@@ -20,9 +20,12 @@ $('document').ready(function() {
     $('.contactForm').ajaxForm({
         target: ".contactFormResult",
         success: function() {
+          console.log('success');
+          var btn = document.getElementById("submitContactForm");
+          btn.disabled = true;
+          $('#submitContactForm').val("Správa bola odoslaná");
         },
         error: function() {
-            $('#contactFormResult').text("Vaša správa sa bohužiaľ stratila v hlbinách internetu. Skúste to ešte raz.");
         }
     });
 

@@ -162,9 +162,10 @@ function solveCaptcha()
     $captcha_success=json_decode($verify);
 
     if ($captcha_success->success==false) {
-        echo "<p class='error'>Máme podozrenie, že si robot. Ak nie si robot, Zaškrtni políčko pri texte <strong>I'm not a robot</strong>. Ak si robot, nechytaj sa našej stránky.</p>";
+        echo "<p class='error'>Máme podozrenie, že si robot. Ak nie si robot, Zaškrtni políčko pri texte <strong>Nie som robot</strong>. Ak si robot, nechytaj sa našej stránky.</p>";
         return false;
     } elseif ($captcha_success->success==true) {
+        echo "<p class='success'>Vaša správa úspešne opustila túto stránku a mala by doraziť tak na Váš email ako aj na našu adresu info@panakrala.sk</p>";
         return true;
     }
 }

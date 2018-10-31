@@ -1,10 +1,10 @@
-To: matej.mosko@gmail.com
+To: moskom@centrum.sk
 
- Subject: List pre Pána Kráľa
+ Subject: Záujem o gow
 
  From: info@panakrala.sk
 
- Txt: sdfsdfsdf
+ Txt: Dobrý deň, máme záujem o váš produkt Game of Worlds. Pošlite nám prosím detailnejšie informácie.
 
  Headers: MIME-Version: 1.0
 Content-type:text/html;charset=UTF-8

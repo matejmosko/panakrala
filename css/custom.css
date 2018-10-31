@@ -491,7 +491,9 @@ h2.title, h3.title {
   object-fit: cover;
 }
 
-#contactFormDiv {}
+#contactFormDiv {
+  max-width: 650px;
+}
 
 .hamburger-bars {
   display: block;
@@ -522,11 +524,18 @@ h2.title, h3.title {
   padding: 5px;
 }
 
-.error {
+.error, .success {
   color: white;
   color: var(--foregroundLight);
   padding: 10px;
+}
+
+.error {
   background-color: indianred;
+}
+
+.success {
+  background-color: #4AA44A;
 }
 
 .kingDiv {
@@ -700,7 +709,7 @@ a:visited {
   }
 }
 
-@media screen and (max-height: 575px) {
+@media screen and (max-width: 575px) {
   #rc-imageselect, .g-recaptcha {
     transform: scale(0.77);
     -webkit-transform: scale(0.77);
