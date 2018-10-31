@@ -6,6 +6,7 @@
 data/*
 kamosko-config.php
 admin/vendor/
+admin/*.txt
 doc
 .htaccess
 
