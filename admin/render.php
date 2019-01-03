@@ -18,11 +18,11 @@ $loader = new Twig_Loader_Filesystem($GLOBALS['options']['basepath'].'templates/
 $twig = new Twig_Environment($loader);
 $twig->addExtension(new Twig_Extensions_Extension_Intl());
 
-saveFiles();
+createFiles();
 
 if ($debug) {
-  echo "Base FS path: ".PATH_BASE_FS."<br />";
-  echo "Base WEB path: ".PATH_BASE_WEB."<br />";
+    echo "Base FS path: ".PATH_BASE_FS."<br />";
+    echo "Base WEB path: ".PATH_BASE_WEB."<br />";
     echo "<pre>";
     print_r($data);
     echo "</pre>";
@@ -53,10 +53,10 @@ function renderEvent($projectId, $eventId, $today, $format)
         $eventPic = $path."default.jpg";
     }
     $form = "";
-    if (array_key_exists ('regLink', $GLOBALS['data']['projects'][$projectId]['events'][$eventId]['opts'])) {
-      if ($GLOBALS['data']['projects'][$projectId]['events'][$eventId]['opts']['regLink'] == "") {
-        $form = renderForm($projectId, $eventId);
-      }
+    if (array_key_exists('regLink', $GLOBALS['data']['projects'][$projectId]['events'][$eventId]['opts'])) {
+        if ($GLOBALS['data']['projects'][$projectId]['events'][$eventId]['opts']['regLink'] == "") {
+            $form = renderForm($projectId, $eventId);
+        }
     }
 
     return $GLOBALS['twig']->render('event.twig', array(
@@ -110,18 +110,54 @@ function renderEvents($projectId, $filter)
 
 function renderProjects()
 {
-    return $GLOBALS['twig']->render('projectlist.twig', array(
+    if (array_key_exists('projects', $GLOBALS['data'])) {
+        return $GLOBALS['twig']->render('projectlist.twig', array(
     'projects' => $GLOBALS['data']['projects'],
     'options' => $GLOBALS['options']
   ));
+    } else {
+        return "";
+    }
+}
+
+function renderProducts()
+{
+    if (array_key_exists('products', $GLOBALS['data'])) {
+        $products = $GLOBALS['data']['products'];
+
+        array_multisort(array_map(function ($element) {
+            return $element['opts']['category'];
+        }, $products), SORT_ASC, $products);
+
+        return $GLOBALS['twig']->render('productlist.twig', array(
+          'data' => $GLOBALS['data'],
+    'products' => $products,
+    'options' => $GLOBALS['options']
+  ));
+    } else {
+        return "";
+    }
 }
 
 function renderCover($masterClass = null, $projectId = null, $eventId = null)
 {
-  $projectData = "";
-  if ($projectId){
-    $projectData = $GLOBALS['data']['projects'][$projectId];
+    switch ($masterClass) {
+    case 'project':
+      $projectData = $GLOBALS['data']['projects'][$projectId];
+      break;
+      case 'product':
+        $projectData = $GLOBALS['data']['products'][$projectId];
+        break;
+
+    default:
+      $projectData = "";
+      break;
   }
+    /*
+    $projectData = "";
+    if ($masterClass == ) {
+        $projectData = $GLOBALS['data']['projects'][$projectId];
+    }*/
     return $GLOBALS['twig']->render('cover.twig', array(
     'data' => $GLOBALS['data'],
     'options' => $GLOBALS['options'],
@@ -140,17 +176,18 @@ function renderFooter()
 }
 
 
-function renderHead()
+function renderHead($localopts)
 {
     return $GLOBALS['twig']->render('head.twig', array(
     'data' => $GLOBALS['data'],
+    'localopts' => $localopts,
     'options' => $GLOBALS['options']
   ));
 }
 
 function renderScripts()
 {
-  $today = $GLOBALS['options']['today'];
+    $today = $GLOBALS['options']['today'];
     return $GLOBALS['twig']->render('scripts.twig', array(
     'data' => $GLOBALS['data'],
     'options' => $GLOBALS['options'],
@@ -168,6 +205,17 @@ function renderProject($projectId, $filterEvents)
     'filterEvents' => $filterEvents,
     'contactForm' => renderContactForm('Záujem o '.$projectId, 'Dobrý deň, máme záujem o váš produkt '.$GLOBALS['data']['projects'][$projectId]['opts']['name'].'. Pošlite nám prosím detailnejšie informácie.')
     //'pastEvents' => renderEvents($project, 'past')
+  ));
+}
+
+function renderProduct($productId)
+{
+    return $GLOBALS['twig']->render('product.twig', array(
+    'data' => $GLOBALS['data'],
+    'product' => $GLOBALS['data']['products'][$productId],
+    'productId' => $productId,
+    'options' => $GLOBALS['options'],
+    'contactForm' => renderContactForm('Záujem o '.$productId, 'Dobrý deň, máme záujem o váš produkt '.$GLOBALS['data']['products'][$productId]['opts']['name'].'. Pošlite nám prosím detailnejšie informácie.')
   ));
 }
 
@@ -224,9 +272,9 @@ function renderHomePage()
 {
     return $GLOBALS['twig']->render('page.twig', array(
   'menu' => renderMenu(),
-  'head' => renderHead(),
+  'head' => renderHead($GLOBALS['data']['opts']),
   'cover' => renderCover(),
-  'content' => renderProjects(),
+  'content' => renderProjects().renderProducts(),
   'footer' => renderFooter(),
   'scripts' => renderScripts(),
   'masterClass' => 'home',
@@ -238,7 +286,7 @@ function renderProjectPage($projectId)
 {
     return $GLOBALS['twig']->render('page.twig', array(
   'menu' => renderMenu(),
-  'head' => renderHead(),
+  'head' => renderHead($GLOBALS['data']['projects'][$projectId]['opts']),
   'cover' => renderCover('project', $projectId, ""),
   'content' => renderProject($projectId, 'next'),
   'footer' => renderFooter(),
@@ -248,11 +296,25 @@ function renderProjectPage($projectId)
 ));
 }
 
+function renderPage($pageType, $elementId)
+{
+    return $GLOBALS['twig']->render('page.twig', array(
+  'menu' => renderMenu(),
+  'head' => renderHead($GLOBALS['data'][$pageType.'s'][$elementId]['opts']),
+  'cover' => renderCover($pageType, $elementId, ""),
+  'content' => renderProduct($elementId),
+  'footer' => renderFooter(),
+  'scripts' => renderScripts(),
+  'masterClass' => $pageType,
+  'options' => $GLOBALS['options']
+));
+}
+
 function renderProjectArchivePage($projectId)
 {
     return $GLOBALS['twig']->render('page.twig', array(
   'menu' => renderMenu(),
-  'head' => renderHead(),
+  'head' => renderHead($GLOBALS['data']['projects'][$projectId]['opts']),
   'cover' => renderCover('project', $projectId, ""),
   'content' => renderProject($projectId, 'all'),
   'footer' => renderFooter(),
@@ -266,7 +328,7 @@ function renderGalleryPage($projectId, $gallery)
 {
     return $GLOBALS['twig']->render('page.twig', array(
   'menu' => renderMenu(),
-  'head' => renderHead(),
+  'head' => renderHead($GLOBALS['data']['projects'][$projectId]['opts']),
   'cover' => renderCover(),
   'content' => renderGallery($projectId, $gallery),
   //'footer' => renderFooter(),
@@ -280,7 +342,7 @@ function renderDocumentPage($document)
 {
     return $GLOBALS['twig']->render('page.twig', array(
       'menu' => renderMenu(),
-      'head' => renderHead(),
+      'head' => renderHead($GLOBALS['data']['opts']),
       'cover' => renderCover(),
       'content' => renderDocument($document),
       'footer' => renderFooter(),
@@ -317,23 +379,48 @@ function saveProject($key)
     }
 }
 
+function saveProduct($key)
+{
+    /* Save Projects' html files */
+    $dir = $GLOBALS['options']['basepath'].'./products/';
+    if (!file_exists($dir)) {
+        mkdir($dir, 0777, true);
+    }
+    file_put_contents($dir.$key.'.html', renderPage('product', $key));
+}
+
 function saveDocument($doc)
 {
     /* Save Documents' html files */
     file_put_contents($GLOBALS['options']['basepath'].pathinfo($doc, PATHINFO_FILENAME).'.html', renderDocumentPage($doc));
 }
 
-function saveFiles()
+function createFiles()
 {
+
+  /* INITIATE SAVING OF INDEX.HTML */
     saveIndex();
 
-    foreach ($GLOBALS['data']['projects'] as $key => $project) {
-        saveProject($key);
+    /* INITIATE SAVING OF PROJECTS FILES */
+    if (array_key_exists('projects', $GLOBALS['data'])) {
+        foreach ($GLOBALS['data']['projects'] as $key => $project) {
+            saveProject($key);
+        }
     }
 
-    foreach ($GLOBALS['data']['documents'] as $key => $doc) {
-        if (pathinfo($doc, PATHINFO_EXTENSION) == "md") {
-            saveDocument($doc);
+    /* INITIATE SAVING OF PAGE'S DOCUMENTS */
+    if (array_key_exists('documents', $GLOBALS['data'])) {
+        foreach ($GLOBALS['data']['documents'] as $key => $doc) {
+            if (pathinfo($doc, PATHINFO_EXTENSION) == "md") {
+                saveDocument($doc);
+            }
+        }
+    }
+
+    /* INITIATE SAVING OF PRODUCTS products FILES */
+    if (array_key_exists('products', $GLOBALS['data'])) {
+        foreach ($GLOBALS['data']['products'] as $key => $project) {
+            saveProduct($key);
         }
     }
     echo "<p>Done.</p>";

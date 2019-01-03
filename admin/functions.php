@@ -139,14 +139,38 @@ function recursiveJsonSearch(&$data, $path)
     return $data;
 }
 
-function solveCaptcha()
+function solveCaptcha(){
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Build POST request:
+    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+    $recaptcha_secret = '6LcsPIYUAAAAAOj6vgx6MY7C6neIRPzaBL7l8bzB';
+    $recaptcha_response = $_POST['recaptcha_response'];
+
+    // Make and decode POST request:
+    $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+    $recaptcha = json_decode($recaptcha);
+
+    // Take action based on the score returned:
+    if ($recaptcha->score <= 0.5) {
+      echo "<p class='error'>Máme podozrenie, že si robot. Ak nie si robot, Zaškrtni políčko pri texte <strong>Nie som robot</strong>. Ak si robot, nechytaj sa našej stránky.</p>";
+      return false;
+    } else {
+      echo "<p class='success'>Vaša správa úspešne opustila túto stránku a mala by doraziť tak na Váš email ako aj na našu adresu info@panakrala.sk</p>";
+      return true;
+    }
+
+}
+}
+
+function solveCaptchaOld()
 {
     $response = $_POST["g-recaptcha-response"] || "";
 
     $url = 'https://www.google.com/recaptcha/api/siteverify';
     $data = array(
-        'secret' => '6LfjIEQUAAAAAFQLMapACvy5bHBoKUr4wkyJbuIQ',
-        'response' => $_POST["g-recaptcha-response"]
+        'secret' => '6LcsPIYUAAAAAOj6vgx6MY7C6neIRPzaBL7l8bzB',
+        'response' => $response
     );
     $query = http_build_query($data);
     $options = array(
@@ -161,10 +185,10 @@ function solveCaptcha()
     $verify = file_get_contents($url, false, $context);
     $captcha_success=json_decode($verify);
 
-    if ($captcha_success->success==false) {
+    if ($captcha_success->score>=0.5) {
         echo "<p class='error'>Máme podozrenie, že si robot. Ak nie si robot, Zaškrtni políčko pri texte <strong>Nie som robot</strong>. Ak si robot, nechytaj sa našej stránky.</p>";
         return false;
-    } elseif ($captcha_success->success==true) {
+    } else {
         echo "<p class='success'>Vaša správa úspešne opustila túto stránku a mala by doraziť tak na Váš email ako aj na našu adresu info@panakrala.sk</p>";
         return true;
     }

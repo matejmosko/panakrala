@@ -6,13 +6,19 @@
       </a>
       <h2 class="coverTitle">{{projectData.opts.name}}</h2>
     {% endif %}
+    {% if masterClass == 'product' %}
+      <a href="{{options.baseurl}}products/{{projectId}}.html">
+        <img src="{{options.baseurl}}data/categories/{{projectData.opts.category}}.jpg" alt="{{projectData.opts.category}}"/>
+      </a>
+      <h2 class="coverTitle">{{projectData.opts.name}}</h2>
+    {% endif %}
   </div>
 
   <div class="homeTitle">
     <a href="{{options.baseurl}}index.html" class="title">
-      <h1 class="title">{{data.opts.title}}</h1>
+      <h1 class="title">{{data.opts.name}}</h1>
     </a>
-    <div class="dataDesc">{{data.opts.subtitle}}</div>
+    <div class="homeDesc">{{data.opts.subtitle}}</div>
   </div>
   <div class="kingDiv">
     <div class="kingTip kingTip-1">{{data.opts.kingTips.tip1}}</div>
