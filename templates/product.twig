@@ -44,12 +44,14 @@
 
         <div class="gallery">
           <img class="galleryPhoto" src="{{options.baseurl}}data/products/{{productId}}/cover.jpg" alt="{{productId}}"/>
+          {% if images|length > 1 %}
           <div class="galleryThumbs">
             {% for photokey, photo in product %}
               {% if '.jpg' in photo %}
                 <img class="thumb" src="{{options.baseurl}}data/products/{{productId}}/{{photo}}" alt="{{productId}}"/>
               {% endif %}
             {% endfor %}
+            {% endif %}
           </div>
         </div>
       </div>

@@ -120,14 +120,20 @@ function renderProjects()
     }
 }
 
+function mapProductCategory($element){
+  return $element['opts']['category'];
+}
+
 function renderProducts()
 {
     if (array_key_exists('products', $GLOBALS['data'])) {
         $products = $GLOBALS['data']['products'];
-
+/*
         array_multisort(array_map(function ($element) {
             return $element['opts']['category'];
-        }, $products), SORT_ASC, $products);
+        }, $products), SORT_ASC, $products);*/
+
+        array_multisort(array_map("mapProductCategory", $products), SORT_ASC, $products);
 
         return $GLOBALS['twig']->render('productlist.twig', array(
           'data' => $GLOBALS['data'],
@@ -208,11 +214,25 @@ function renderProject($projectId, $filterEvents)
   ));
 }
 
+function imagesToArray($array)
+{
+    $result = array();
+    foreach ($array as $key => $value) {
+        if (is_string($value)) {
+            if (strpos($value, "jpg") !== false) {
+                array_push($result, $value);
+            }
+        }
+    }
+    return $result;
+}
+
 function renderProduct($productId)
 {
     return $GLOBALS['twig']->render('product.twig', array(
     'data' => $GLOBALS['data'],
     'product' => $GLOBALS['data']['products'][$productId],
+    'images' => imagesToArray($GLOBALS['data']['products'][$productId]),
     'productId' => $productId,
     'options' => $GLOBALS['options'],
     'contactForm' => renderContactForm('Záujem o '.$productId, 'Dobrý deň, máme záujem o váš produkt '.$GLOBALS['data']['products'][$productId]['opts']['name'].'. Pošlite nám prosím detailnejšie informácie.')

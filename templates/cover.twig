@@ -5,12 +5,18 @@
         <img src="{{options.baseurl}}data/projects/{{projectId}}/back.jpg"/>
       </a>
       <h2 class="coverTitle">{{projectData.opts.name}}</h2>
+      <a href="{{options.baseurl}}">
+        <div class="backBtn"></div>
+      </a>
     {% endif %}
     {% if masterClass == 'product' %}
       <a href="{{options.baseurl}}products/{{projectId}}.html">
         <img src="{{options.baseurl}}data/categories/{{projectData.opts.category}}.jpg" alt="{{projectData.opts.category}}"/>
       </a>
       <h2 class="coverTitle">{{projectData.opts.name}}</h2>
+      <a href="{{options.baseurl}}">
+        <div class="backBtn"></div>
+      </a>
     {% endif %}
   </div>
 

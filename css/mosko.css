@@ -72,6 +72,7 @@ body {
   /* as flex container */
   align-content: space-between;
   align-items: stretch;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .tile100px {
@@ -122,7 +123,9 @@ body {
   margin: 0px;
   position: relative;
   z-index: 1000;
-  background: #eee;
+  background-image: url("img/patterns/graphy.png");
+  background-repeat: repeat;
+  border-top: 5px #444 solid;
 }
 
 .coverTitle {
@@ -242,7 +245,9 @@ body {
 }
 
 .fitImg img {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -288,12 +293,24 @@ body {
   box-shadow: inset 0 0 20px rgba(205, 92, 92, .5), 0 0 20px rgba(205, 92, 92, .2);
   outline-color: rgba(205, 92, 92, 0);
   outline-offset: 15px;
+  cursor: pointer;
 }
 
 .hideBtn {
   align-self: center;
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+.backBtn {
+  background-image: url("img/back.png");
+  background-repeat: no-repeat;
+  padding: 10px;
+  position: absolute;
+  height: 64px;
+  width: 64px;
+  left: 0px;
+  bottom: 0px;
 }
 
 /** TITLES **/
@@ -401,8 +418,6 @@ h2.title, h3.title {
   flex-flow: row wrap;
   justify-content: center;
 }
-
-.projectPage .gallery a {}
 
 .projectPage .gallery img {
   flex: 1 1 auto;
@@ -617,19 +632,15 @@ a:visited {
   }
 }
 
-@media screen and (max-width: 575px) {
-  .king {
-    background-size: auto 93px;
-    height: 93px;
-    width: 75px;
-  }
-
-  .equalColumn {
-    width: 95%;
-  }
+.kingDiv {
+  display: none;
 }
 
 @media screen and (max-width: 575px) {
+  .equalColumn {
+    width: 95%;
+  }
+
   #rc-imageselect, .g-recaptcha {
     transform: scale(0.77);
     -webkit-transform: scale(0.77);
@@ -661,7 +672,8 @@ a:visited {
 
 /* Products */
 .productCover {
-  width: 100%;
+  width: 30%;
+  height: 100%;
   padding: 5px;
 }
 
@@ -675,8 +687,8 @@ a:visited {
 }
 
 .productPreview {
-  width: 100%;
   justify-content: space-between;
+  align-items: center;
 }
 
 .productPart {
@@ -697,6 +709,7 @@ a:visited {
 
 .productPreview .productCategory {
   justify-content: flex-end;
+  height: 100%;
 }
 
 .categoryPictogram {
@@ -714,7 +727,7 @@ a:visited {
 }
 
 .odevy .productCategory {
-  background-color: #feff99;
+  background-color: #b899ff;
 }
 
 .odevy .categoryPictogram {
@@ -730,11 +743,19 @@ a:visited {
 }
 
 .zvárači .productCategory {
-  background-color: #feff99;
+  background-color: #ff6f26;
 }
 
 .zvárači .categoryPictogram {
   background-position: -192px 0px;
+}
+
+.držiaky .productCategory {
+  background-color: #99ffa9;
+}
+
+.držiaky .categoryPictogram {
+  background-position: -256px 0px;
 }
 
 .emblems {
@@ -775,6 +796,18 @@ a:visited {
   background-position: -96px 0px;
 }
 
+.emblemItem.waterproof {
+  background-position: -120px 0px;
+}
+
+.emblemItem.welding {
+  background-position: -144px 0px;
+}
+
+.emblemItem.kevlar {
+  background-position: -168px 0px;
+}
+
 .tooltip {
   display: none;
   position: absolute;
@@ -802,8 +835,8 @@ a:visited {
 }
 
 .galleryPhoto {
-  height: 400px;
-  width: 500px;
+  width: 100%;
+  height: 350px;
   object-fit: contain;
 }
 
@@ -813,17 +846,36 @@ a:visited {
   object-fit: contain;
 }
 
-@media screen and (min-width: 600px) {
+.product .gallery .thumb:hover {
+  cursor: pointer;
+}
+
+.attrTitle {
+  font-weight: bold;
+}
+
+@media screen and (min-width: 575px) {
   .productCover {
     max-width: 30%;
   }
 
   .productDesc {
-    max-width: 50%;
+    width: 50%;
+    min-width: 300px;
+  }
+
+  .gallery {
+    width: 35%;
+    min-width: 150px;
+    max-width: 400px;
+    padding: 15px;
   }
 
   .productPreview {
-    max-width: 48%;
+    min-width: 600px;
+    max-width: 650px;
+    width: 97vw;
+    height: 280px;
   }
 }
 
