@@ -74,14 +74,14 @@ $('document').ready(function() {
 
   /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
   $('#topMenuHamburger').click(function() {
-    var x = document.getElementById("topMenu");
-    if (x.className === "topnav") {
-      x.className += " responsive";
-    }
-    else {
-      x.className = "topnav";
-    }
+    $(this).parent(".topnav").toggleClass("responsive");
   });
+
+  $('html').click(function(event) {
+    if ($(event.target).closest('.topnav').length === 0) {
+        $('.topnav').removeClass("responsive");
+    }
+});
 
   /* MOVE OBJECT (KING) WHEN SCROLLING PAGE */
 
@@ -151,6 +151,8 @@ $('document').ready(function() {
     $(this).closest('.gallery').children('.galleryPhoto').attr('src', $(this).attr('src'))
   });
 
+
+/*
   grecaptcha.ready(function() {
     grecaptcha.execute('6LcsPIYUAAAAAMqbNsx-May3Gd7UMglrYCVelRFu', {
         action: 'sendmail'
@@ -160,4 +162,5 @@ $('document').ready(function() {
                 recaptchaResponse.value = token;
       });
   });
+  */
 });

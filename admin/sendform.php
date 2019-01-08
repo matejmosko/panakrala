@@ -19,7 +19,7 @@ function sendMessage()
     $headers .= 'From: Ing. Miroslav Moško <mm.mosko@gmail.com>' . "\r\n";
     $headers .= 'Cc: <'.$from.'>' . "\r\n";
 
-    mail($to, $subject, $txt, $headers);
+    if (mail($to, $subject, $txt, $headers)) {} else return "Pri posielaní správy došlo k chybe. Skúste nám správu poslať priamo na ". $from;
 
     file_put_contents("email.txt", "To: ".$to."\n\n Subject: ".$subject."\n\n From: ".$from."\n\n Txt: ".$txt."\n\n Headers: ".$headers);
 }

@@ -1,57 +1,62 @@
 {% autoescape false %}
   <div class="productPage">
     <div class="product {{product.opts.category}}">
-      <div class="contentBlock blockLight tile40">
-        <div class="productCategory">
-          <a href="{{options.baseurl}}#{{product.opts.category}}" title="Kategória: {{product.opts.category}}"><div class="categoryPictogram"></div></a>
-          <div class="emblems">
-            {% for emblem in product.opts.emblems %}
-              <div class="emblemItem {{emblem}}"><div class="tooltip">{{attribute(data.opts.emblems, emblem)}}</div></div>
-            {% endfor %}
-          </div>
-        </div>
-        <div class="productDesc textBlock productText">
-
+      <div class="blockLight tile">
+        <div class="productInfo contentBlock">
+          <div class="productDesc textBlock productText">
             <h3>{{product.opts.name}}</h3>
-          <p>{{product.opts.desc}}</p>
-          {% if product.opts.size != "" %}
-            <p class="productAttr">
-              <span class="attrTitle">Rozmery:</span>
-              {{product.opts.size}}</p>
-          {% endif %}
-          {% if product.opts.material != "" %}
-            <p class="productAttr">
-              <span class="attrTitle">Materiál:</span>
-              {{product.opts.material}}</p>
-          {% endif %}
-          {% if product.opts.certificate != "" %}
-            <p class="productAttr">
-              <span class="attrTitle">Certifikát:</span>
-              {{product.opts.certificate}}</p>
-          {% endif %}
-          {% if product.opts.standard != "" %}
-            <p class="productAttr">
-              <span class="attrTitle">Zhoda:</span>
-              {{product.opts.standard}}</p>
-          {% endif %}
+            <p>{{product.opts.desc}}</p>
+            {% if product.opts.size != "" %}
+              <p class="productAttr">
+                <span class="attrTitle">Rozmery:</span>
+                {{product.opts.size}}</p>
+            {% endif %}
+            {% if product.opts.material != "" %}
+              <p class="productAttr">
+                <span class="attrTitle">Materiál:</span>
+                {{product.opts.material}}</p>
+            {% endif %}
+            {% if product.opts.certificate != "" %}
+              <p class="productAttr">
+                <span class="attrTitle">Certifikát:</span>
+                {{product.opts.certificate}}</p>
+            {% endif %}
+            {% if product.opts.standard != "" %}
+              <p class="productAttr">
+                <span class="attrTitle">Zhoda:</span>
+                {{product.opts.standard}}</p>
+            {% endif %}
             <div class="hiddenInfo flexColumn">
               <button type="button" class="hideBtn ctaBtn">Chcem vedieť viac.</button>
               <div class="foldable">
-                  {{contactForm}}
+                {{contactForm}}
               </div>
             </div>
-        </div>
+          </div>
 
-        <div class="gallery">
-          <img class="galleryPhoto" src="{{options.baseurl}}data/products/{{productId}}/cover.jpg" alt="{{productId}}"/>
-          {% if images|length > 1 %}
-          <div class="galleryThumbs">
-            {% for photokey, photo in product %}
-              {% if '.jpg' in photo %}
-                <img class="thumb" src="{{options.baseurl}}data/products/{{productId}}/{{photo}}" alt="{{productId}}"/>
+          <div class="gallery">
+            <img class="galleryPhoto" src="{{options.baseurl}}data/products/{{productId}}/cover.jpg" alt="{{productId}}"/>
+            {% if images | length > 1 %}
+              <div class="galleryThumbs">
+                {% for photokey, photo in product %}
+                  {% if '.jpg' in photo %}
+                    <img class="thumb" src="{{options.baseurl}}data/products/{{productId}}/{{photo}}" alt="{{productId}}"/>
+                  {% endif %}
+                {% endfor %}
+                </div>
               {% endif %}
+</div>
+          </div>
+        <div class="productCategory">
+          <a href="{{options.baseurl}}#{{product.opts.category}}" title="Kategória: {{product.opts.category}}">
+            <div class="categoryPictogram"></div>
+          </a>
+          <div class="emblems">
+            {% for emblem in product.opts.emblems %}
+              <div class="emblemItem {{emblem}}">
+                <div class="tooltip">{{attribute(data.opts.emblems, emblem)}}</div>
+              </div>
             {% endfor %}
-            {% endif %}
           </div>
         </div>
       </div>

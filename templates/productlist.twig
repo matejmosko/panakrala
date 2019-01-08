@@ -5,43 +5,49 @@
         {% if "[disabled]" in key %}
         {% else %}
 
-        {% if currentCategory != product.opts.category %}
-        {% if loop.first %}
-        {% else %}
-      </div>
-      {% endif %}
-          <div id="{{product.opts.category}}"  class="products flexRow">
-        {% endif %}
-          <div class="productPreview contentBlock tile40 blockLight {{product.opts.category}} {{ cycle(['odd', 'even'], loop.index0) }}">
-            <div class="productCover fitImg productPart">
-              <a href="{{options.baseurl}}products/{{key}}.html">
-                <img class="frontImg" src="{{options.baseurl}}data/products/{{key}}/cover.jpg" alt="{{key}}"/>
-
-              </a>
+          {% if currentCategory != product.opts.category %}
+            {% if loop.first %}
+            {% else %}
             </div>
-            <div class="productDesc productPart">
+          {% endif %}
+          <div id="{{product.opts.category}}" class="products flexRow">
+          {% endif %}
+          <div class="productPreview tile blockLight {{product.opts.category}} {{ cycle(['odd', 'even'], loop.index0) }}">
+            <div class="productInfo contentBlock">
+              <div class="productCover fitImg productPart">
+                <a href="{{options.baseurl}}products/{{key}}.html">
+                  <img class="frontImg" src="{{options.baseurl}}data/products/{{key}}/cover.jpg" alt="{{key}}"/>
 
-              <h2 class="productTitle title">
-                <a href="{{options.baseurl}}products/{{key}}.html">{{product.opts.name}}</a>
-              </h2>
-              {% if product.opts.size != "" %}
-                <p class="productAttr">
-                  <span class="attrTitle">Rozmery:</span>
-                  {{product.opts.size}}</p>
-              {% endif %}
-              {% if product.opts.material != "" %}
-                <p class="productAttr">
-                  <span class="attrTitle">Materiál:</span>
-                  {{product.opts.material}}</p>
-              {% endif %}
+                </a>
+              </div>
+              <div class="productDesc productPart">
+
+                <h2 class="productTitle title">
+                  <a href="{{options.baseurl}}products/{{key}}.html">{{product.opts.name}}</a>
+                </h2>
+                {% if product.opts.size != "" %}
+                  <p class="productAttr">
+                    <span class="attrTitle">Rozmery:</span>
+                    {{product.opts.size}}</p>
+                {% endif %}
+                {% if product.opts.material != "" %}
+                  <p class="productAttr">
+                    <span class="attrTitle">Materiál:</span>
+                    {{product.opts.material}}</p>
+                {% endif %}
+              </div>
             </div>
             <div class="productCategory">
               <div class="emblems">
                 {% for emblem in product.opts.emblems %}
-                  <div class="emblemItem {{emblem}}"><div class="tooltip">{{attribute(data.opts.emblems, emblem)}}</div></div>
+                  <div class="emblemItem {{emblem}}">
+                    <div class="tooltip">{{attribute(data.opts.emblems, emblem)}}</div>
+                  </div>
                 {% endfor %}
               </div>
-              <a href="{{options.baseurl}}#{{product.opts.category}}" title="Kategória: {{product.opts.category}}"><div class="categoryPictogram"></div></a>
+              <a href="{{options.baseurl}}#{{product.opts.category}}" title="Kategória: {{product.opts.category}}">
+                <div class="categoryPictogram"></div>
+              </a>
             </div>
           </div>
         {% endif %}

@@ -24,4 +24,23 @@
 
     gtag('config', 'UA-XXXXX-Y');
 </script>
-<script src='https://www.google.com/recaptcha/api.js?render=6LcsPIYUAAAAAMqbNsx-May3Gd7UMglrYCVelRFu'></script>
+<script src="https://www.google.com/recaptcha/api.js?render=explicit&onload=onRecaptchaLoadCallback"></script>
+<script>
+function onRecaptchaLoadCallback() {
+        var clientId = grecaptcha.render('recaptcha_container', {
+            'sitekey': '6LcsPIYUAAAAAMqbNsx-May3Gd7UMglrYCVelRFu',
+            'badge': 'inline',
+            'size': 'invisible'
+        });
+
+        grecaptcha.ready(function() {
+            grecaptcha.execute(clientId, {
+                    action: 'sendmail'
+                })
+                .then(function(token) {
+                  var recaptchaResponse = document.getElementById('recaptchaResponse');
+                          recaptchaResponse.value = token;
+                });
+        });
+    }
+</script>
