@@ -1,5 +1,5 @@
 <?php
-$debug = $_GET['debug'];
+$debug = $_GET['debug'] ?: 'false';
 
 if ($debug) {
     error_reporting(E_ALL);
@@ -8,11 +8,7 @@ if ($debug) {
 
 Locale::setDefault('sk_SK');
 
-
-
 require_once(__DIR__ . '/functions.php');
-
-$data = getData();
 
 $loader = new Twig_Loader_Filesystem($GLOBALS['options']['basepath'].'templates/');
 $twig = new Twig_Environment($loader);

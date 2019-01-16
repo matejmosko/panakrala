@@ -8,6 +8,8 @@
 require __DIR__ . '/vendor/autoload.php';
 require_once(__DIR__."/../kamosko-config.php");
 
+$data = getData();
+
   if (isset($_GET['script'])) {
       $script = $_GET['script'];
       switch ($script) {
@@ -153,45 +155,14 @@ function solveCaptcha(){
 
     // Take action based on the score returned:
     if ($recaptcha->score <= 0.5) {
-      echo "<p class='error'>Máme podozrenie, že si robot. Ak nie si robot, Zaškrtni políčko pri texte <strong>Nie som robot</strong>. Ak si robot, nechytaj sa našej stránky.</p>";
+      echo "<p class='error'>Máme podozrenie, že si robot. Ak nie ste robot, napíšte nám priamo na emailovú adresu uvedenú v sekcii Kontakt. Ak si robot, nechytaj sa našej stránky.</p>";
       return false;
     } else {
-      echo "<p class='success'>Vaša správa úspešne opustila túto stránku a mala by doraziť tak na Váš email ako aj na našu adresu info@panakrala.sk</p>";
+      echo "<p class='success'>Vaša správa úspešne opustila túto stránku a mala by doraziť tak na Váš email ako aj na našu adresu ".$GLOBALS['data']['opts']['contactEmail']."</p>";
       return true;
     }
 
 }
-}
-
-function solveCaptchaOld()
-{
-    $response = $_POST["g-recaptcha-response"] || "";
-
-    $url = 'https://www.google.com/recaptcha/api/siteverify';
-    $data = array(
-        'secret' => '6LcsPIYUAAAAAOj6vgx6MY7C6neIRPzaBL7l8bzB',
-        'response' => $response
-    );
-    $query = http_build_query($data);
-    $options = array(
-        'http' => array(
-      'header' => "Content-Type: application/x-www-form-urlencoded\r\n".
-                    "Content-Length: ".strlen($query)."\r\n",
-            'method' => 'POST',
-            'content' => $query
-        )
-    );
-    $context  = stream_context_create($options);
-    $verify = file_get_contents($url, false, $context);
-    $captcha_success=json_decode($verify);
-
-    if ($captcha_success->score>=0.5) {
-        echo "<p class='error'>Máme podozrenie, že si robot. Ak nie si robot, Zaškrtni políčko pri texte <strong>Nie som robot</strong>. Ak si robot, nechytaj sa našej stránky.</p>";
-        return false;
-    } else {
-        echo "<p class='success'>Vaša správa úspešne opustila túto stránku a mala by doraziť tak na Váš email ako aj na našu adresu info@panakrala.sk</p>";
-        return true;
-    }
 }
 
 /* REGISTRATION SYSTEM */

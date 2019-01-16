@@ -524,7 +524,6 @@ h2.title, h3.title {
 
 .error {
   background-color: crimson;
-  color: var(--linkColor);
 }
 
 .success {
@@ -932,7 +931,7 @@ a:visited {
 
   .productPreview {
     min-width: 600px;
-    max-width: 650px;
+    max-width: 615px;
     width: 97vw;
     height: 280px;
   }
