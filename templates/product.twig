@@ -54,7 +54,7 @@
           <div class="emblems">
             {% for emblem in product.opts.emblems %}
               <div class="emblemItem {{emblem}}">
-                <div class="tooltip">{{attribute(data.opts.emblems, emblem)}}</div>
+                <div class="tooltip"><strong>{{attribute(data.opts.emblems, emblem)[0]}}</strong><br />{{attribute(data.opts.emblems, emblem)[1]}}</div>
               </div>
             {% endfor %}
           </div>
