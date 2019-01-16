@@ -1,5 +1,10 @@
 <?php
-$debug = $_GET['debug'] ?: 'false';
+
+if (isset($_GET['debug'])) {
+    $debug = $_GET['debug'];
+} else {
+    $debug = false;
+}
 
 if ($debug) {
     error_reporting(E_ALL);
@@ -116,25 +121,25 @@ function renderProjects()
     }
 }
 
-function mapProductCategory($element){
-  return $element['opts']['category'];
+function mapProductCategory($element)
+{
+    return $element['opts']['category'];
 }
 
 function renderProducts()
 {
     if (array_key_exists('products', $GLOBALS['data'])) {
         $products = $GLOBALS['data']['products'];
-/*
-        array_multisort(array_map(function ($element) {
-            return $element['opts']['category'];
-        }, $products), SORT_ASC, $products);*/
 
         array_multisort(array_map("mapProductCategory", $products), SORT_ASC, $products);
 
+        $categories = array_values(array_unique(array_map("mapProductCategory", $products)));
+
         return $GLOBALS['twig']->render('productlist.twig', array(
           'data' => $GLOBALS['data'],
-    'products' => $products,
-    'options' => $GLOBALS['options']
+          'products' => $products,
+          'categories' => $categories,
+          'options' => $GLOBALS['options']
   ));
     } else {
         return "";

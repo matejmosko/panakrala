@@ -1,4 +1,12 @@
 {% autoescape false %}
+{% if categories %}
+<div id="categories" class="filterMenu">
+  {% for category in categories %}
+    <a href="#{{category}}"><div class="categoryItem {{category}} shadow"><div class="categoryPictogram"></div><div class="categoryName category">{{category}}</div></div></a>
+{% endfor %}
+</div>
+
+{% endif %}
   {% if products %}
     <div id="products">
       {% for key, product in products %}
@@ -12,7 +20,7 @@
           {% endif %}
           <div id="{{product.opts.category}}" class="products flexRow">
           {% endif %}
-          <div class="productPreview tile blockLight {{product.opts.category}} {{ cycle(['odd', 'even'], loop.index0) }}">
+          <div class="productPreview tile blockLight shadow {{product.opts.category}} {{ cycle(['odd', 'even'], loop.index0) }}">
             <div class="productInfo contentBlock">
               <div class="productCover fitImg productPart">
                 <a href="{{options.baseurl}}products/{{key}}.html">
@@ -37,7 +45,7 @@
                 {% endif %}
               </div>
             </div>
-            <div class="productCategory">
+            <div class="productCategory category">
               <div class="emblems">
                 {% for emblem in product.opts.emblems %}
                   <div class="emblemItem {{emblem}}">

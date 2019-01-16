@@ -1,7 +1,7 @@
 {% autoescape false %}
   <div class="productPage">
     <div class="product {{product.opts.category}}">
-      <div class="blockLight tile">
+      <div class="blockLight tile shadow">
         <div class="productInfo contentBlock">
           <div class="productDesc textBlock productText">
             <h3>{{product.opts.name}}</h3>
@@ -47,7 +47,7 @@
               {% endif %}
 </div>
           </div>
-        <div class="productCategory">
+        <div class="productCategory category">
           <a href="{{options.baseurl}}#{{product.opts.category}}" title="Kategória: {{product.opts.category}}">
             <div class="categoryPictogram"></div>
           </a>
