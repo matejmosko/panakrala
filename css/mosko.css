@@ -313,6 +313,10 @@ body {
   margin-bottom: 30px;
 }
 
+.filterBtn {
+  margin: 5px 0;
+}
+
 #backBtn {
   background-image: url("img/piktogramy.png");
   background-position: -0px 64px;
@@ -769,8 +773,15 @@ a:visited {
   color: var(--foregroundDark);
 }
 
+#emblems {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
 .emblemsFilter {
   justify-content: center;
+  display: none;
 }
 
 .categoryItem {

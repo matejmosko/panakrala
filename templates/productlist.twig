@@ -6,7 +6,7 @@
           <a href="#{{category}}">
             <div class="categoryItem {{category}} shadow">
               <div class="categoryPictogram"></div>
-              <div class="categoryName">{{category}}</div>
+              <div class="categoryName category">{{category}}</div>
             </div>
           </a>
         {% endfor %}
@@ -14,7 +14,9 @@
     {% endif %}
 
     {% if data.opts.emblems %}
-      <div id="emblems" class="filterMenu emblemsFilter shadow blockLight">
+    <div id="emblems">
+    <button type="button" id="filterBtn" class="filterBtn ctaBtn">Filtrovať produkty</button>
+        <div class="shadow blockLight filterMenu emblemsFilter">
         <form action="#" method="post" class="emblemsForm" id="emblemsForm">
           <fieldset>
             {% for emblem, emblemInfo in data.opts.emblems %}
@@ -23,6 +25,7 @@
           </fieldset>
         </form>
       </div>
+    </div>
     {% endif %}
   </div>
   {% if products %}

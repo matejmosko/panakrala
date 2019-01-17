@@ -43,7 +43,8 @@ $('document').ready(function() {
   function ajaxGetEvent(projectId, eventId) {
     link = baseUrl + "admin/ajax.php?script=eventGetGuests&eventId=" + eventId + "&projectId=" + projectId;
     $.getJSON(link, function(data) {
-      if ($.isEmptyObject(data)) {} else {
+      if ($.isEmptyObject(data)) {}
+      else {
         var items = [];
         $.each(data, function(key, val) {
           items.push("<li id='" + key + "'>" + val.name + "</li>");
@@ -91,15 +92,18 @@ $('document').ready(function() {
       $(king).addClass("kingwalk-2");
       $(king).removeClass("kingwalk-3");
       $(king).removeClass("kingwalk-1");
-    } else if (xs % 3 == 0) {
+    }
+    else if (xs % 3 == 0) {
       $(king).addClass("kingwalk-3");
       $(king).removeClass("kingwalk-1");
       $(king).removeClass("kingwalk-2");
-    } else if (xs % 2 == 0) {
+    }
+    else if (xs % 2 == 0) {
       $(king).addClass("kingwalk-1");
       $(king).removeClass("kingwalk-2");
       $(king).removeClass("kingwalk-3");
-    } else {
+    }
+    else {
       $(king).addClass("kingwalk-2");
       $(king).removeClass("kingwalk-1");
       $(king).removeClass("kingwalk-3");
@@ -114,15 +118,18 @@ $('document').ready(function() {
       $(".kingTip-1").show();
       $(".kingTip-2").hide();
       $(".kingTip-3").hide();
-    } else if (kingPos > 350 && kingPos < 550) {
+    }
+    else if (kingPos > 350 && kingPos < 550) {
       $(".kingTip-1").hide();
       $(".kingTip-2").show();
       $(".kingTip-3").hide();
-    } else if (kingPos > 750 && kingPos < 950) {
+    }
+    else if (kingPos > 750 && kingPos < 950) {
       $(".kingTip-1").hide();
       $(".kingTip-2").hide();
       $(".kingTip-3").show();
-    } else {
+    }
+    else {
       $(".kingTip-1").hide();
       $(".kingTip-2").hide();
       $(".kingTip-3").hide();
@@ -144,11 +151,17 @@ $('document').ready(function() {
     $(this).closest('.gallery').children('.galleryPhoto').attr('src', $(this).attr('src'))
   });
 
+  $('.filterBtn').click(function() {
+    $(this).parent('div').find('.filterMenu').toggle();
+});
+
+
   $('.emblemsForm :checkbox').change(function() {
     checkedEmblems = $('.emblemsForm :checkbox:checked');
     if (checkedEmblems.length == 0 || checkedEmblems.length == $('.emblemsForm :checkbox').length) {
       $('.productPreview').show();
-    } else {
+    }
+    else {
       $('.productPreview').hide();
       checkedEmblems.each(function() {
         $('.productPreview.' + this.value).show();
@@ -158,7 +171,7 @@ $('document').ready(function() {
 
   function fixDiv() {
     var $cache = $('#filterArea');
-    if ($(window).scrollTop() > $("#content").offset().top){
+    if ($(window).scrollTop() > $("#content").offset().top) {
       $cache.addClass("positionFixed shadow");
       $cache.find(".emblemsFilter").removeClass("shadow");
     }
