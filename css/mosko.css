@@ -313,6 +313,13 @@ body {
   margin-bottom: 30px;
 }
 
+.linkBtn {
+  color: var(--linkColor);
+  color: crimson;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .filterBtn {
   margin: 5px 0;
 }
