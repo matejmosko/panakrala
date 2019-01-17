@@ -171,7 +171,7 @@ $('document').ready(function() {
 
   function fixDiv() {
     var $cache = $('#filterArea');
-    if ($(window).scrollTop() > $("#content").offset().top) {
+    if ($(window).scrollTop() > $("#content").offset().top-100) {
       $cache.addClass("positionFixed shadow");
       $cache.find(".emblemsFilter").removeClass("shadow");
     }
