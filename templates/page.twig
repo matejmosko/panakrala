@@ -1,32 +1,36 @@
 {% autoescape false %}
-<!doctype html>
-<html class="no-js" lang="sk">
-<head>
-  <!--<meta http-equiv="Content-Security-Policy" content="default-src https: 'unsafe-inline' 'unsafe-eval'; report-uri {{options.baseurl}}admin/https://panakrala.report-uri.com/r/d/csp/wizard">-->
-    {{head}}
-</head>
-<body>
-    <!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
+  <!doctype html>
+  <html class="no-js" lang="sk">
+    <head>
+      <!--<meta http-equiv="Content-Security-Policy" content="default-src https: 'unsafe-inline' 'unsafe-eval'; report-uri {{options.baseurl}}admin/https://panakrala.report-uri.com/r/d/csp/wizard">-->
+      {{head}}
+    </head>
+    <body>
+      <!-- Google Tag Manager (noscript) -->
+      <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PRPKWMJ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      </noscript>
+      <!-- End Google Tag Manager (noscript) -->
+      <!--[if lte IE 9]> <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p> <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div id="wrapper" class="{{masterClass}}">
-        <div id="header">
-        </div>
+      <!-- Add your site or application content here -->
+      <div id="wrapper" class="{{masterClass}}">
+        <div id="header"></div>
         <div id="topMenu" class="topnav">
-            {{menu}}
+          {{menu}}
         </div>
         <div id="cover">
-            {{cover}}
+          {{cover}}
         </div>
         <div id="content" class="flexRow">
           {{content}}
         </div>
         <div id="footer">{{footer}}</div>
-    </div>
-    <a href="#"><div id="topBtn"></div></a>
-  {{scripts}}
-</body>
-</html>
+      </div>
+      <a href="#">
+        <div id="topBtn"></div>
+      </a>
+      {{scripts}}
+    </body>
+  </html>
 {% endautoescape %}
