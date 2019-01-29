@@ -2,6 +2,7 @@
 
 html {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 *, *:before, *:after {
@@ -34,6 +35,7 @@ body {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  position: relative;
 }
 
 .contentBlock {
@@ -1037,6 +1039,11 @@ input[type=radio], input[type=checkbox] {
     width: 97vw;
     height: 280px;
   }
+}
+
+.anchorPoint {
+  position: absolute;
+  top: -160px;
 }
 
 .grecaptcha-badge {

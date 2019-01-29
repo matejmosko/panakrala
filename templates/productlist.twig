@@ -39,7 +39,8 @@
             {% else %}
             </div>
           {% endif %}
-          <div id="{{product.opts.category}}" class="products flexRow">
+          <div class="products flexRow">
+            <div id="{{product.opts.category}}" class="anchorPoint"></div>
           {% endif %}
           <div class="productPreview tile blockLight shadow {{product.opts.category}} {% for emblem in product.opts.emblems %} {{emblem}} {% endfor %} {{ cycle(['odd', 'even'], loop.index0) }}">
             <div class="productInfo contentBlock">
