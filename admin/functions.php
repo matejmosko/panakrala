@@ -108,15 +108,16 @@ function parseJsonFile($value, $path)
     return $infodata;
 }
 
-function parseMarkdownFile($value, $path){
-  $myfile = $path."/".$value;
-  if (file_exists($myfile)) {
-      $Parsedown = new ParsedownExtra();
-      $markfile = $Parsedown->text(file_get_contents($myfile));
-  } else {
-      $markfile = "";
-  }
-  return $markfile;
+function parseMarkdownFile($value, $path)
+{
+    $myfile = $path."/".$value;
+    if (file_exists($myfile)) {
+        $Parsedown = new ParsedownExtra();
+        $markfile = $Parsedown->text(file_get_contents($myfile));
+    } else {
+        $markfile = "";
+    }
+    return $markfile;
 }
 
 function recursiveJsonSearch(&$data, $path)
@@ -125,7 +126,6 @@ function recursiveJsonSearch(&$data, $path)
         if (is_object($value) or is_array($value)) {
             recursiveJsonSearch($value, $path."/".$key);
         } elseif (pathinfo($value, PATHINFO_EXTENSION) == "json" && $value == "opts.json") {
-
             $json = parseJsonFile($value, $path);
 
             $data['opts'] = json_decode($json, true);
@@ -134,36 +134,37 @@ function recursiveJsonSearch(&$data, $path)
                 $data['opts']['timestamp'] = strtotime($data['opts']['date']);
             }
         } elseif (pathinfo($value, PATHINFO_EXTENSION) == "md") {
-
             $data[pathinfo($value, PATHINFO_FILENAME)] = parseMarkdownFile($value, $path);
         }
     }
     return $data;
 }
 
-function solveCaptcha(){
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+function solveCaptcha()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Build POST request:
-    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-    $recaptcha_secret = '6LcsPIYUAAAAAOj6vgx6MY7C6neIRPzaBL7l8bzB';
-    $recaptcha_response = $_POST['recaptcha_response'];
+        $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+        $recaptcha_secret = '6LcsPIYUAAAAAOj6vgx6MY7C6neIRPzaBL7l8bzB';
+        $recaptcha_response = $_POST['recaptcha_response'];
 
-    // Make and decode POST request:
-    $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
-    $recaptcha = json_decode($recaptcha);
+        // Make and decode POST request:
+        $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+        $recaptcha = json_decode($recaptcha);
 
-    // Take action based on the score returned:
-    print_r($recaptcha);
-    if ($recaptcha->score <= 0.5) {
-      echo "<p class='error'>Máme podozrenie, že si robot. Ak nie ste robot, napíšte nám priamo na emailovú adresu uvedenú v sekcii Kontakt. Ak si robot, nechytaj sa našej stránky.</p>";
-      return false;
-    } else {
-      echo "<p class='success'>Vaša správa úspešne opustila túto stránku a mala by doraziť tak na Váš email ako aj na našu adresu ".$GLOBALS['data']['opts']['contactEmail']."</p>";
-      return true;
+        // Take action based on the score returned:
+        //print_r($recaptcha);
+        setTimeout(function () {
+            if ($recaptcha->score <= 0.5) {
+                echo "<p class='error'>Máme podozrenie, že si robot. Ak nie ste robot, napíšte nám priamo na emailovú adresu uvedenú v sekcii Kontakt. Ak si robot, nechytaj sa našej stránky.</p>";
+                return false;
+            } else {
+                echo "<p class='success'>Vaša správa úspešne opustila túto stránku a mala by doraziť tak na Váš email ako aj na našu adresu ".$GLOBALS['data']['opts']['contactEmail']."</p>";
+                return true;
+            }
+        }, 2000);
     }
-
-}
 }
 
 /* REGISTRATION SYSTEM */

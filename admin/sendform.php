@@ -21,5 +21,5 @@ function sendMessage()
 
     if (mail($to, $subject, $txt, $headers)) {} else return "<p class='error'>Pri posielaní správy došlo k chybe. Skúste nám správu poslať priamo na ". $from."</p>";
 
-    file_put_contents("email.txt", "To: ".$to."\n\n Subject: ".$subject."\n\n From: ".$from."\n\n Txt: ".$txt."\n\n Headers: ".$headers);
+    //file_put_contents("email.txt", "To: ".$to."\n\n Subject: ".$subject."\n\n From: ".$from."\n\n Txt: ".$txt."\n\n Headers: ".$headers);
 }

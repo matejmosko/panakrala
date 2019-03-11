@@ -1,8 +1,5 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
-require_once(__DIR__."/render.php");
 require_once(__DIR__."/functions.php");
 
 if (!empty($_POST['name']) && !empty($_POST['email'])) {
@@ -11,7 +8,7 @@ if (!empty($_POST['name']) && !empty($_POST['email'])) {
         addGuest($_POST);
     }
 } else {
-    echo "Zadajte údaje prihlasovaného tímu.";
+    echo "Zadajte údaje prihlasovaného tímu do formulára.";
 }
 
 /* reCaptcha */
