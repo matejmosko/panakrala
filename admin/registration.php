@@ -1,5 +1,6 @@
 <?php
 
+require_once(__DIR__."/render.php");
 require_once(__DIR__."/functions.php");
 
 if (!empty($_POST['name']) && !empty($_POST['email'])) {
