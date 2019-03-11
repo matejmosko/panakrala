@@ -14,7 +14,7 @@
 <script>
   function onRecaptchaLoadCallback() {
     var clientId = grecaptcha.render('recaptcha_container', {
-      'sitekey': '{{options.recaptchaSecret}}',
+      'sitekey': '{{data.opts.recaptchaSecret}}',
       'badge': 'inline',
       'size': 'invisible'
     });
