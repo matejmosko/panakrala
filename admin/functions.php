@@ -154,6 +154,7 @@ function solveCaptcha(){
     $recaptcha = json_decode($recaptcha);
 
     // Take action based on the score returned:
+    print_r($recaptcha);
     if ($recaptcha->score <= 0.5) {
       echo "<p class='error'>Máme podozrenie, že si robot. Ak nie ste robot, napíšte nám priamo na emailovú adresu uvedenú v sekcii Kontakt. Ak si robot, nechytaj sa našej stránky.</p>";
       return false;
