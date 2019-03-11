@@ -157,6 +157,7 @@ function solveCaptcha()
         echo "<pre>";
         print_r($recaptcha);
         echo "</pre>";
+        
         if ($recaptcha->score <= 0.5) {
             echo "<p class='error'>Máme podozrenie, že si robot. Ak nie ste robot, napíšte nám priamo na emailovú adresu uvedenú v sekcii Kontakt. Ak si robot, nechytaj sa našej stránky.</p>";
             return false;
