@@ -444,7 +444,7 @@ function createFiles()
             saveProduct($key);
         }
     }
-    echo "<p>Done.</p>";
+    //echo "<p>Done.</p>";
 }
 
 
