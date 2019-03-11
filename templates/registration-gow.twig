@@ -11,7 +11,7 @@
     <select name="faction">
       {% for key, faction in event.opts.factions %}
         {% if faction.playing == false %}
-          <option>{{faction.country}}</option>
+          <option>{{faction.country}} ({{faction.desc}})</option>
         {% endif %}
       {% endfor %}
     </select>
