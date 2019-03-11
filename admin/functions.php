@@ -155,15 +155,14 @@ function solveCaptcha()
 
         // Take action based on the score returned:
         //print_r($recaptcha);
-        setTimeout(function () {
-            if ($recaptcha->score <= 0.5) {
-                echo "<p class='error'>Máme podozrenie, že si robot. Ak nie ste robot, napíšte nám priamo na emailovú adresu uvedenú v sekcii Kontakt. Ak si robot, nechytaj sa našej stránky.</p>";
-                return false;
-            } else {
-                echo "<p class='success'>Vaša správa úspešne opustila túto stránku a mala by doraziť tak na Váš email ako aj na našu adresu ".$GLOBALS['data']['opts']['contactEmail']."</p>";
-                return true;
-            }
-        }, 2000);
+sleep(2);
+        if ($recaptcha->score <= 0.5) {
+            echo "<p class='error'>Máme podozrenie, že si robot. Ak nie ste robot, napíšte nám priamo na emailovú adresu uvedenú v sekcii Kontakt. Ak si robot, nechytaj sa našej stránky.</p>";
+            return false;
+        } else {
+            echo "<p class='success'>Vaša správa úspešne opustila túto stránku a mala by doraziť tak na Váš email ako aj na našu adresu ".$GLOBALS['data']['opts']['contactEmail']."</p>";
+            return true;
+        }
     }
 }
 
