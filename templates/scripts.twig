@@ -21,8 +21,7 @@
 
     grecaptcha.ready(function() {
       grecaptcha.execute(clientId, {action: 'sendmail'}).then(function(token) {
-        var recaptchaResponse = document.getElementById('recaptchaResponse');
-        recaptchaResponse.value = token;
+        document.getElementById('recaptchaResponse').value = token;
       });
     });
   }
