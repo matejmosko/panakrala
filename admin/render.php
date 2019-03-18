@@ -1,5 +1,5 @@
 <?php
-
+header('Content-Type: text/html; charset=utf-8');
 if (isset($_GET['debug'])) {
     $debug = $_GET['debug'];
 } else {

@@ -1,8 +1,8 @@
 <?php
-
+header('Content-Type: text/html; charset=utf-8');
 require_once(__DIR__."/render.php");
 require_once(__DIR__."/functions.php");
-mb_internal_encoding("UTF-8");
+
 
 if (!empty($_POST['name']) && !empty($_POST['email'])) {
     //addGuest($_POST);
