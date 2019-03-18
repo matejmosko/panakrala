@@ -3,6 +3,7 @@
  ini_set('display_errors', 1);
  ini_set('display_startup_errors', 1);
  error_reporting(E_ALL);
+ mb_internal_encoding("UTF-8");
 /** CALLS **/
 
 require __DIR__ . '/vendor/autoload.php';
@@ -154,10 +155,10 @@ function solveCaptcha()
         $recaptcha = json_decode($recaptcha);
 
         // Take action based on the score returned:
-        echo "<pre>";
-        print_r($recaptcha);
-        echo "</pre>";
-        
+        //echo "<pre>";
+        //print_r($recaptcha);
+        //echo "</pre>";
+
         if ($recaptcha->score <= 0.5) {
             echo "<p class='error'>Máme podozrenie, že si robot. Ak nie ste robot, napíšte nám priamo na emailovú adresu uvedenú v sekcii Kontakt. Ak si robot, nechytaj sa našej stránky.</p>";
             return false;

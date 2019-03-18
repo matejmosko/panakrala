@@ -11,6 +11,7 @@ if ($debug) {
     ini_set('display_errors', 1);
 }
 
+mb_internal_encoding("UTF-8");
 Locale::setDefault('sk_SK');
 
 require_once(__DIR__ . '/functions.php');
