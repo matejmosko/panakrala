@@ -38,8 +38,6 @@ function dbNewGuest($newGuest)
     $subject = "Úspešne ste registrovali tím".$name."na ".$event;
     $txt = "<p>Dobrý deň, </p><p>ďakujeme za Vašu registráciu na ".$event.". Prihlásili ste sa pod menom ".$name." a budete hrať za ".$faction.". Autorom hry, teda nám, ste odkázali túto správu: '".$message."'. Ďakujeme. </p><p>S pozdravom<br />Hry Pána kráľa</p>";
 
-    echo $email.$subject.$txt;
-
     $sql = "INSERT INTO events_guests (project, event, name, email, message, faction, personalcheck, emailcheck) VALUES ('$project', '$event', '$name', '$email', '$message', '$faction', '$personalcheck', '$emailcheck')";
 
     if (mysqli_query($conn, $sql)) {

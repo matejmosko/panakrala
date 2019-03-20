@@ -265,7 +265,6 @@ function eventSendEmail()
 function sendMessage($to, $subject, $txt)
 {
     $from = $GLOBALS['data']['opts']['contactEmail'];
-    echo "text";
 
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -273,7 +272,7 @@ function sendMessage($to, $subject, $txt)
     $headers .= 'From: '.$GLOBALS['data']['opts']['emailFrom']. "\r\n";
     $headers .= 'Cc: <'.$from.'>' . "\r\n";
 
-    if (mail($to, $subject, $txt, $headers)) {} else return "<p class='error'>Pri posielaní správy došlo k chybe. Skúste nám správu poslať priamo na ". $from."</p>";
+    if (mail($to, $subject, $txt, $headers)) {echo "great";} else return "<p class='error'>Pri posielaní správy došlo k chybe. Skúste nám správu poslať priamo na ". $from."</p>";
 
     //file_put_contents("email.txt", "To: ".$to."\n\n Subject: ".$subject."\n\n From: ".$from."\n\n Txt: ".$txt."\n\n Headers: ".$headers);
 }
