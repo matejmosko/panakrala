@@ -1,5 +1,5 @@
 {% autoescape false %}
-    <div class="projectPage">
+  <div class="projectPage">
     {% if events != "" %}
       {% if filterEvents == "next" %}
         <div class="eventsList">
@@ -15,8 +15,9 @@
         </div>
       {% endif %}
     {% endif %}
-    <div class="textBlock projectText blockLight">{{data.mainText}}</div>
-            </div>
+    <div class="projectDesc contentBlock blockTrans">
+      <div class="textBlock projectText blockLight">{{data.mainText}}</div>
+    </div>
     {% if data.hiddenText != "" %}
       <div class="hiddenInfo flexColumn businessInfo">
         <h3 class="darkBackground title">{{data.opts.name}}
